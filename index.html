@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #181818;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 50px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            max-width: 800px;
+        }
+        .post {
+            background: #222;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        .add-post {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ffcc00;
+            color: black;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+        }
+        .hidden { display: none; }
+
+        /* Animacja rysowania gwiazdy */
+        .star-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        svg {
+            width: 100px;
+            height: 100px;
+        }
+        path {
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+            animation: draw 1.5s ease-in-out forwards;
+        }
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animacja gwiazdy -->
+    <div class="star-container">
+        <svg viewBox="0 0 100 100">
+            <path d="M50 10 L61 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L39 40 Z"
+                  stroke="yellow" stroke-width="4" fill="none"/>
+        </svg>
+    </div>
+
+    <h1>Blog</h1>
+    <div class="container" id="posts"></div>
+
+    <!-- Przycisk dodawania postów (widoczny tylko dla Ciebie) -->
+    <div class="add-post hidden" id="addPost">+</div>
+
+    <script>
+        // Ukrywanie animacji gwiazdy po kilku sekundach
+        setTimeout(() => {
+            document.querySelector('.star-container').style.display = 'none';
+        }, 1500);
+
+        // Załaduj posty z pliku JSON
+        async function loadPosts() {
+            try {
+                const response = await fetch('posts.json');
+                const posts = await response.json();
+                const container = document.getElementById('posts');
+                container.innerHTML = posts.map(post => `
+                    <div class="post">
+                        <h2>${post.title}</h2>
+                        <p>${post.content}</p>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading posts:', error);
+            }
+        }
+
+        // Sprawdzenie, czy użytkownik jest autoryzowany (np. na podstawie lokalnego tokena)
+        function checkAuthorization() {
+            const isAuthorized = localStorage.getItem("isAdmin") === "true";  // Możesz zmienić metodę autoryzacji
+            if (isAuthorized) {
+                document.getElementById('addPost').classList.remove('hidden');
+            }
+        }
+
+        // Obsługa kliknięcia w przycisk "+"
+        document.getElementById('addPost').addEventListener('click', () => {
+            const title = prompt("Podaj tytuł wpisu:");
+            const content = prompt("Podaj treść wpisu:");
+            if (title && content) {
+                const newPost = { title, content };
+                savePost(newPost);
+            }
+        });
+
+        // Zapisanie nowego posta do pliku JSON (wymaga backendu - tutaj symulowane w LocalStorage)
+        function savePost(post) {
+            let posts = JSON.parse(localStorage.getItem('posts')) || [];
+            posts.push(post);
+            localStorage.setItem('posts', JSON.stringify(posts));
+            loadPosts();  // Odświeżenie postów
+        }
+
+        // Inicjalizacja
+        checkAuthorization();
+        loadPosts();
+    </script>
+</body>
+</html>

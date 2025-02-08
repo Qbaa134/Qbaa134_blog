@@ -15,20 +15,17 @@
             margin: 0;
             padding: 0;
         }
-
         h1 {
             margin-top: 50px;
             font-size: 2.5em;
             font-weight: 600;
         }
-
         .container {
             width: 90%;
             margin: auto;
             max-width: 800px;
             display: none; /* Ukrywamy posty */
         }
-
         .post {
             background: #1e1e1e;
             padding: 20px;
@@ -37,18 +34,15 @@
             box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
-
         .post:hover {
             transform: scale(1.02);
             box-shadow: 0 6px 15px rgba(255, 255, 255, 0.15);
         }
-
         .post-title {
             cursor: pointer;
             color: #ffcc00;
             font-weight: bold;
         }
-
         .contact-link {
             position: fixed;
             bottom: 20px;
@@ -63,14 +57,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 0 12px rgba(255, 255, 0, 0.9);
+            box-shadow: 0 0 12px rgba(255, 204, 0, 0.9);
             transition: transform 0.2s ease-in-out;
         }
-
         .contact-link:hover {
             transform: scale(1.1);
         }
-
         .hidden { display: none; }
 
         /* Animacja rysowania gwiazdy */
@@ -80,61 +72,20 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-
         svg {
             width: 200px;  /* Większa gwiazda */
             height: 200px;
         }
-
         path {
             stroke-dasharray: 400;
             stroke-dashoffset: 400;
             animation: draw 2s ease-in-out forwards;
         }
-
         @keyframes draw {
             to {
                 stroke-dashoffset: 0;
             }
         }
-
-        /* Wyszukiwarka */
-        .search-box {
-            margin: 20px auto;
-            width: 90%;
-            max-width: 400px;
-            padding: 10px;
-            background-color: #1e1e1e;
-            border: 2px solid #ffcc00;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(255, 204, 0, 0.7);
-            transition: all 0.3s ease;
-            box-sizing: border-box;  /* Zapewnia, że padding jest uwzględniany w szerokości */
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            background-color: #333;
-            color: white;
-            font-size: 1.1em;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            box-sizing: border-box; /* Umożliwia prawidłowe wyświetlanie w obrębie kontenera */
-        }
-
-        .search-box:hover {
-            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.9);
-        }
-
-        .search-box input:focus {
-            outline: none;
-            background-color: #444;
-            border-radius: 10px;
-            border: 2px solid #ffcc00;
-        }
-
     </style>
 </head>
 <body>
@@ -148,12 +99,6 @@
     </div>
 
     <h1>Blog</h1>
-
-    <!-- Wyszukiwarka -->
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Wyszukaj posty..." onkeyup="searchPosts()">
-    </div>
-
     <div class="container" id="posts"></div>
 
     <!-- Przycisk kontaktowy, który prowadzi do podstrony z danymi -->

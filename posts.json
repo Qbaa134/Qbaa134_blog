@@ -1,5 +1,12 @@
 [
-    { "id": "1", "title": "Post 1", "content": "Treść posta 1" },
-    { "id": "1", "title": "Post 2", "content": "Treść posta 2" }
+    { "id": "1",
+        "title": "Post 1",
+        "content": "Treść posta 1" 
+    },
+    {
+        "id": "1",
+        "title": "Witaj na moim blogu!",
+        "content": "Cześć! Skoro tutaj trafiłeś, to znaczy, że interesują Cię technologie, elektronika, programowanie i wszystko, co związane z techniką. \nŚwietnie się składa, bo właśnie o tym będzie ten blog! \n\nKim jestem? \nNazywam się Kuba, ale na Githubie używam nicku Qbaa134. \nMoim hobby są mikrokomputery, takie jak Arduino, Raspberry Pi, ESP32, a także wszystko, co pozwala nam budować i eksperymentować. \nUwielbiam także druk 3D, tworzenie programów hakerskich, stare gry, systemy operacyjne oraz szeroko pojętą inżynierię odwrotną. \nJeśli masz podobne zainteresowania, to trafiłeś w dobre miejsce – mam nadzieję, że znajdziesz coś, co Cię zainspiruje i rozwinie! \n\nO czym będę pisać? \nPoradniki i tutoriale dotyczące programowania mikrokontrolerów, ESP32, Raspberry Pi oraz Arduino. \nProjekty DIY, w których krok po kroku pokażę, jak budować własne urządzenia. \nPorównania, recenzje i informacje o projektach i urządzeniach, które warto poznać. \nEksperymenty z elektroniką, takie jak wykorzystanie modułów GPS, NRF, LoRa, RFID, wyświetlaczy OLED i TFT oraz innych ciekawych komponentów. \nTesty i recenzje sprzętu – zarówno nowoczesnych gadżetów, jak i mniej znanych, ale przydatnych narzędzi. \nHackowanie sprzętu i oprogramowania – legalne i edukacyjne podejście do inżynierii odwrotnej. \nAnalizy sieciowe, sniffing, bezpieczeństwo IT i inne ciekawostki ze świata cyberbezpieczeństwa. \n\nDlaczego ten blog? \nTworzę różne projekty, wdrażam swoje pomysły w życie i uczę się na błędach. \nZauważyłem, że wielu ludzi ma podobne zainteresowania, ale często brakuje im konkretnego przewodnika, który krok po kroku przeprowadzi ich przez trudniejsze techniczne zagadnienia. \nChcę dzielić się swoją wiedzą, doświadczeniem i inspiracjami, żeby pomóc innym w odkrywaniu fascynującego świata elektroniki, informatyki i techniki. \n\nJak możesz się zaangażować? \nChciałbym, aby ten blog stał się miejscem wymiany doświadczeń i wspólnego rozwoju. \nJeśli masz pytania, pomysły na projekty lub chcesz podzielić się swoimi osiągnięciami – śmiało pisz w komentarzach lub skontaktuj się ze mną! \nMoże razem stworzymy coś niesamowitego? \n\nZachęcam też do śledzenia kolejnych wpisów – będę regularnie publikować nowe treści, które mam nadzieję będą dla Ciebie przydatne i inspirujące! \n\nDo zobaczenia w kolejnych wpisach! \nQbaa134"
+    }
 ]
 

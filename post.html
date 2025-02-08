@@ -81,6 +81,35 @@
         button:hover {
             background-color: #e6b800;
         }
+
+        /* Styl dla gwiazdek */
+        .stars {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            font-size: 2em;
+            color: #ffd700;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .star:hover {
+            transform: scale(1.2);
+        }
+
+        .star.selected {
+            color: #ffcc00;
+        }
+
+        /* Styl dla nazwiska użytkownika */
+        #username {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: #ffcc00;
+        }
     </style>
 </head>
 <body>
@@ -92,11 +121,28 @@
     <!-- Sekcja komentarzy -->
     <div class="comment-section" id="comments">
         <h2>Komentarze</h2>
-        <div id="commentList"></div>
+        
+        <!-- Nazwa użytkownika i gwiazdki -->
+        <div id="username">Nazwa użytkownika</div>
+        
+        <!-- Gwiazdki do oceniania -->
+        <div class="stars" id="starRating">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+        </div>
+
+        <!-- Pole do wpisywania komentarza -->
         <textarea id="commentInput" rows="4" cols="50" placeholder="Dodaj komentarz..."></textarea><br>
         <button onclick="addComment()">Dodaj komentarz</button>
+
+        <!-- Wyświetlanie komentarzy -->
+        <div id="commentList"></div>
     </div>
 
+    <!-- Przycisk powrotu -->
     <a href="index.html" class="back-link">Powrót na stronę główną</a>
 
     <script>
@@ -128,7 +174,7 @@
             const commentList = document.getElementById('commentList');
 
             commentList.innerHTML = postComments.map(comment => `
-                <div class="comment">${comment}</div>
+                <div class="comment">${comment.text} - ${'★'.repeat(comment.rating)}</div>
             `).join('');
         }
 
@@ -136,7 +182,10 @@
         function addComment() {
             const commentInput = document.getElementById('commentInput');
             const commentText = commentInput.value.trim();
-            if (commentText) {
+            const rating = getSelectedRating();
+            const username = "Użytkownik";  // Możesz tu wpisać dynamicznie użytkownika
+
+            if (commentText && rating) {
                 const params = new URLSearchParams(window.location.search);
                 const postId = params.get('id');
                 const comments = JSON.parse(localStorage.getItem('comments')) || {};
@@ -145,13 +194,32 @@
                     comments[postId] = [];
                 }
 
-                comments[postId].push(commentText);
+                comments[postId].push({
+                    text: commentText,
+                    rating: rating,
+                    username: username
+                });
+
                 localStorage.setItem('comments', JSON.stringify(comments));
 
                 commentInput.value = '';  // Wyczyść pole tekstowe
                 loadComments(postId);  // Załaduj ponownie komentarze
             }
         }
+
+        // Funkcja do uzyskania zaznaczonej oceny (gwiazdek)
+        function getSelectedRating() {
+            const stars = document.querySelectorAll('.star.selected');
+            return stars.length;
+        }
+
+        // Funkcja do zaznaczania gwiazdek
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', () => {
+                document.querySelectorAll('.star').forEach(s => s.classList.remove('selected'));
+                star.classList.add('selected');
+            });
+        });
 
         // Inicjalizacja
         loadPost();

@@ -1,5 +1,10 @@
 [
     {
+        "id": "0",
+        "title": "Sample Post Title",
+        "content": "This is the content of the post."
+    }
+    {
         "id": "1",
         "title": "Witaj na moim blogu! 1",
         "content": "Cześć! Skoro tutaj trafiłeś, to znaczy, że interesują Cię technologie, elektronika, programowanie i wszystko, co związane z techniką. Świetnie się składa, bo właśnie o tym będzie ten blog! 🚀🔧"

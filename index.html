@@ -15,17 +15,20 @@
             margin: 0;
             padding: 0;
         }
+
         h1 {
             margin-top: 50px;
             font-size: 2.5em;
             font-weight: 600;
         }
+
         .container {
             width: 90%;
             margin: auto;
             max-width: 800px;
             display: none; /* Ukrywamy posty */
         }
+
         .post {
             background: #1e1e1e;
             padding: 20px;
@@ -34,60 +37,26 @@
             box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
+
         .post:hover {
             transform: scale(1.02);
             box-shadow: 0 6px 15px rgba(255, 255, 255, 0.15);
         }
+
         .post-title {
             cursor: pointer;
             color: #ffcc00;
             font-weight: bold;
         }
 
-        /* Wyszukiwarka */
-        .search-container {
-            margin: 20px;
-            text-align: center;
+        .post-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
         }
 
-        #searchInput {
-            width: 80%;
-            padding: 10px;
-            font-size: 1.2em;
-            border-radius: 5px;
-            border: 2px solid #ffcc00;
-            background-color: #1e1e1e;
-            color: white;
-        }
-
-        #searchInput:focus {
-            outline: none;
-            border-color: #ff9900;
-        }
-
-        /* Animacja rysowania gwiazdy */
-        .star-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        svg {
-            width: 200px;  /* Większa gwiazda */
-            height: 200px;
-        }
-        path {
-            stroke-dasharray: 400;
-            stroke-dashoffset: 400;
-            animation: draw 2s ease-in-out forwards;
-        }
-        @keyframes draw {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        /* Styl przycisku kontaktowego */
         .contact-link {
             position: fixed;
             bottom: 20px;
@@ -110,6 +79,75 @@
             transform: scale(1.1);
         }
 
+        .hidden { display: none; }
+
+        /* Animacja rysowania gwiazdy */
+        .star-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        svg {
+            width: 200px;  /* Większa gwiazda */
+            height: 200px;
+        }
+
+        path {
+            stroke-dasharray: 400;
+            stroke-dashoffset: 400;
+            animation: draw 2s ease-in-out forwards;
+        }
+
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* Stylizacja galerii */
+        .post-gallery {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .gallery-image {
+            width: 200px;
+            height: auto;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Wyszukiwarka */
+        .search-box {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 400px;
+            padding: 10px;
+            background-color: #1e1e1e;
+            border: 1px solid #ffcc00;
+            border-radius: 5px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #333;
+            color: white;
+            font-size: 1.1em;
+            border-radius: 5px;
+        }
+
     </style>
 </head>
 <body>
@@ -123,16 +161,15 @@
     </div>
 
     <h1>Blog</h1>
-    
+
     <!-- Wyszukiwarka -->
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Szukaj postów..." oninput="searchPosts()">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Wyszukaj posty..." onkeyup="searchPosts()">
     </div>
-    
-    <!-- Posty -->
+
     <div class="container" id="posts"></div>
 
-    <!-- Przycisk kontaktowy -->
+    <!-- Przycisk kontaktowy, który prowadzi do podstrony z danymi -->
     <div class="contact-link">
         <a href="kontakt.html" style="color: black; text-decoration: none;">!</a>
     </div>
@@ -151,8 +188,9 @@
                 const posts = await response.json();
                 const container = document.getElementById('posts');
                 container.innerHTML = posts.map(post => `
-                    <div class="post">
+                    <div class="post" data-title="${post.title.toLowerCase()}">
                         <a href="post.html?id=${post.id}" class="post-title">${post.title}</a>
+                        ${post.image ? `<img src="${post.image}" alt="${post.title}" class="post-image">` : ''}
                     </div>
                 `).join('');
             } catch (error) {
@@ -160,21 +198,23 @@
             }
         }
 
-        loadPosts(); // Inicjalizacja ładowania postów
-
-        // Wyszukiwanie postów
+        // Funkcja wyszukiwania postów
         function searchPosts() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
             const posts = document.querySelectorAll('.post');
+
             posts.forEach(post => {
-                const title = post.querySelector('.post-title').textContent.toLowerCase();
-                if (title.includes(input)) {
-                    post.style.display = '';
+                const title = post.getAttribute('data-title');
+                if (title.indexOf(filter) > -1) {
+                    post.style.display = "";
                 } else {
-                    post.style.display = 'none';
+                    post.style.display = "none";
                 }
             });
         }
+
+        loadPosts(); // Inicjalizacja ładowania postów
     </script>
 </body>
 </html>

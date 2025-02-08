@@ -44,27 +44,6 @@
             font-weight: bold;
         }
 
-        /* Wyszukiwarka */
-        .search-container {
-            margin: 20px;
-            text-align: center;
-        }
-
-        #searchInput {
-            width: 80%;
-            padding: 10px;
-            font-size: 1.2em;
-            border-radius: 5px;
-            border: 2px solid #ffcc00;
-            background-color: #1e1e1e;
-            color: white;
-        }
-
-        #searchInput:focus {
-            outline: none;
-            border-color: #ff9900;
-        }
-
         /* Chatbot */
         .chatbot {
             position: fixed;
@@ -135,30 +114,6 @@
                 stroke-dashoffset: 0;
             }
         }
-
-        /* Styl przycisku kontaktowego */
-        .contact-link {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ffcc00;
-            color: black;
-            font-size: 28px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0 12px rgba(255, 204, 0, 0.9);
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .contact-link:hover {
-            transform: scale(1.1);
-        }
-
     </style>
 </head>
 <body>
@@ -172,11 +127,6 @@
     </div>
 
     <h1>Blog</h1>
-    
-    <!-- Wyszukiwarka -->
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Szukaj postów..." oninput="searchPosts()">
-    </div>
     
     <!-- Posty -->
     <div class="container" id="posts"></div>
@@ -221,44 +171,50 @@
 
         loadPosts(); // Inicjalizacja ładowania postów
 
-        // Wyszukiwanie postów
-        function searchPosts() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const posts = document.querySelectorAll('.post');
-            posts.forEach(post => {
-                const title = post.querySelector('.post-title').textContent.toLowerCase();
-                if (title.includes(input)) {
-                    post.style.display = '';
-                } else {
-                    post.style.display = 'none';
-                }
-            });
-        }
-
-        // Chatbot
+        // Obsługuje kliknięcie przycisku chatbota
         document.getElementById('chatbotToggle').addEventListener('click', () => {
             const chatbox = document.getElementById('chatbox');
             chatbox.style.display = chatbox.style.display === 'block' ? 'none' : 'block';
         });
 
-        document.getElementById('sendMessage').addEventListener('click', () => {
+        // Wysłanie wiadomości przez użytkownika
+        document.getElementById('sendMessage').addEventListener('click', async () => {
             const userMessage = document.getElementById('userMessage').value;
             if (userMessage) {
                 displayMessage(userMessage, 'user');
                 document.getElementById('userMessage').value = '';
 
-                setTimeout(() => {
-                    displayMessage('Dziękuję za wiadomość! Jeśli masz pytania, napisz do mnie na maila.', 'bot');
-                }, 1000);
+                const botResponse = await getChatbotResponse(userMessage);
+                displayMessage(botResponse, 'bot');
             }
         });
 
+        // Funkcja do wyświetlania wiadomości w czacie
         function displayMessage(message, sender) {
             const messageElement = document.createElement('div');
             messageElement.textContent = message;
             messageElement.classList.add(sender);
             document.getElementById('chatMessages').appendChild(messageElement);
             document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+        }
+
+        // Funkcja do pobierania odpowiedzi od chatbota (przy użyciu API)
+        async function getChatbotResponse(userMessage) {
+            try {
+                const response = await fetch('/chatbot-api', { // Zakładając, że masz serwer, który obsługuje ten endpoint
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: userMessage }),
+                });
+
+                const data = await response.json();
+                return data.reply || 'Przepraszam, nie rozumiem tego pytania.';
+            } catch (error) {
+                console.error('Błąd podczas komunikacji z API:', error);
+                return 'Wystąpił błąd. Spróbuj ponownie później.';
+            }
         }
     </script>
 </body>

@@ -30,11 +30,9 @@
             line-height: 1.6;
             margin-bottom: 20px;
             opacity: 0;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 3px solid white;
+            white-space: normal; /* Pozwala na zawijanie tekstu */
+            word-wrap: break-word; /* Zawija długie słowa */
             animation: typing 4s steps(60) 1s forwards, blink 0.75s step-end infinite;
-            word-wrap: break-word; /* Dodane, aby tekst przechodził do kolejnej linii */
         }
         .content a {
             color: #ffcc00;
@@ -131,7 +129,7 @@
                 if (i < textContent.length) {
                     textElement.innerHTML += textContent.charAt(i);
                     i++;
-                    setTimeout(typeText, 50); // Skrócenie opóźnienia do 50ms dla szybszego efektu
+                    setTimeout(typeText, 30); // Zwiększona prędkość
                 }
             }
             typeText(); // Uruchamiamy funkcję

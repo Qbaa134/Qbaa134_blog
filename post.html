@@ -36,10 +36,16 @@
             margin: 10px 0;
             border-radius: 8px;
         }
-        .back-link {
+        .back-link-container {
             margin-top: 30px;
+            background-color: #ffcc00;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        .back-link {
             font-size: 1.2em;
-            color: #ffcc00;
+            color: black;
             text-decoration: none;
         }
         .back-link:hover {
@@ -155,7 +161,9 @@
     </div>
 
     <!-- Przycisk powrotu -->
-    <a href="index.html" class="back-link">Powrót na stronę główną</a>
+    <div class="back-link-container">
+        <a href="index.html" class="back-link">Powrót na stronę główną</a>
+    </div>
 
     <script>
         // Funkcja do załadowania konkretnego posta
@@ -186,7 +194,10 @@
             const commentList = document.getElementById('commentList');
 
             commentList.innerHTML = postComments.map(comment => `
-                <div class="comment">${comment.text} - ${'★'.repeat(comment.rating)}</div>
+                <div class="comment">
+                    <strong>${comment.username}</strong> - ${'★'.repeat(comment.rating)}<br>
+                    ${comment.text}
+                </div>
             `).join('');
         }
 

@@ -76,30 +76,6 @@
             box-shadow: 0 6px 15px rgba(255, 255, 255, 0.15);
         }
 
-        /* Dynamiczne posty */
-        .container {
-            width: 90%;
-            margin: auto;
-            max-width: 800px;
-        }
-        .post {
-            background: #1e1e1e;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-        .post:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.15);
-        }
-        .post-title {
-            cursor: pointer;
-            color: #ffcc00;
-            font-weight: bold;
-        }
-
         /* Animacja gwiazdy */
         .star-container {
             position: absolute;
@@ -167,11 +143,7 @@
     <div class="post-links">
         <a href="post.html?id=1" class="post-link" data-title="Post 1">Post 1</a>
         <a href="post.html?id=2" class="post-link" data-title="Post 2">Post 2</a>
-        <a href="post.html?id=3" class="post-link" data-title="Nowy wpis">Nowy wpis</a>
     </div>
-
-    <!-- Dynamiczne posty -->
-    <div class="container" id="posts"></div>
 
     <!-- Przycisk kontaktowy -->
     <div class="contact-link">
@@ -179,45 +151,19 @@
     </div>
 
     <script>
-        // Ukrywanie animacji gwiazdy po 2 sekundach i wyświetlenie postów
+        // Ukrywanie animacji gwiazdy po 2 sekundach
         setTimeout(() => {
             document.querySelector('.star-container').style.display = 'none';
-            document.getElementById('posts').style.display = 'block';
         }, 2000);
 
         // Wyszukiwanie postów
         function searchPosts() {
             const input = document.getElementById('searchInput').value.toLowerCase();
-
-            // Szukaj w linkach do postów
             document.querySelectorAll('.post-link').forEach(link => {
                 const title = link.getAttribute('data-title').toLowerCase();
                 link.style.display = title.includes(input) ? "block" : "none";
             });
-
-            // Szukaj w dynamicznych postach
-            document.querySelectorAll('.post').forEach(post => {
-                const title = post.getAttribute('data-title').toLowerCase();
-                post.style.display = title.includes(input) ? "block" : "none";
-            });
         }
-
-        // Załaduj dynamiczne posty
-        async function loadPosts() {
-            const postsData = [
-                { id: 4, title: "Arduino i ESP32", image: "" },
-                { id: 5, title: "Raspberry Pi Zero", image: "" }
-            ];
-
-            const container = document.getElementById('posts');
-            container.innerHTML = postsData.map(post => `
-                <div class="post" data-title="${post.title.toLowerCase()}">
-                    <a href="post.html?id=${post.id}" class="post-title">${post.title}</a>
-                </div>
-            `).join('');
-        }
-
-        loadPosts();
     </script>
 
 </body>

@@ -86,6 +86,22 @@
                 stroke-dashoffset: 0;
             }
         }
+
+        /* Stylizacja pola wyszukiwania */
+        .search-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .search-container input {
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: none;
+            width: 80%;
+            max-width: 400px;
+            background-color: #333;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -99,6 +115,18 @@
     </div>
 
     <h1>Blog</h1>
+
+    <!-- Linki do postów -->
+    <div>
+        <a href="post.html?id=1">Post 1</a> | 
+        <a href="post.html?id=2">Post 2</a>
+    </div>
+
+    <!-- Pole wyszukiwania -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Wyszukaj post..." oninput="searchPosts()">
+    </div>
+
     <div class="container" id="posts"></div>
 
     <!-- Przycisk kontaktowy, który prowadzi do podstrony z danymi -->

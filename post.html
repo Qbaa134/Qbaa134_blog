@@ -169,7 +169,7 @@
         // Funkcja do załadowania konkretnego posta
         async function loadPost() {
             const params = new URLSearchParams(window.location.search);
-            const postId = params.get('id');
+            const postId = params.get("id");
 
             try {
                 const response = await fetch('posts.json');
@@ -178,7 +178,7 @@
                 const postContainer = document.getElementById('post');
 
                 postContainer.innerHTML = `
-                    <h2>${post.title}</h2>
+                    <h1>${post.title}</h1>
                     <p>${post.content}</p>
                 `;
                 loadComments(postId);  // Załaduj komentarze dla tego posta

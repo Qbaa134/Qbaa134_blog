@@ -18,65 +18,105 @@
             font-size: 2.5em;
             font-weight: 600;
         }
-        .post-content {
-            margin: 20px;
+        .post-container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
         }
-        .contact-link {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ffcc00;
-            color: black;
-            font-size: 28px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0 12px rgba(255, 204, 0, 0.9);
-            transition: transform 0.2s ease-in-out;
+        .comment-section {
+            margin-top: 50px;
         }
-        .contact-link:hover {
-            transform: scale(1.1);
+        .comment {
+            background: #1e1e1e;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .back-link {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
     <h1>Post</h1>
-    <div class="post-content" id="postContent"></div>
 
-    <!-- Przycisk kontaktowy, który prowadzi do podstrony z danymi -->
-    <div class="contact-link">
-        <a href="kontakt.html" style="color: black; text-decoration: none;">!</a>
+    <div class="post-container" id="post"></div>
+
+    <!-- Sekcja komentarzy -->
+    <div class="comment-section" id="comments">
+        <h2>Komentarze</h2>
+        <div id="commentList"></div>
+        <textarea id="commentInput" rows="4" cols="50" placeholder="Dodaj komentarz..."></textarea><br>
+        <button onclick="addComment()">Dodaj komentarz</button>
     </div>
 
+    <a href="index.html" class="back-link">Powrót na stronę główną</a>
+
     <script>
-        // Funkcja ładująca post na podstawie parametru 'id' w URL
+        // Funkcja do załadowania konkretnego posta
         async function loadPost() {
             const params = new URLSearchParams(window.location.search);
             const postId = params.get('id');
+
             try {
                 const response = await fetch('posts.json');
                 const posts = await response.json();
-                const post = posts.find(post => post.id === postId);
-                if (post) {
-                    document.getElementById('postContent').innerHTML = `
-                        <h2>${post.title}</h2>
-                        <p>${post.content}</p>
-                    `;
-                } else {
-                    document.getElementById('postContent').innerHTML = "<p>Post not found.</p>";
-                }
+                const post = posts[postId];
+                const postContainer = document.getElementById('post');
+
+                postContainer.innerHTML = `
+                    <h2>${post.title}</h2>
+                    <p>${post.content}</p>
+                `;
+                loadComments(postId);  // Załaduj komentarze dla tego posta
             } catch (error) {
                 console.error('Error loading post:', error);
             }
         }
 
-        loadPost(); // Ładowanie posta na stronie
+        // Funkcja do załadowania komentarzy
+        function loadComments(postId) {
+            const comments = JSON.parse(localStorage.getItem('comments')) || {};
+            const postComments = comments[postId] || [];
+            const commentList = document.getElementById('commentList');
+
+            commentList.innerHTML = postComments.map(comment => `
+                <div class="comment">${comment}</div>
+            `).join('');
+        }
+
+        // Funkcja do dodawania komentarza
+        function addComment() {
+            const commentInput = document.getElementById('commentInput');
+            const commentText = commentInput.value.trim();
+            if (commentText) {
+                const params = new URLSearchParams(window.location.search);
+                const postId = params.get('id');
+                const comments = JSON.parse(localStorage.getItem('comments')) || {};
+
+                if (!comments[postId]) {
+                    comments[postId] = [];
+                }
+
+                comments[postId].push(commentText);
+                localStorage.setItem('comments', JSON.stringify(comments));
+
+                commentInput.value = '';  // Wyczyść pole tekstowe
+                loadComments(postId);  // Załaduj ponownie komentarze
+            }
+        }
+
+        // Inicjalizacja
+        loadPost();
     </script>
 
 </body>
 </html>
+

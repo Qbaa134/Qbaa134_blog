@@ -1,6 +1,11 @@
-[
-    { "id": "1", "title": "Post 1", "content": "Treść posta 1" },
-    { "id": "2", "title": "Post 2", "content": "Treść posta 2" }
-]
-
+{
+    "1": {
+        "title": "Post 1",
+        "content": "Treść posta 1"
+    },
+    "2": {
+        "title": "Post 2",
+        "content": "Treść posta 2"
+    }
+}
 

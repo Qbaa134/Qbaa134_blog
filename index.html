@@ -46,7 +46,7 @@
             color: #ffcc00;
             font-weight: bold;
         }
-        .add-post {
+        .contact-link {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -63,7 +63,7 @@
             box-shadow: 0 0 12px rgba(255, 204, 0, 0.9);
             transition: transform 0.2s ease-in-out;
         }
-        .add-post:hover {
+        .contact-link:hover {
             transform: scale(1.1);
         }
         .hidden { display: none; }
@@ -104,8 +104,10 @@
     <h1>Blog</h1>
     <div class="container" id="posts"></div>
 
-    <!-- Przycisk dodawania postów (widoczny tylko po autoryzacji) -->
-    <div class="add-post hidden" id="addPost">+</div>
+    <!-- Przycisk kontaktowy, który prowadzi do podstrony z danymi -->
+    <div class="contact-link">
+        <a href="kontakt.html" style="color: black; text-decoration: none;">!</a>
+    </div>
 
     <script>
         // Ukrywanie animacji gwiazdy po 2 sekundach i wyświetlenie postów
@@ -141,43 +143,7 @@
             postContent.style.display = postContent.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Sprawdzenie autoryzacji na podstawie cookie
-        function checkAuthorization() {
-            const isAuthorized = document.cookie.includes("admin=true");
-            if (isAuthorized) {
-                document.getElementById('addPost').classList.remove('hidden');
-            }
-        }
-
-        // Sprawdzenie, czy użytkownik odwiedza #admin i ustawienie cookie
-        if (window.location.hash === "#admin") {
-            document.cookie = "admin=true; path=/; max-age=86400";  // Ważne przez 1 dzień
-            alert("Dostęp administratora aktywowany!");
-            window.location.hash = "";  // Usunięcie #admin po ustawieniu cookie
-            location.reload();  // Odświeżenie strony
-        }
-
-        // Obsługa kliknięcia w przycisk "+"
-        document.getElementById('addPost').addEventListener('click', () => {
-            const title = prompt("Podaj tytuł wpisu:");
-            const content = prompt("Podaj treść wpisu:");
-            if (title && content) {
-                const newPost = { title, content };
-                savePost(newPost);
-            }
-        });
-
-        // Zapisanie nowego posta do pliku JSON (symulacja w LocalStorage)
-        function savePost(post) {
-            let posts = JSON.parse(localStorage.getItem('posts')) || [];
-            posts.push(post);
-            localStorage.setItem('posts', JSON.stringify(posts));
-            loadPosts();  // Odświeżenie postów
-        }
-
-        // Inicjalizacja
-        checkAuthorization();
-        loadPosts();
+        loadPosts(); // Inicjalizacja ładowania postów
     </script>
 </body>
 </html>

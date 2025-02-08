@@ -38,9 +38,6 @@
             transform: scale(1.02);
             box-shadow: 0 6px 15px rgba(255, 255, 255, 0.15);
         }
-        .post-content {
-            display: none; /* Ukryte treści */
-        }
         .post-title {
             cursor: pointer;
             color: #ffcc00;
@@ -124,23 +121,12 @@
                 const container = document.getElementById('posts');
                 container.innerHTML = posts.map(post => `
                     <div class="post">
-                        <div class="post-title" onclick="togglePostContent(this)">
-                            ${post.title}
-                        </div>
-                        <div class="post-content">
-                            <p>${post.content}</p>
-                        </div>
+                        <a href="post.html?id=${post.id}" class="post-title">${post.title}</a>
                     </div>
                 `).join('');
             } catch (error) {
                 console.error('Error loading posts:', error);
             }
-        }
-
-        // Przełączanie widoczności treści posta
-        function togglePostContent(titleElement) {
-            const postContent = titleElement.nextElementSibling;
-            postContent.style.display = postContent.style.display === 'block' ? 'none' : 'block';
         }
 
         loadPosts(); // Inicjalizacja ładowania postów

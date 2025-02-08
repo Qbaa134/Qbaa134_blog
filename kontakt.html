@@ -17,6 +17,7 @@
             margin-top: 50px;
             font-size: 2.5em;
             font-weight: 600;
+            color: #ffcc00;
         }
         .content {
             margin: 20px;
@@ -24,10 +25,38 @@
         .content p {
             font-size: 1.2em;
             line-height: 1.6;
+            margin-bottom: 20px;
         }
-        a {
+        .content a {
             color: #ffcc00;
             font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .content a:hover {
+            color: #ff9900;
+        }
+        .copy-btn {
+            background-color: #ffcc00;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .copy-btn:hover {
+            background-color: #ff9900;
+        }
+        .email-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .email-container span {
+            font-size: 1.2em;
         }
     </style>
 </head>
@@ -36,9 +65,31 @@
     <h1>O mnie</h1>
     <div class="content">
         <p>Jestem pasjonatem technologii, komputerów 💻, mikrokomputerów 🖥️ oraz drukowania 3D 🖨️. Zajmuję się hackowaniem, tworzeniem nowych rozwiązań, a także odkrywaniem nowinek w dziedzinie systemów operacyjnych, gier 🎮 i sztucznej inteligencji 🤖. Posiadam szeroki zestaw sprzętu, w tym Raspberry Pi, Arduino, ESP32, a także różne wyświetlacze, moduły radiowe i inne akcesoria elektroniczne ⚙️. Lubię pracować nad projektami związanymi z BLE oraz programowaniem, szczególnie tworzeniem aplikacji na platformy takie jak AIDE 📱. Moje hobby obejmuje także rowery górskie 🚵‍♂️, które pozwalają mi łączyć pasję do technologii z aktywnością na świeżym powietrzu. Każdy dzień to dla mnie okazja do nauki i rozwijania nowych umiejętności! 💡</p>
-        <p>GitHub: <a href="Github" target="_blank">https://github.com/Qbaa134</a></p>
-        <p>Email: <a href="mail">qbaa134.pl@gmail.com</a></p>
+        
+        <p>GitHub: 
+            <a href="https://github.com/Qbaa134" target="_blank">https://github.com/Qbaa134</a>
+        </p>
+        
+        <p>Email: 
+            <div class="email-container">
+                <span>qbaa134.pl@gmail.com</span>
+                <button class="copy-btn" onclick="copyEmail()">Skopiuj</button>
+            </div>
+        </p>
     </div>
 
+    <script>
+        // Funkcja do kopiowania e-maila
+        function copyEmail() {
+            const emailText = "qbaa134.pl@gmail.com";
+            navigator.clipboard.writeText(emailText)
+                .then(() => {
+                    alert('E-mail skopiowany!');
+                })
+                .catch(err => {
+                    console.error('Błąd podczas kopiowania:', err);
+                });
+        }
+    </script>
 </body>
 </html>

@@ -38,6 +38,14 @@
             transform: scale(1.02);
             box-shadow: 0 6px 15px rgba(255, 255, 255, 0.15);
         }
+        .post-content {
+            display: none; /* Ukryte treści */
+        }
+        .post-title {
+            cursor: pointer;
+            color: #ffcc00;
+            font-weight: bold;
+        }
         .add-post {
             position: fixed;
             bottom: 20px;
@@ -60,61 +68,66 @@
         }
         .hidden { display: none; }
 
-        /* Stylizacja sekcji komentarzy */
-        .comment-section {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #1e1e1e;
-            border-radius: 10px;
+        /* Animacja rysowania gwiazdy */
+        .star-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
-
-        .comment-section textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: white;
+        svg {
+            width: 200px;  /* Większa gwiazda */
+            height: 200px;
         }
-
-        .comment-section button {
-            padding: 10px 15px;
-            background-color: #ffcc00;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        path {
+            stroke-dasharray: 400;
+            stroke-dashoffset: 400;
+            animation: draw 2s ease-in-out forwards;
         }
-
-        .comment-section button:disabled {
-            background-color: #888;
-            cursor: not-allowed;
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Animacja gwiazdy -->
+    <div class="star-container">
+        <svg viewBox="0 0 100 100">
+            <path d="M50 10 L61 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L39 40 Z"
+                  stroke="yellow" stroke-width="4" fill="none"/>
+        </svg>
+    </div>
+
     <h1>Blog</h1>
     <div class="container" id="posts"></div>
 
-    <!-- Sekcja komentarzy -->
-    <div class="comment-section hidden" id="commentSection">
-        <h3>Dodaj komentarz:</h3>
-        <textarea id="commentText" placeholder="Twój komentarz..."></textarea><br>
-        <button id="submitComment" disabled>Wyślij komentarz</button>
-        <div id="captchaContainer"></div>
-    </div>
+    <!-- Przycisk dodawania postów (widoczny tylko po autoryzacji) -->
+    <div class="add-post hidden" id="addPost">+</div>
 
     <script>
-        // Ukrywanie postów, dopóki nie zostaną załadowane
+        // Ukrywanie animacji gwiazdy po 2 sekundach i wyświetlenie postów
+        setTimeout(() => {
+            document.querySelector('.star-container').style.display = 'none';
+            document.getElementById('posts').style.display = 'block';
+        }, 2000);
+
+        // Załaduj posty z pliku JSON
         async function loadPosts() {
             try {
                 const response = await fetch('posts.json');
                 const posts = await response.json();
                 const container = document.getElementById('posts');
-                container.innerHTML = posts.map((post, index) => `
-                    <div class="post" data-index="${index}">
-                        <h2 class="post-title">${post.title}</h2>
+                container.innerHTML = posts.map(post => `
+                    <div class="post">
+                        <div class="post-title" onclick="togglePostContent(this)">
+                            ${post.title}
+                        </div>
+                        <div class="post-content">
+                            <p>${post.content}</p>
+                        </div>
                     </div>
                 `).join('');
             } catch (error) {
@@ -122,74 +135,48 @@
             }
         }
 
-        // Obsługuje kliknięcie na tytuł posta
-        document.getElementById('posts').addEventListener('click', (event) => {
-            if (event.target && event.target.classList.contains('post-title')) {
-                const index = event.target.closest('.post').getAttribute('data-index');
-                loadFullPost(index);
+        // Przełączanie widoczności treści posta
+        function togglePostContent(titleElement) {
+            const postContent = titleElement.nextElementSibling;
+            postContent.style.display = postContent.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Sprawdzenie autoryzacji na podstawie cookie
+        function checkAuthorization() {
+            const isAuthorized = document.cookie.includes("admin=true");
+            if (isAuthorized) {
+                document.getElementById('addPost').classList.remove('hidden');
+            }
+        }
+
+        // Sprawdzenie, czy użytkownik odwiedza #admin i ustawienie cookie
+        if (window.location.hash === "#admin") {
+            document.cookie = "admin=true; path=/; max-age=86400";  // Ważne przez 1 dzień
+            alert("Dostęp administratora aktywowany!");
+            window.location.hash = "";  // Usunięcie #admin po ustawieniu cookie
+            location.reload();  // Odświeżenie strony
+        }
+
+        // Obsługa kliknięcia w przycisk "+"
+        document.getElementById('addPost').addEventListener('click', () => {
+            const title = prompt("Podaj tytuł wpisu:");
+            const content = prompt("Podaj treść wpisu:");
+            if (title && content) {
+                const newPost = { title, content };
+                savePost(newPost);
             }
         });
 
-        // Załaduj pełny post
-        async function loadFullPost(index) {
-            try {
-                const response = await fetch('posts.json');
-                const posts = await response.json();
-                const post = posts[index];
-                
-                const postContainer = document.getElementById('posts');
-                postContainer.innerHTML = `
-                    <div class="post">
-                        <h2>${post.title}</h2>
-                        <p>${post.content}</p>
-                    </div>
-                `;
-                
-                // Pokazanie sekcji komentarzy
-                document.getElementById('commentSection').classList.remove('hidden');
-                initializeCaptcha(); // Inicjalizuj CAPTCHA
-            } catch (error) {
-                console.error('Error loading full post:', error);
-            }
-        }
-
-        // Inicjalizacja CAPTCHA (prosta weryfikacja)
-        function initializeCaptcha() {
-            const captchaContainer = document.getElementById('captchaContainer');
-            captchaContainer.innerHTML = `
-                <input type="text" id="captchaInput" placeholder="Wpisz '1234'" />
-            `;
-            document.getElementById('submitComment').disabled = true;
-            
-            // Zdolność do wysyłania komentarza tylko po weryfikacji CAPTCHA
-            document.getElementById('captchaInput').addEventListener('input', () => {
-                const input = document.getElementById('captchaInput').value;
-                if (input === '1234') {
-                    document.getElementById('submitComment').disabled = false;
-                } else {
-                    document.getElementById('submitComment').disabled = true;
-                }
-            });
-
-            // Obsługuje kliknięcie przycisku do wysłania komentarza
-            document.getElementById('submitComment').addEventListener('click', () => {
-                const commentText = document.getElementById('commentText').value;
-                if (commentText) {
-                    saveComment(commentText);
-                }
-            });
-        }
-
-        // Zapisuje komentarz w LocalStorage (symulacja)
-        function saveComment(commentText) {
-            let comments = JSON.parse(localStorage.getItem('comments')) || [];
-            comments.push(commentText);
-            localStorage.setItem('comments', JSON.stringify(comments));
-            alert('Komentarz dodany!');
-            document.getElementById('commentText').value = ''; // Czyści pole tekstowe
+        // Zapisanie nowego posta do pliku JSON (symulacja w LocalStorage)
+        function savePost(post) {
+            let posts = JSON.parse(localStorage.getItem('posts')) || [];
+            posts.push(post);
+            localStorage.setItem('posts', JSON.stringify(posts));
+            loadPosts();  // Odświeżenie postów
         }
 
         // Inicjalizacja
+        checkAuthorization();
         loadPosts();
     </script>
 </body>

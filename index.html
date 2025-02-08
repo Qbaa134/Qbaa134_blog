@@ -24,25 +24,60 @@
             width: 90%;
             margin: auto;
             max-width: 800px;
-            display: none; /* Ukrywamy posty */
+            display: none;
         }
-        .post {
-            background: #1e1e1e;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        
+        /* Stylizacja pola wyszukiwania */
+        .search-container {
+            margin-top: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
-        .post:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.15);
+        .search-container input {
+            padding: 15px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: none;
+            width: 80%;
+            max-width: 400px;
+            background-color: #333;
+            color: white;
         }
-        .post-title {
-            cursor: pointer;
+        .search-icon {
+            font-size: 1.5em;
             color: #ffcc00;
-            font-weight: bold;
         }
+
+        /* Stylizacja linków do postów */
+        .post-links-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .post-link {
+            background-color: #ffcc00;
+            color: #121212;
+            padding: 20px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: bold;
+            width: 300px;
+            text-align: center;
+            margin: 10px 0;
+            box-shadow: 0 6px 15px rgba(255, 204, 0, 0.3);
+            transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .post-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 18px rgba(255, 204, 0, 0.5);
+        }
+        
+        /* Przycisk kontaktowy */
         .contact-link {
             position: fixed;
             bottom: 20px;
@@ -63,125 +98,32 @@
         .contact-link:hover {
             transform: scale(1.1);
         }
-        .hidden { display: none; }
-
-        /* Animacja rysowania gwiazdy */
-        .star-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        svg {
-            width: 200px;  /* Większa gwiazda */
-            height: 200px;
-        }
-        path {
-            stroke-dasharray: 400;
-            stroke-dashoffset: 400;
-            animation: draw 2s ease-in-out forwards;
-        }
-        @keyframes draw {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
-        /* Stylizacja linków do postów */
-        .post-links-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 50px;
-        }
-        .post-link {
-            background-color: #ffcc00;
-            color: #121212;
-            padding: 15px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
-            box-shadow: 0 6px 15px rgba(255, 204, 0, 0.3);
-            transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .post-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 18px rgba(255, 204, 0, 0.5);
-        }
-
-        /* Stylizacja pola wyszukiwania */
-        .search-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .search-container input {
-            padding: 10px;
-            font-size: 1.2em;
-            border-radius: 5px;
-            border: none;
-            width: 80%;
-            max-width: 400px;
-            background-color: #333;
-            color: white;
-        }
     </style>
 </head>
 <body>
 
-    <!-- Animacja gwiazdy -->
-    <div class="star-container">
-        <svg viewBox="0 0 100 100">
-            <path d="M50 10 L61 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L39 40 Z"
-                  stroke="yellow" stroke-width="4" fill="none"/>
-        </svg>
-    </div>
-
     <h1>Blog</h1>
 
-    <!-- Linki do postów wyświetlane w eleganckich prostokątach -->
+    <!-- Pole wyszukiwania z lupą -->
+    <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Wyszukaj post..." oninput="searchPosts()">
+    </div>
+
+    <!-- Linki do postów w większych prostokątach -->
     <div class="post-links-container">
         <a href="post.html?id=1" class="post-link">Post 1</a>
         <a href="post.html?id=2" class="post-link">Post 2</a>
     </div>
 
-    <!-- Pole wyszukiwania -->
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Wyszukaj post..." oninput="searchPosts()">
-    </div>
-
     <div class="container" id="posts"></div>
 
-    <!-- Przycisk kontaktowy, który prowadzi do podstrony z danymi -->
+    <!-- Przycisk kontaktowy -->
     <div class="contact-link">
         <a href="kontakt.html" style="color: black; text-decoration: none;">!</a>
     </div>
 
     <script>
-        // Ukrywanie animacji gwiazdy po 2 sekundach i wyświetlenie postów
-        setTimeout(() => {
-            document.querySelector('.star-container').style.display = 'none';
-            document.getElementById('posts').style.display = 'block';
-        }, 2000);
-
-        // Załaduj posty z pliku JSON
-        async function loadPosts() {
-            try {
-                const response = await fetch('posts.json');
-                const posts = await response.json();
-                const container = document.getElementById('posts');
-                container.innerHTML = posts.map(post => `
-                    <div class="post" data-title="${post.title.toLowerCase()}">
-                        <a href="post.html?id=${post.id}" class="post-title">${post.title}</a>
-                        ${post.image ? `<img src="${post.image}" alt="${post.title}" class="post-image">` : ''}
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error loading posts:', error);
-            }
-        }
-
-        // Funkcja wyszukiwania postów
         function searchPosts() {
             const input = document.getElementById('searchInput');
             const filter = input.value.toLowerCase();
@@ -196,8 +138,6 @@
                 }
             });
         }
-
-        loadPosts(); // Inicjalizacja ładowania postów
     </script>
 </body>
 </html>

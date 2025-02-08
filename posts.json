@@ -1,12 +1,13 @@
 [
-    {
-        "id": "1",
-        "title": "Sexxxx",
-        "content": "Get back to work nigga"
-    }
-    {
-        "id": "2",
-        "title": "Sexxxghhghx",
-        "content": "Get back to work nigga"
-    }
+  {
+    "id": 1,
+    "title": "O mnie - Qbaa134",
+    "content": "<h2>Witaj na moim blogu!</h2><p>Cześć! Skoro tutaj trafiłeś, to znaczy, że interesują Cię technologie, elektronika, programowanie...</p>"
+  },
+  {
+    "id": 2,
+    "title": "Projekt Arduino",
+    "content": "<h2>Projekt Arduino - DIY dla początkujących</h2><p>W tym wpisie pokażę Ci, jak stworzyć własny projekt z Arduino...</p>"
+  }
 ]
+

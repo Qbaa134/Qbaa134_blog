@@ -24,6 +24,7 @@
             width: 90%;
             margin: auto;
             max-width: 800px;
+            display: none; /* Ukrywamy posty */
         }
         .post {
             background: #1e1e1e;
@@ -67,13 +68,13 @@
             transform: translate(-50%, -50%);
         }
         svg {
-            width: 120px;
-            height: 120px;
+            width: 200px;  /* Większa gwiazda */
+            height: 200px;
         }
         path {
-            stroke-dasharray: 300;
-            stroke-dashoffset: 300;
-            animation: draw 1.5s ease-in-out forwards;
+            stroke-dasharray: 400;
+            stroke-dashoffset: 400;
+            animation: draw 2s ease-in-out forwards;
         }
         @keyframes draw {
             to {
@@ -99,10 +100,11 @@
     <div class="add-post hidden" id="addPost">+</div>
 
     <script>
-        // Ukrywanie animacji gwiazdy po kilku sekundach
+        // Ukrywanie animacji gwiazdy po 2 sekundach i wyświetlenie postów
         setTimeout(() => {
             document.querySelector('.star-container').style.display = 'none';
-        }, 1500);
+            document.getElementById('posts').style.display = 'block';
+        }, 2000);
 
         // Załaduj posty z pliku JSON
         async function loadPosts() {
@@ -129,11 +131,12 @@
             }
         }
 
-        // Sprawdzenie, czy użytkownik odwiedza /admin i ustawienie cookie
-        if (window.location.pathname === "/admin") {
+        // Sprawdzenie, czy użytkownik odwiedza #admin i ustawienie cookie
+        if (window.location.hash === "#admin") {
             document.cookie = "admin=true; path=/; max-age=86400";  // Ważne przez 1 dzień
             alert("Dostęp administratora aktywowany!");
-            window.location.href = "/";  // Przekierowanie na stronę główną
+            window.location.hash = "";  // Usunięcie #admin po ustawieniu cookie
+            location.reload();  // Odświeżenie strony
         }
 
         // Obsługa kliknięcia w przycisk "+"

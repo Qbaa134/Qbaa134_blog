@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #181818;
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
             color: white;
             text-align: center;
             margin: 0;
@@ -15,18 +17,25 @@
         }
         h1 {
             margin-top: 50px;
+            font-size: 2.5em;
+            font-weight: 600;
         }
         .container {
-            width: 80%;
+            width: 90%;
             margin: auto;
             max-width: 800px;
         }
         .post {
-            background: #222;
+            background: #1e1e1e;
             padding: 20px;
             margin: 20px 0;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .post:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.15);
         }
         .add-post {
             position: fixed;
@@ -34,15 +43,19 @@
             right: 20px;
             background: #ffcc00;
             color: black;
-            font-size: 24px;
-            width: 50px;
-            height: 50px;
+            font-size: 28px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+            box-shadow: 0 0 12px rgba(255, 204, 0, 0.9);
+            transition: transform 0.2s ease-in-out;
+        }
+        .add-post:hover {
+            transform: scale(1.1);
         }
         .hidden { display: none; }
 
@@ -54,8 +67,8 @@
             transform: translate(-50%, -50%);
         }
         svg {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
         }
         path {
             stroke-dasharray: 300;
@@ -82,7 +95,7 @@
     <h1>Blog</h1>
     <div class="container" id="posts"></div>
 
-    <!-- Przycisk dodawania postów (widoczny tylko dla Ciebie) -->
+    <!-- Przycisk dodawania postów (widoczny tylko po autoryzacji) -->
     <div class="add-post hidden" id="addPost">+</div>
 
     <script>
@@ -108,12 +121,19 @@
             }
         }
 
-        // Sprawdzenie, czy użytkownik jest autoryzowany (np. na podstawie lokalnego tokena)
+        // Sprawdzenie autoryzacji na podstawie cookie
         function checkAuthorization() {
-            const isAuthorized = localStorage.getItem("isAdmin") === "true";  // Możesz zmienić metodę autoryzacji
+            const isAuthorized = document.cookie.includes("admin=true");
             if (isAuthorized) {
                 document.getElementById('addPost').classList.remove('hidden');
             }
+        }
+
+        // Sprawdzenie, czy użytkownik odwiedza /admin i ustawienie cookie
+        if (window.location.pathname === "/admin") {
+            document.cookie = "admin=true; path=/; max-age=86400";  // Ważne przez 1 dzień
+            alert("Dostęp administratora aktywowany!");
+            window.location.href = "/";  // Przekierowanie na stronę główną
         }
 
         // Obsługa kliknięcia w przycisk "+"
@@ -126,7 +146,7 @@
             }
         });
 
-        // Zapisanie nowego posta do pliku JSON (wymaga backendu - tutaj symulowane w LocalStorage)
+        // Zapisanie nowego posta do pliku JSON (symulacja w LocalStorage)
         function savePost(post) {
             let posts = JSON.parse(localStorage.getItem('posts')) || [];
             posts.push(post);

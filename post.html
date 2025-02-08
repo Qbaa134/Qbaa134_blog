@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post</title>
+    <title>Posty</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -132,7 +132,7 @@
 </head>
 <body>
 
-    <h1>Post</h1>
+    <h1>Posty</h1>
 
     <div class="post-container" id="post"></div>
 
@@ -166,24 +166,37 @@
     </div>
 
     <script>
-        // Funkcja do załadowania konkretnego posta
-        async function loadPost() {
-            const params = new URLSearchParams(window.location.search);
-            const postId = params.get('id');
-
+        // Funkcja do załadowania postów o id 1 i 2
+        async function loadPosts() {
             try {
+                // Wczytujemy dane z pliku JSON
                 const response = await fetch('posts.json');
                 const posts = await response.json();
-                const post = posts[postId];
+
+                // Pobieramy posty o id 1 i 2
+                const post1 = posts[1];
+                const post2 = posts[2];
+
+                // Element, w którym będą wyświetlane posty
                 const postContainer = document.getElementById('post');
 
+                // Wstawiamy zawartość postów do kontenera
                 postContainer.innerHTML = `
-                    <h2>${post.title}</h2>
-                    <p>${post.content}</p>
+                    <h2>${post1.title}</h2>
+                    <p>${post1.content}</p>
+
+                    <hr>
+
+                    <h2>${post2.title}</h2>
+                    <p>${post2.content}</p>
                 `;
-                loadComments(postId);  // Załaduj komentarze dla tego posta
+
+                // Jeśli chcesz wczytać komentarze dla każdego z postów, możesz dodać tutaj dodatkową funkcjonalność:
+                loadComments(1);  // Komentarze dla posta o id 1
+                loadComments(2);  // Komentarze dla posta o id 2
+
             } catch (error) {
-                console.error('Error loading post:', error);
+                console.error('Błąd podczas ładowania postów:', error);
             }
         }
 
@@ -248,7 +261,7 @@
         });
 
         // Inicjalizacja
-        loadPost();
+        loadPosts();
     </script>
 
 </body>

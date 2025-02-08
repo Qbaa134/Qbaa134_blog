@@ -1,10 +1,15 @@
 [
     {
-        "title": "Pierwszy wpis",
-        "content": "To jest przykładowy post na blogu!"
+        "title": "Post 1",
+        "content": "To jest pierwszy post. Treść pierwszego posta na blogu."
     },
     {
-        "title": "Drugi wpis",
-        "content": "Kolejny świetny artykuł!"
+        "title": "Post 2",
+        "content": "To jest drugi post. Treść drugiego posta na blogu."
+    },
+    {
+        "title": "Post 3",
+        "content": "To jest trzeci post. Treść trzeciego posta na blogu."
     }
 ]
+

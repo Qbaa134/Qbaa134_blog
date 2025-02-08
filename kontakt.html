@@ -21,6 +21,9 @@
         }
         .content {
             margin: 20px;
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
         }
         .content p {
             font-size: 1.2em;
@@ -30,7 +33,8 @@
             white-space: nowrap;
             overflow: hidden;
             border-right: 3px solid white;
-            animation: typing 5s steps(60) 1s forwards, blink 0.75s step-end infinite;
+            animation: typing 4s steps(60) 1s forwards, blink 0.75s step-end infinite;
+            word-wrap: break-word; /* Dodane, aby tekst przechodził do kolejnej linii */
         }
         .content a {
             color: #ffcc00;
@@ -127,7 +131,7 @@
                 if (i < textContent.length) {
                     textElement.innerHTML += textContent.charAt(i);
                     i++;
-                    setTimeout(typeText, 100); // Opóźnienie przy każdym znaku (100ms)
+                    setTimeout(typeText, 50); // Skrócenie opóźnienia do 50ms dla szybszego efektu
                 }
             }
             typeText(); // Uruchamiamy funkcję

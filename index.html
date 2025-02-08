@@ -5,120 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #121212; color: white; text-align: center; }
-        .navbar { background: #333; padding: 15px; position: fixed; top: 0; width: 100%; }
-        .navbar a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-        .container { margin-top: 60px; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .post-title { background: #222; padding: 15px; cursor: pointer; margin: 10px 0; border-radius: 5px; }
-        .post-content { display: none; padding: 15px; background: #1e1e1e; border-radius: 5px; }
-        .admin-tools { display: none; margin-top: 20px; }
-        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 50px;
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            max-width: 800px;
+            display: none; /* Ukrywamy posty */
+        }
+        .post {
+            background: #1e1e1e;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .post:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.15);
+        }
+        .add-post {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ffcc00;
+            color: black;
+            font-size: 28px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(255, 204, 0, 0.9);
+            transition: transform 0.2s ease-in-out;
+        }
+        .add-post:hover {
+            transform: scale(1.1);
+        }
+        .hidden { display: none; }
+
+        /* Stylizacja sekcji komentarzy */
+        .comment-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+        }
+
+        .comment-section textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+        }
+
+        .comment-section button {
+            padding: 10px 15px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comment-section button:disabled {
+            background-color: #888;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
-    <canvas id="starCanvas"></canvas>
-    <div class="navbar">
-        <a href="mailto:qbaa134@gmail.com">Kontakt</a>
-        <a href="#about">O mnie</a>
-        <a href="https://github.com/qbaa134" target="_blank">GitHub</a>
-    </div>
 
+    <h1>Blog</h1>
     <div class="container" id="posts"></div>
 
-    <div class="admin-tools" id="adminTools">
-        <h3>Dodaj Post</h3>
-        <input type="text" id="title" placeholder="Tytuł"><br>
-        <textarea id="content" placeholder="Treść"></textarea><br>
-        <button onclick="addPost()">Dodaj</button>
+    <!-- Sekcja komentarzy -->
+    <div class="comment-section hidden" id="commentSection">
+        <h3>Dodaj komentarz:</h3>
+        <textarea id="commentText" placeholder="Twój komentarz..."></textarea><br>
+        <button id="submitComment" disabled>Wyślij komentarz</button>
+        <div id="captchaContainer"></div>
     </div>
 
     <script>
-        const username = "admin";
-        const password = "tajnehaslo";  // Ustal własne
-        let isAdmin = false;
+        // Ukrywanie postów, dopóki nie zostaną załadowane
+        async function loadPosts() {
+            try {
+                const response = await fetch('posts.json');
+                const posts = await response.json();
+                const container = document.getElementById('posts');
+                container.innerHTML = posts.map((post, index) => `
+                    <div class="post" data-index="${index}">
+                        <h2 class="post-title">${post.title}</h2>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading posts:', error);
+            }
+        }
 
-        function loadPosts() {
-            const posts = JSON.parse(localStorage.getItem("posts")) || [];
-            const container = document.getElementById("posts");
-            container.innerHTML = "";
-            posts.forEach((post, index) => {
-                container.innerHTML += `
-                    <div class='post-title' onclick='togglePost(${index})'>${post.title}</div>
-                    <div class='post-content' id='content-${index}'>${post.content}</div>
+        // Obsługuje kliknięcie na tytuł posta
+        document.getElementById('posts').addEventListener('click', (event) => {
+            if (event.target && event.target.classList.contains('post-title')) {
+                const index = event.target.closest('.post').getAttribute('data-index');
+                loadFullPost(index);
+            }
+        });
+
+        // Załaduj pełny post
+        async function loadFullPost(index) {
+            try {
+                const response = await fetch('posts.json');
+                const posts = await response.json();
+                const post = posts[index];
+                
+                const postContainer = document.getElementById('posts');
+                postContainer.innerHTML = `
+                    <div class="post">
+                        <h2>${post.title}</h2>
+                        <p>${post.content}</p>
+                    </div>
                 `;
+                
+                // Pokazanie sekcji komentarzy
+                document.getElementById('commentSection').classList.remove('hidden');
+                initializeCaptcha(); // Inicjalizuj CAPTCHA
+            } catch (error) {
+                console.error('Error loading full post:', error);
+            }
+        }
+
+        // Inicjalizacja CAPTCHA (prosta weryfikacja)
+        function initializeCaptcha() {
+            const captchaContainer = document.getElementById('captchaContainer');
+            captchaContainer.innerHTML = `
+                <input type="text" id="captchaInput" placeholder="Wpisz '1234'" />
+            `;
+            document.getElementById('submitComment').disabled = true;
+            
+            // Zdolność do wysyłania komentarza tylko po weryfikacji CAPTCHA
+            document.getElementById('captchaInput').addEventListener('input', () => {
+                const input = document.getElementById('captchaInput').value;
+                if (input === '1234') {
+                    document.getElementById('submitComment').disabled = false;
+                } else {
+                    document.getElementById('submitComment').disabled = true;
+                }
+            });
+
+            // Obsługuje kliknięcie przycisku do wysłania komentarza
+            document.getElementById('submitComment').addEventListener('click', () => {
+                const commentText = document.getElementById('commentText').value;
+                if (commentText) {
+                    saveComment(commentText);
+                }
             });
         }
 
-        function togglePost(index) {
-            const content = document.getElementById(`content-${index}`);
-            content.style.display = content.style.display === "block" ? "none" : "block";
+        // Zapisuje komentarz w LocalStorage (symulacja)
+        function saveComment(commentText) {
+            let comments = JSON.parse(localStorage.getItem('comments')) || [];
+            comments.push(commentText);
+            localStorage.setItem('comments', JSON.stringify(comments));
+            alert('Komentarz dodany!');
+            document.getElementById('commentText').value = ''; // Czyści pole tekstowe
         }
 
-        function login() {
-            const user = prompt("Podaj login:");
-            const pass = prompt("Podaj hasło:");
-            if (user === username && pass === password) {
-                alert("Zalogowano jako admin");
-                isAdmin = true;
-                document.getElementById("adminTools").style.display = "block";
-            } else {
-                alert("Błędne dane logowania!");
-            }
-        }
-
-        function addPost() {
-            if (!isAdmin) return alert("Brak dostępu!");
-            const title = document.getElementById("title").value;
-            const content = document.getElementById("content").value;
-            if (title && content) {
-                let posts = JSON.parse(localStorage.getItem("posts")) || [];
-                posts.push({ title, content });
-                localStorage.setItem("posts", JSON.stringify(posts));
-                loadPosts();
-            }
-        }
-
-        function drawStarAnimation() {
-            const canvas = document.getElementById("starCanvas");
-            const ctx = canvas.getContext("2d");
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            ctx.strokeStyle = "yellow";
-            ctx.lineWidth = 3;
-            
-            let points = [
-                [canvas.width / 2, canvas.height / 4],
-                [canvas.width * 0.6, canvas.height * 0.8],
-                [canvas.width * 0.2, canvas.height * 0.4],
-                [canvas.width * 0.8, canvas.height * 0.4],
-                [canvas.width * 0.4, canvas.height * 0.8]
-            ];
-            
-            let index = 0;
-            function draw() {
-                if (index < points.length) {
-                    ctx.lineTo(points[index][0], points[index][1]);
-                    ctx.stroke();
-                    index++;
-                    setTimeout(draw, 300);
-                } else {
-                    setTimeout(() => {
-                        canvas.style.display = "none";
-                    }, 1000);
-                }
-            }
-            
-            ctx.beginPath();
-            ctx.moveTo(points[0][0], points[0][1]);
-            draw();
-        }
-
-        window.onload = () => {
-            drawStarAnimation();
-            setTimeout(loadPosts, 2000);
-            if (confirm("Czy chcesz się zalogować jako admin?")) login();
-        };
+        // Inicjalizacja
+        loadPosts();
     </script>
 </body>
 </html>

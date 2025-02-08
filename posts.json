@@ -2,7 +2,7 @@
     {
         "id": 1,
         "title": "Post 1",
-        "content": "This is the content of the first post."
+        "content": "<h2>Witaj na moim blogu!</h2><p>Cześć! Skoro tutaj trafiłeś, to znaczy, że interesują Cię technologie, elektronika, programowanie...</p>"
     },
     {
         "id": 2,

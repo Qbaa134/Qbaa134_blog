@@ -87,6 +87,29 @@
             }
         }
 
+        /* Stylizacja linków do postów */
+        .post-links-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+        .post-link {
+            background-color: #ffcc00;
+            color: #121212;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 6px 15px rgba(255, 204, 0, 0.3);
+            transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .post-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 18px rgba(255, 204, 0, 0.5);
+        }
+
         /* Stylizacja pola wyszukiwania */
         .search-container {
             margin-top: 20px;
@@ -116,10 +139,10 @@
 
     <h1>Blog</h1>
 
-    <!-- Linki do postów -->
-    <div>
-        <a href="post.html?id=1">Post 1</a> | 
-        <a href="post.html?id=2">Post 2</a>
+    <!-- Linki do postów wyświetlane w eleganckich prostokątach -->
+    <div class="post-links-container">
+        <a href="post.html?id=1" class="post-link">Post 1</a>
+        <a href="post.html?id=2" class="post-link">Post 2</a>
     </div>
 
     <!-- Pole wyszukiwania -->

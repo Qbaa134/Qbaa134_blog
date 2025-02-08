@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontakt</title>
+    <title>Post</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -17,120 +17,238 @@
             margin-top: 50px;
             font-size: 2.5em;
             font-weight: 600;
-            color: #ffcc00;
         }
-        .content {
-            margin: 20px;
+        .post-container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
         }
-        .content p {
+        .comment-section {
+            margin-top: 50px;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        }
+        .comment {
+            background: #333333;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .back-link-container {
+            margin-top: 30px;
+            background-color: #ffcc00;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        .back-link {
             font-size: 1.2em;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            opacity: 0;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 3px solid white;
-            animation: typing 5s steps(60) 1s forwards, blink 0.75s step-end infinite;
-        }
-        .content a {
-            color: #ffcc00;
-            font-weight: bold;
+            color: black;
             text-decoration: none;
-            transition: color 0.3s;
         }
-        .content a:hover {
-            color: #ff9900;
+        .back-link:hover {
+            text-decoration: underline;
         }
-        .copy-btn {
+
+        /* Styl dla tekstowego pola do wpisywania komentarza */
+        #commentInput {
+            width: 100%;
+            height: 120px;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            background-color: #333333;
+            color: white;
+            border: 1px solid #444444;
+            resize: vertical; /* Pozwalamy na zmianę wysokości */
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        #commentInput:focus {
+            outline: none;
+            background-color: #444444;
+        }
+
+        /* Styl przycisku do dodania komentarza */
+        button {
             background-color: #ffcc00;
             color: black;
+            border: none;
             padding: 10px 20px;
+            font-size: 1.1em;
             border-radius: 5px;
             cursor: pointer;
-            border: none;
-            font-size: 1em;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease;
         }
-        .copy-btn:hover {
-            background-color: #ff9900;
+
+        button:hover {
+            background-color: #e6b800;
         }
-        .email-container {
+
+        /* Styl dla gwiazdek */
+        .stars {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 10px;
+            margin-bottom: 15px;
         }
-        .email-container span {
+
+        .star {
+            font-size: 2em;
+            color: #ffd700;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .star:hover {
+            transform: scale(1.2);
+        }
+
+        .star.selected {
+            color: #ffcc00;
+        }
+
+        /* Styl dla nazwiska użytkownika */
+        #username {
+            margin-bottom: 10px;
             font-size: 1.2em;
+            color: #ffcc00;
         }
 
-        /* Animacja pisania */
-        @keyframes typing {
-            0% {
-                width: 0;
-                opacity: 1;
-            }
-            100% {
-                width: 100%;
-                opacity: 1;
-            }
-        }
-
-        /* Animacja migania karetki */
-        @keyframes blink {
-            50% {
-                border-color: transparent;
-            }
+        /* Styl dla pola wpisywania nazwy użytkownika */
+        #userInput {
+            width: 80%;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            background-color: #333333;
+            color: white;
+            border: 1px solid #444444;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
-    <h1>O mnie</h1>
-    <div class="content">
-        <p id="aboutMeText">Jestem pasjonatem technologii, komputerów 💻, mikrokomputerów 🖥️ oraz drukowania 3D 🖨️. Zajmuję się hackowaniem, tworzeniem nowych rozwiązań, a także odkrywaniem nowinek w dziedzinie systemów operacyjnych, gier 🎮 i sztucznej inteligencji 🤖. Posiadam szeroki zestaw sprzętu, w tym Raspberry Pi, Arduino, ESP32, a także różne wyświetlacze, moduły radiowe i inne akcesoria elektroniczne ⚙️. Lubię pracować nad projektami związanymi z BLE oraz programowaniem, szczególnie tworzeniem aplikacji na platformy takie jak AIDE 📱. Moje hobby obejmuje także rowery górskie 🚵‍♂️, które pozwalają mi łączyć pasję do technologii z aktywnością na świeżym powietrzu. Każdy dzień to dla mnie okazja do nauki i rozwijania nowych umiejętności! 💡</p>
+    <h1>Post</h1>
+
+    <div class="post-container" id="post"></div>
+
+    <!-- Sekcja komentarzy -->
+    <div class="comment-section" id="comments">
+        <h2>Komentarze</h2>
         
-        <p>GitHub: 
-            <a href="https://github.com/Qbaa134" target="_blank">https://github.com/Qbaa134</a>
-        </p>
-        
-        <p>Email: 
-            <div class="email-container">
-                <span>qbaa134.pl@gmail.com</span>
-                <button class="copy-btn" onclick="copyEmail()">Skopiuj</button>
-            </div>
-        </p>
+        <!-- Wpisywanie nazwy użytkownika -->
+        <input type="text" id="userInput" placeholder="Wpisz swoją nazwę użytkownika" /><br>
+
+        <!-- Gwiazdki do oceniania -->
+        <div class="stars" id="starRating">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+        </div>
+
+        <!-- Pole do wpisywania komentarza -->
+        <textarea id="commentInput" rows="4" cols="50" placeholder="Dodaj komentarz..."></textarea><br>
+        <button onclick="addComment()">Dodaj komentarz</button>
+
+        <!-- Wyświetlanie komentarzy -->
+        <div id="commentList"></div>
+    </div>
+
+    <!-- Przycisk powrotu -->
+    <div class="back-link-container">
+        <a href="index.html" class="back-link">Powrót na stronę główną</a>
     </div>
 
     <script>
-        // Funkcja do kopiowania e-maila
-        function copyEmail() {
-            const emailText = "qbaa134.pl@gmail.com";
-            navigator.clipboard.writeText(emailText)
-                .then(() => {
-                    alert('E-mail skopiowany!');
-                })
-                .catch(err => {
-                    console.error('Błąd podczas kopiowania:', err);
-                });
+        // Funkcja do załadowania konkretnego posta
+        async function loadPost() {
+            const params = new URLSearchParams(window.location.search);
+            const postId = params.get('id');
+
+            try {
+                const response = await fetch('posts.json');
+                const posts = await response.json();
+                const post = posts[postId];
+                const postContainer = document.getElementById('post');
+
+                postContainer.innerHTML = `
+                    <h2>${post.title}</h2>
+                    <p>${post.content}</p>
+                `;
+                loadComments(postId);  // Załaduj komentarze dla tego posta
+            } catch (error) {
+                console.error('Error loading post:', error);
+            }
         }
 
-        // Funkcja do dodania efektu "pisania"
-        window.onload = () => {
-            const textElement = document.getElementById('aboutMeText');
-            const textContent = textElement.innerHTML;
-            textElement.innerHTML = ''; // Usuwamy tekst, aby go na nowo dodawać
+        // Funkcja do załadowania komentarzy
+        function loadComments(postId) {
+            const comments = JSON.parse(localStorage.getItem('comments')) || {};
+            const postComments = comments[postId] || [];
+            const commentList = document.getElementById('commentList');
 
-            let i = 0;
-            function typeText() {
-                if (i < textContent.length) {
-                    textElement.innerHTML += textContent.charAt(i);
-                    i++;
-                    setTimeout(typeText, 100); // Opóźnienie przy każdym znaku (100ms)
+            commentList.innerHTML = postComments.map(comment => `
+                <div class="comment">
+                    <strong>${comment.username}</strong> - ${'★'.repeat(comment.rating)}<br>
+                    ${comment.text}
+                </div>
+            `).join('');
+        }
+
+        // Funkcja do dodawania komentarza
+        function addComment() {
+            const commentInput = document.getElementById('commentInput');
+            const commentText = commentInput.value.trim();
+            const username = document.getElementById('userInput').value.trim();
+            const rating = getSelectedRating();
+
+            if (commentText && username && rating) {
+                const params = new URLSearchParams(window.location.search);
+                const postId = params.get('id');
+                const comments = JSON.parse(localStorage.getItem('comments')) || {};
+
+                if (!comments[postId]) {
+                    comments[postId] = [];
                 }
+
+                comments[postId].push({
+                    text: commentText,
+                    username: username,
+                    rating: rating
+                });
+
+                localStorage.setItem('comments', JSON.stringify(comments));
+
+                commentInput.value = '';  // Wyczyść pole tekstowe
+                document.getElementById('userInput').value = '';  // Wyczyść pole nazwy użytkownika
+                loadComments(postId);  // Załaduj ponownie komentarze
+            } else {
+                alert('Proszę uzupełnić wszystkie pola!');
             }
-            typeText(); // Uruchamiamy funkcję
-        };
+        }
+
+        // Funkcja do uzyskania zaznaczonej oceny (gwiazdek)
+        function getSelectedRating() {
+            const stars = document.querySelectorAll('.star.selected');
+            return stars.length;
+        }
+
+        // Funkcja do zaznaczania gwiazdek
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', () => {
+                document.querySelectorAll('.star').forEach(s => s.classList.remove('selected'));
+                star.classList.add('selected');
+            });
+        });
+
+        // Inicjalizacja
+        loadPost();
     </script>
 
 </body>

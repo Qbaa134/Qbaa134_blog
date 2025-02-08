@@ -2,81 +2,11 @@
     {
         "id": "1",
         "title": "Witaj na moim blogu!",
-        "content": "Cześć! Skoro tutaj trafiłeś, to znaczy, że interesują Cię technologie, elektronika, programowanie i wszystko, co związane z techniką."
+        "content": "Cześć! Skoro tutaj trafiłeś, to znaczy, że interesują Cię technologie, elektronika, programowanie i wszystko, co związane z techniką. Świetnie się składa, bo właśnie o tym będzie ten blog! 🚀🔧"
     },
     {
-        "content": "Świetnie się składa, bo właśnie o tym będzie ten blog!"
-    },
-    {
-        "content": "Kim jestem?"
-    },
-    {
-        "content": "Nazywam się Kuba, ale na Githubie używam nicku Qbaa134."
-    },
-    {
-        "content": "Moim hobby są mikrokomputery, takie jak Arduino, Raspberry Pi, ESP32, a także wszystko, co pozwala nam budować i eksperymentować."
-    },
-    {
-        "content": "Uwielbiam także druk 3D, tworzenie programów hakerskich, stare gry, systemy operacyjne oraz szeroko pojętą inżynierię odwrotną."
-    },
-    {
-        "content": "Jeśli masz podobne zainteresowania, to trafiłeś w dobre miejsce – mam nadzieję, że znajdziesz coś, co Cię zainspiruje i rozwinie!"
-    },
-    {
-        "content": "O czym będę pisać?"
-    },
-    {
-        "content": "Poradniki i tutoriale dotyczące programowania mikrokontrolerów, ESP32, Raspberry Pi oraz Arduino."
-    },
-    {
-        "content": "Projekty DIY, w których krok po kroku pokażę, jak budować własne urządzenia."
-    },
-    {
-        "content": "Porównania, recenzje i informacje o projektach i urządzeniach, które warto poznać."
-    },
-    {
-        "content": "Eksperymenty z elektroniką, takie jak wykorzystanie modułów GPS, NRF, LoRa, RFID, wyświetlaczy OLED i TFT oraz innych ciekawych komponentów."
-    },
-    {
-        "content": "Testy i recenzje sprzętu – zarówno nowoczesnych gadżetów, jak i mniej znanych, ale przydatnych narzędzi."
-    },
-    {
-        "content": "Hackowanie sprzętu i oprogramowania – legalne i edukacyjne podejście do inżynierii odwrotnej."
-    },
-    {
-        "content": "Analizy sieciowe, sniffing, bezpieczeństwo IT i inne ciekawostki ze świata cyberbezpieczeństwa."
-    },
-    {
-        "content": "Dlaczego ten blog?"
-    },
-    {
-        "content": "Tworzę różne projekty, wdrażam swoje pomysły w życie i uczę się na błędach."
-    },
-    {
-        "content": "Zauważyłem, że wielu ludzi ma podobne zainteresowania, ale często brakuje im konkretnego przewodnika, który krok po kroku przeprowadzi ich przez trudniejsze techniczne zagadnienia."
-    },
-    {
-        "content": "Chcę dzielić się swoją wiedzą, doświadczeniem i inspiracjami, żeby pomóc innym w odkrywaniu fascynującego świata elektroniki, informatyki i techniki."
-    },
-    {
-        "content": "Jak możesz się zaangażować?"
-    },
-    {
-        "content": "Chciałbym, aby ten blog stał się miejscem wymiany doświadczeń i wspólnego rozwoju."
-    },
-    {
-        "content": "Jeśli masz pytania, pomysły na projekty lub chcesz podzielić się swoimi osiągnięciami – śmiało pisz w komentarzach lub skontaktuj się ze mną!"
-    },
-    {
-        "content": "Może razem stworzymy coś niesamowitego?"
-    },
-    {
-        "content": "Zachęcam też do śledzenia kolejnych wpisów – będę regularnie publikować nowe treści, które mam nadzieję będą dla Ciebie przydatne i inspirujące!"
-    },
-    {
-        "content": "Do zobaczenia w kolejnych wpisach!"
-    },
-    {
-        "content": "Qbaa134"
+        "id": "2",
+        "title": "Mój pierwszy projekt z ESP32",
+        "content": "Zacząłem przygodę z ESP32, budując prosty system monitorowania temperatury i wilgotności w pomieszczeniu. Użyłem czujnika DHT11 i przesyłałem dane do chmury. Projekt świetnie pokazuje, jak łatwo można połączyć ESP32 z Internetem rzeczy!"
     }
 ]

@@ -65,27 +65,11 @@
             border-color: #ff9900;
         }
 
-        /* Zapisz jako PDF */
-        .pdf-button {
-            background-color: #ffcc00;
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(255, 204, 0, 0.5);
-        }
-
-        .pdf-button:hover {
-            background-color: #ff9900;
-        }
-
         /* Chatbot */
         .chatbot {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            left: 20px;
         }
 
         .chatbot-button {
@@ -129,7 +113,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        
+
         /* Animacja rysowania gwiazdy */
         .star-container {
             position: absolute;
@@ -194,9 +178,6 @@
         <input type="text" id="searchInput" placeholder="Szukaj postów..." oninput="searchPosts()">
     </div>
     
-    <!-- Zapisz jako PDF -->
-    <button id="savePDF" class="pdf-button">Zapisz jako PDF</button>
-
     <!-- Posty -->
     <div class="container" id="posts"></div>
 
@@ -214,8 +195,6 @@
             <button id="sendMessage">Wyślij</button>
         </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script>
         // Ukrywanie animacji gwiazdy po 2 sekundach i wyświetlenie postów
@@ -255,24 +234,6 @@
                 }
             });
         }
-
-        // Zapisz jako PDF
-        document.getElementById('savePDF').addEventListener('click', () => {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            doc.text('Blog - Moje Posty', 20, 20);
-            let y = 30;
-
-            const posts = document.querySelectorAll('.post');
-            posts.forEach(post => {
-                const title = post.querySelector('.post-title').textContent;
-                doc.text(title, 20, y);
-                y += 10;
-            });
-
-            doc.save('blog.pdf');
-        });
 
         // Chatbot
         document.getElementById('chatbotToggle').addEventListener('click', () => {

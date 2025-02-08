@@ -1,12 +1,5 @@
 [
-    {
-        "id": "1",
-        "title": "Witaj na moim blogu! 1",
-        "content": "Cześć! Skoro tutaj trafiłeś, to znaczy, że interesują Cię technologie, elektronika, programowanie i wszystko, co związane z techniką. Świetnie się składa, bo właśnie o tym będzie ten blog! 🚀🔧"
-    },
-    {
-        "id": "2",
-        "title": "Mój pierwszy projekt z ESP32 2",
-        "content": "Zacząłem przygodę z ESP32, budując prosty system monitorowania temperatury i wilgotności w pomieszczeniu. Użyłem czujnika DHT11 i przesyłałem dane do chmury. Projekt świetnie pokazuje, jak łatwo można połączyć ESP32 z Internetem rzeczy!"
-    }
+    { "id": 1, "title": "Post 1", "content": "Treść posta 1" },
+    { "id": 2, "title": "Post 2", "content": "Treść posta 2" }
 ]
+

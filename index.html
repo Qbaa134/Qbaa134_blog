@@ -49,14 +49,6 @@
             font-weight: bold;
         }
 
-        .post-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-top: 10px;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-        }
-
         .contact-link {
             position: fixed;
             bottom: 20px;
@@ -117,6 +109,7 @@
             border-radius: 20px;
             box-shadow: 0 4px 10px rgba(255, 204, 0, 0.7);
             transition: all 0.3s ease;
+            box-sizing: border-box;  /* Zapewnia, że padding jest uwzględniany w szerokości */
         }
 
         .search-box input {
@@ -128,6 +121,7 @@
             font-size: 1.1em;
             border-radius: 10px;
             transition: all 0.3s ease;
+            box-sizing: border-box; /* Umożliwia prawidłowe wyświetlanie w obrębie kontenera */
         }
 
         .search-box:hover {

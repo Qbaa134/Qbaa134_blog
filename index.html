@@ -140,9 +140,8 @@
     </div>
 
     <!-- Linki do postów -->
-    <div class="post-links">
-        <a href="post.html?id=1" class="post-link" data-title="Powitanie">Powitanie</a>
-        <a href="post.html?id=2" class="post-link" data-title="Post 2">Post 2</a>
+    <div class="post-links" id="postLinks">
+        <!-- Posty będą ładowane dynamicznie tutaj -->
     </div>
 
     <!-- Przycisk kontaktowy -->
@@ -150,6 +149,7 @@
         <a href="kontakt.html" style="color: black; text-decoration: none;">!</a>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         // Ukrywanie animacji gwiazdy po 2 sekundach
         setTimeout(() => {
@@ -164,6 +164,20 @@
                 link.style.display = title.includes(input) ? "block" : "none";
             });
         }
+
+        // Wczytanie pliku Markdown
+        function loadMarkdownFile(filename) {
+            fetch(filename)
+                .then(response => response.text())
+                .then(data => {
+                    const htmlContent = marked(data);  // Konwertowanie Markdown do HTML
+                    document.getElementById('postLinks').innerHTML = htmlContent;
+                })
+                .catch(error => console.log('Błąd podczas ładowania pliku Markdown:', error));
+        }
+
+        // Przykładowe wywołanie - wczytaj plik markdown
+        loadMarkdownFile('post1.md');
     </script>
 
 </body>

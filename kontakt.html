@@ -22,7 +22,7 @@
         .content {
             margin: 20px;
             width: 90%;
-            max-width: 800px;
+            max-width: 1000px; /* Zwiększenie szerokości kontenera */
             margin: 0 auto;
         }
         .content p {
@@ -129,7 +129,7 @@
                 if (i < textContent.length) {
                     textElement.innerHTML += textContent.charAt(i);
                     i++;
-                    setTimeout(typeText, 30); // Zwiększona prędkość
+                    setTimeout(typeText, 60); // Zwiększenie prędkości pisania (wolniej)
                 }
             }
             typeText(); // Uruchamiamy funkcję

@@ -1,15 +1,14 @@
 [
     {
+        "id": "1",
         "title": "Post 1",
-        "content": "To jest pierwszy post. Treść pierwszego posta na blogu."
+        "content": "This is the content of the first post."
     },
     {
+        "id": "2",
         "title": "Post 2",
-        "content": "To jest drugi post. Treść drugiego posta na blogu."
-    },
-    {
-        "title": "Post 3",
-        "content": "To jest trzeci post. Treść trzeciego posta na blogu."
+        "content": "This is the content of the second post."
     }
 ]
+
 

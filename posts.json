@@ -1,13 +1,7 @@
 [
-  {
-    "id": 1,
-    "title": "O mnie - Qbaa134",
-    "content": "<h2>Witaj na moim blogu!</h2><p>Cześć! Skoro tutaj trafiłeś, to znaczy, że interesują Cię technologie, elektronika, programowanie...</p>"
-  },
-  {
-    "id": 2,
-    "title": "Projekt Arduino",
-    "content": "<h2>Projekt Arduino - DIY dla początkujących</h2><p>W tym wpisie pokażę Ci, jak stworzyć własny projekt z Arduino...</p>"
-  }
+    {
+        "id": "1",
+        "title": "Witaj na moim blogu! 🌐💡",
+        "content": "<h1>Cześć!</h1><p>Skoro tutaj trafiłeś, to znaczy, że interesują Cię technologie, elektronika, programowanie i wszystko, co związane z techniką. Świetnie się składa, bo właśnie o tym będzie ten blog! 🚀🔧</p><h2>Kim jestem? 🤔</h2><p>Nazywam się Kuba, ale na Githubie używam nicku Qbaa134. Moim hobby są mikrokomputery, takie jak Arduino, Raspberry Pi, ESP32, a także wszystko, co pozwala nam budować i eksperymentować. 🖥️✨ Uwielbiam także druk 3D, tworzenie programów hakerskich, stare gry, systemy operacyjne oraz szeroko pojętą inżynierię odwrotną. Jeśli masz podobne zainteresowania, to trafiłeś w dobre miejsce – mam nadzieję, że znajdziesz coś, co Cię zainspiruje i rozwinie! 💻🎮</p><h2>O czym będę pisać? 📝</h2><p>Na blogu znajdziesz:</p><ul><li>Poradniki i tutoriale dotyczące programowania mikrokontrolerów, ESP32, Raspberry Pi oraz Arduino. 👨‍💻📚</li><li>Projekty DIY, w których krok po kroku pokażę, jak budować własne urządzenia. 🔨💡</li><li>Porównania, recenzje i informacje o projektach i urządzeniach, które warto poznać. 🔍⚙️</li><li>Eksperymenty z elektroniką, takie jak wykorzystanie modułów GPS, NRF, LoRa, RFID, wyświetlaczy OLED i TFT oraz innych ciekawych komponentów. 📡🔋</li><li>Testy i recenzje sprzętu – zarówno nowoczesnych gadżetów, jak i mniej znanych, ale przydatnych narzędzi. 🛠️💥</li><li>Hackowanie sprzętu i oprogramowania – legalne i edukacyjne podejście do inżynierii odwrotnej. 🔐🔓</li><li>Analizy sieciowe, sniffing, bezpieczeństwo IT i inne ciekawostki ze świata cyberbezpieczeństwa. 🌐🛡️</li></ul><h2>Dlaczego ten blog? 🤖</h2><p>Tworzę różne projekty, wdrażam swoje pomysły w życie i uczę się na błędach. Zauważyłem, że wielu ludzi ma podobne zainteresowania, ale często brakuje im konkretnego przewodnika, który krok po kroku przeprowadzi ich przez trudniejsze techniczne zagadnienia. Chcę dzielić się swoją wiedzą, doświadczeniem i inspiracjami, żeby pomóc innym w odkrywaniu fascynującego świata elektroniki, informatyki i techniki. 🔍🚀</p><h2>Jak możesz się zaangażować? 🤝</h2><p>Chciałbym, aby ten blog stał się miejscem wymiany doświadczeń i wspólnego rozwoju. Jeśli masz pytania, pomysły na projekty lub chcesz podzielić się swoimi osiągnięciami – śmiało pisz w komentarzach lub skontaktuj się ze mną! Może razem stworzymy coś niesamowitego? 🤩💬</p><p>Zachęcam też do śledzenia kolejnych wpisów – będę regularnie publikować nowe treści, które mam nadzieję będą dla Ciebie przydatne i inspirujące! 📅🔜</p><h2>Do zobaczenia w kolejnych wpisach! 👋</h2><p>Qbaa134 🌟</p>"
+    }
 ]
-

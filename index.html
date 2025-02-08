@@ -43,28 +43,93 @@
             color: #ffcc00;
             font-weight: bold;
         }
-        .contact-link {
+
+        /* Wyszukiwarka */
+        .search-container {
+            margin: 20px;
+            text-align: center;
+        }
+
+        #searchInput {
+            width: 80%;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: 2px solid #ffcc00;
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: #ff9900;
+        }
+
+        /* Zapisz jako PDF */
+        .pdf-button {
+            background-color: #ffcc00;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 204, 0, 0.5);
+        }
+
+        .pdf-button:hover {
+            background-color: #ff9900;
+        }
+
+        /* Chatbot */
+        .chatbot {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #ffcc00;
-            color: black;
-            font-size: 28px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0 12px rgba(255, 204, 0, 0.9);
-            transition: transform 0.2s ease-in-out;
         }
-        .contact-link:hover {
-            transform: scale(1.1);
-        }
-        .hidden { display: none; }
 
+        .chatbot-button {
+            background-color: #ffcc00;
+            color: black;
+            font-size: 1.2em;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .chatbox {
+            display: none;
+            background-color: #121212;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-messages {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+
+        #userMessage {
+            width: 80%;
+            padding: 5px;
+            background-color: #1e1e1e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #sendMessage {
+            background-color: #ffcc00;
+            color: black;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
         /* Animacja rysowania gwiazdy */
         .star-container {
             position: absolute;
@@ -86,6 +151,30 @@
                 stroke-dashoffset: 0;
             }
         }
+
+        /* Styl przycisku kontaktowego */
+        .contact-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ffcc00;
+            color: black;
+            font-size: 28px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(255, 204, 0, 0.9);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .contact-link:hover {
+            transform: scale(1.1);
+        }
+
     </style>
 </head>
 <body>
@@ -99,12 +188,34 @@
     </div>
 
     <h1>Blog</h1>
+    
+    <!-- Wyszukiwarka -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Szukaj postów..." oninput="searchPosts()">
+    </div>
+    
+    <!-- Zapisz jako PDF -->
+    <button id="savePDF" class="pdf-button">Zapisz jako PDF</button>
+
+    <!-- Posty -->
     <div class="container" id="posts"></div>
 
-    <!-- Przycisk kontaktowy, który prowadzi do podstrony z danymi -->
+    <!-- Przycisk kontaktowy -->
     <div class="contact-link">
         <a href="kontakt.html" style="color: black; text-decoration: none;">!</a>
     </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot">
+        <button id="chatbotToggle" class="chatbot-button">Chatbot</button>
+        <div id="chatbox" class="chatbox">
+            <div id="chatMessages" class="chat-messages"></div>
+            <input type="text" id="userMessage" placeholder="Wpisz wiadomość..." />
+            <button id="sendMessage">Wyślij</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script>
         // Ukrywanie animacji gwiazdy po 2 sekundach i wyświetlenie postów
@@ -130,6 +241,64 @@
         }
 
         loadPosts(); // Inicjalizacja ładowania postów
+
+        // Wyszukiwanie postów
+        function searchPosts() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const posts = document.querySelectorAll('.post');
+            posts.forEach(post => {
+                const title = post.querySelector('.post-title').textContent.toLowerCase();
+                if (title.includes(input)) {
+                    post.style.display = '';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        }
+
+        // Zapisz jako PDF
+        document.getElementById('savePDF').addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.text('Blog - Moje Posty', 20, 20);
+            let y = 30;
+
+            const posts = document.querySelectorAll('.post');
+            posts.forEach(post => {
+                const title = post.querySelector('.post-title').textContent;
+                doc.text(title, 20, y);
+                y += 10;
+            });
+
+            doc.save('blog.pdf');
+        });
+
+        // Chatbot
+        document.getElementById('chatbotToggle').addEventListener('click', () => {
+            const chatbox = document.getElementById('chatbox');
+            chatbox.style.display = chatbox.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.getElementById('sendMessage').addEventListener('click', () => {
+            const userMessage = document.getElementById('userMessage').value;
+            if (userMessage) {
+                displayMessage(userMessage, 'user');
+                document.getElementById('userMessage').value = '';
+
+                setTimeout(() => {
+                    displayMessage('Dziękuję za wiadomość! Jeśli masz pytania, napisz do mnie na maila.', 'bot');
+                }, 1000);
+            }
+        });
+
+        function displayMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            messageElement.classList.add(sender);
+            document.getElementById('chatMessages').appendChild(messageElement);
+            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+        }
     </script>
 </body>
 </html>

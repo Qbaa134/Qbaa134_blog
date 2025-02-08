@@ -110,6 +110,18 @@
             font-size: 1.2em;
             color: #ffcc00;
         }
+
+        /* Styl dla pola wpisywania nazwy użytkownika */
+        #userInput {
+            width: 80%;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            background-color: #333333;
+            color: white;
+            border: 1px solid #444444;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -122,9 +134,9 @@
     <div class="comment-section" id="comments">
         <h2>Komentarze</h2>
         
-        <!-- Nazwa użytkownika i gwiazdki -->
-        <div id="username">Nazwa użytkownika</div>
-        
+        <!-- Wpisywanie nazwy użytkownika -->
+        <input type="text" id="userInput" placeholder="Wpisz swoją nazwę użytkownika" /><br>
+
         <!-- Gwiazdki do oceniania -->
         <div class="stars" id="starRating">
             <span class="star" data-value="1">&#9733;</span>
@@ -182,10 +194,10 @@
         function addComment() {
             const commentInput = document.getElementById('commentInput');
             const commentText = commentInput.value.trim();
+            const username = document.getElementById('userInput').value.trim();
             const rating = getSelectedRating();
-            const username = "Użytkownik";  // Możesz tu wpisać dynamicznie użytkownika
 
-            if (commentText && rating) {
+            if (commentText && username && rating) {
                 const params = new URLSearchParams(window.location.search);
                 const postId = params.get('id');
                 const comments = JSON.parse(localStorage.getItem('comments')) || {};
@@ -196,14 +208,17 @@
 
                 comments[postId].push({
                     text: commentText,
-                    rating: rating,
-                    username: username
+                    username: username,
+                    rating: rating
                 });
 
                 localStorage.setItem('comments', JSON.stringify(comments));
 
                 commentInput.value = '';  // Wyczyść pole tekstowe
+                document.getElementById('userInput').value = '';  // Wyczyść pole nazwy użytkownika
                 loadComments(postId);  // Załaduj ponownie komentarze
+            } else {
+                alert('Proszę uzupełnić wszystkie pola!');
             }
         }
 

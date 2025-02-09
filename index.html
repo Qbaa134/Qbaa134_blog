@@ -120,11 +120,11 @@
             transform: scale(1.1);
         }
 
-        /* Styl powiadomienia */
+        /* Styl powiadomienia w lewym górnym rogu */
         .notification {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            top: 20px;
+            left: 20px;
             background-color: #ffcc00;
             color: black;
             padding: 15px 25px;
@@ -145,7 +145,7 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateX(100%);
+                transform: translateX(-100%);
             }
             to {
                 opacity: 1;

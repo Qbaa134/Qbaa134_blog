@@ -74,30 +74,28 @@
         .back-link:hover {
             background: #e6b800;
         }
-
+        /* Komentarze */
         .comment-section {
-            display: none;
             margin-top: 50px;
-            background: #222;
+            background: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
             width: 80%;
             margin-left: 10%;
+            display: none;
             text-align: center;
         }
 
         .comment-section.active {
             display: block;
-            gap: 15px;
         }
 
-        .comment-section input,
-        .comment-section textarea {
+        .comment-section input, .comment-section textarea {
             margin-bottom: 10px;
             padding: 10px;
             width: 90%;
             max-width: 400px;
-            background: #333;
+            background: #2e2e2e;
             border: none;
             color: white;
             border-radius: 5px;
@@ -120,10 +118,6 @@
         }
 
         .comment-button {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
             padding: 10px 20px;
             background: #ffcc00;
             color: black;
@@ -136,29 +130,43 @@
             background: #e6b800;
         }
 
-        .line {
-            width: 80%;
-            margin: 30px auto;
-            border-top: 1px solid #ffcc00;
-            opacity: 0.3;
+        /* Ustawienie dla pola nazwy, komentarza i gwiazdek */
+        .input-container {
+            margin-bottom: 20px;
         }
-            padding: 10px 20px;
-            background: #ffcc00;
-            color: black;
-            font-size: 18px;
-            border-radius: 25px;
+
+        .input-container input, .input-container textarea {
+            width: 80%;
+            max-width: 500px;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #fff;
+        }
+
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .stars-container .star {
+            font-size: 35px;
+            margin: 0 5px;
             cursor: pointer;
         }
 
-        .comment-button:hover {
-            background: #e6b800;
-        }
-
         .line {
             width: 80%;
             margin: 30px auto;
             border-top: 1px solid #ffcc00;
             opacity: 0.3;
+        }
+
+        .emoji {
+            font-size: 1.5em;
         }
     </style>
 </head>

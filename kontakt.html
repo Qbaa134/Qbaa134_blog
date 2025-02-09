@@ -105,7 +105,7 @@
 </head>
 <body>
 
-    <!-- Canvas do rysowania linii -->
+    <!-- Canvas do rysowania gwiazdy -->
     <canvas id="canvas"></canvas>
 
     <h1>O mnie</h1>
@@ -154,7 +154,7 @@
             typeText(); // Uruchamiamy funkcję
         };
 
-        // Rysowanie losowych linii na canvasie
+        // Funkcja do rysowania gwiazdy
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
@@ -162,25 +162,51 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        function drawLine() {
-            // Ustawienie właściwości linii
-            const startX = Math.random() * canvas.width;
-            const startY = Math.random() * canvas.height;
-            const endX = Math.random() * canvas.width;
-            const endY = Math.random() * canvas.height;
-            const lineWidth = Math.random() * 2 + 1;
-            const alpha = Math.random() * 0.5 + 0.2; // Przezroczystość od 0.2 do 0.7
+        function drawStar(x, y, radius, spikes) {
+            const rot = (Math.PI / 2) * 3;
+            const step = Math.PI / spikes;
 
-            ctx.beginPath();
-            ctx.moveTo(startX, startY);
-            ctx.lineTo(endX, endY);
-            ctx.lineWidth = lineWidth;
-            ctx.strokeStyle = `rgba(255, 204, 0, ${alpha})`;
-            ctx.stroke();
+            let path = new Path2D();
+            path.moveTo(x, y - radius);
+
+            for (let i = 0; i < spikes; i++) {
+                let x1 = x + Math.cos(rot) * radius;
+                let y1 = y + Math.sin(rot) * radius;
+                path.lineTo(x1, y1);
+                rot += step;
+
+                x1 = x + Math.cos(rot) * (radius / 2);
+                y1 = y + Math.sin(rot) * (radius / 2);
+                path.lineTo(x1, y1);
+                rot += step;
+            }
+
+            path.closePath();
+            return path;
         }
 
-        // Rysowanie linii co 100ms
-        setInterval(drawLine, 100);
+        // Rysowanie dużej gwiazdy
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Czyścimy canvas
+
+            // Losowanie przezroczystości gwiazdy
+            const alpha = 0.5;
+            ctx.fillStyle = `rgba(255, 204, 0, ${alpha})`;
+
+            // Rysowanie gwiazdy w centrum ekranu
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = canvas.width / 5; // Promień gwiazdy
+            const spikes = 5; // Liczba "zębów" w gwieździe
+
+            const star = drawStar(centerX, centerY, radius, spikes);
+            ctx.fill(star);
+
+            // Powtarzanie rysowania co 2s
+            setTimeout(draw, 2000);
+        }
+
+        draw(); // Uruchamiamy funkcję rysującą gwiazdę
 
     </script>
 

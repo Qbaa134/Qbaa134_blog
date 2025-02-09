@@ -4,11 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Powitanie</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 50px;
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+
+        /* Link powrotu */
+        .back-link {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #ffcc00;
+            color: black;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            background: #e6b800;
+        }
+
+        /* Komentarze */
+        .comment-section {
+            margin-top: 50px;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            margin-left: 10%;
+            display: none;
+            text-align: center;
+        }
+
+        .comment-section.active {
+            display: block;
+        }
+
+        .comment-section input, .comment-section textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 90%;
+            max-width: 400px;
+            background: #2e2e2e;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .star-rating {
+            display: inline-flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            font-size: 30px;
+            color: #ffcc00;
+            cursor: pointer;
+        }
+
+        .star:hover {
+            color: #e6b800;
+        }
+
+        .comment-button {
+            padding: 10px 20px;
+            background: #ffcc00;
+            color: black;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .comment-button:hover {
+            background: #e6b800;
+        }
+    </style>
 </head>
 <body>
+
     <h1>Powitanie na moim blogu!</h1>
     <p>Witaj na moim blogu, który poświęcony jest tematom związanym z elektroniką, programowaniem i innymi technologiami. Tutaj będę dzielił się swoimi doświadczeniami, projektami DIY oraz wszystkim, co mnie pasjonuje.</p>
     <p>Chciałbym zaprosić Cię do regularnego odwiedzania bloga i interakcji poprzez komentarze i pomysły!</p>
-    <a href="index.html">Powróć do strony głównej</a>
+
+    <div class="back-link">
+        <a href="index.html" style="color: black; text-decoration: none;">Powróć do strony głównej</a>
+    </div>
+
+    <!-- Przycisk otwierający sekcję komentarzy -->
+    <button onclick="toggleComments()" class="comment-button">Dodaj komentarz</button>
+
+    <!-- Sekcja komentarzy -->
+    <div class="comment-section" id="commentSection">
+        <h2>Dodaj swój komentarz</h2>
+        <input type="text" id="userName" placeholder="Twoje imię..." required>
+        <textarea id="userComment" placeholder="Twój komentarz..." rows="4" required></textarea>
+
+        <div class="star-rating" id="starRating">
+            <span class="star" onclick="ratePost(1)">★</span>
+            <span class="star" onclick="ratePost(2)">★</span>
+            <span class="star" onclick="ratePost(3)">★</span>
+            <span class="star" onclick="ratePost(4)">★</span>
+            <span class="star" onclick="ratePost(5)">★</span>
+        </div>
+
+        <button onclick="submitComment()" class="comment-button">Wyślij komentarz</button>
+    </div>
+
+    <script>
+        // Funkcja otwierająca sekcję komentarzy
+        function toggleComments() {
+            const commentSection = document.getElementById('commentSection');
+            commentSection.classList.toggle('active');
+        }
+
+        // Funkcja do oceny postu
+        let rating = 0;
+        function ratePost(starCount) {
+            rating = starCount;
+            const stars = document.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if (index < starCount) {
+                    star.style.color = '#ffcc00';
+                } else {
+                    star.style.color = '#2e2e2e';
+                }
+            });
+        }
+
+        // Funkcja do wysyłania komentarza
+        function submitComment() {
+            const name = document.getElementById('userName').value;
+            const comment = document.getElementById('userComment').value;
+
+            if (name && comment && rating > 0) {
+                alert(`Komentarz został dodany!\nImię: ${name}\nKomentarz: ${comment}\nOcena: ${rating} gwiazdek`);
+                // Można tu dodać kod do wysyłania danych na serwer
+                document.getElementById('userName').value = '';
+                document.getElementById('userComment').value = '';
+                rating = 0;
+                document.getElementById('starRating').querySelectorAll('.star').forEach(star => star.style.color = '#2e2e2e');
+                toggleComments(); // Zamknięcie sekcji komentarzy
+            } else {
+                alert('Proszę wypełnić wszystkie pola!');
+            }
+        }
+    </script>
+
 </body>
 </html>

@@ -12,6 +12,8 @@
             text-align: center;
             margin: 0;
             padding: 0;
+            overflow: hidden;
+            position: relative;
         }
         h1 {
             margin-top: 50px;
@@ -24,6 +26,8 @@
             width: 90%;
             max-width: 1000px; /* Zwiększenie szerokości kontenera */
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
         .content p {
             font-size: 1.2em;
@@ -85,9 +89,49 @@
                 border-color: transparent;
             }
         }
+
+        /* Tło z losowymi liniami i efektami */
+        .background-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .line {
+            position: absolute;
+            background-color: rgba(255, 204, 0, 0.6);
+            height: 2px;
+            animation: lineAnimation 8s infinite;
+        }
+
+        @keyframes lineAnimation {
+            0% {
+                transform: translate(-100%, -100%) rotate(0deg);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(100%, 100%) rotate(360deg);
+                opacity: 0.1;
+            }
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- Tło z losowymi liniami -->
+    <div class="background-lines">
+        <div class="line" style="width: 300px; top: 20%; left: 10%; transform: rotate(45deg); animation-duration: 12s;"></div>
+        <div class="line" style="width: 500px; top: 50%; left: 50%; transform: rotate(135deg); animation-duration: 10s;"></div>
+        <div class="line" style="width: 400px; top: 80%; left: 30%; transform: rotate(90deg); animation-duration: 14s;"></div>
+        <div class="line" style="width: 600px; top: 40%; left: 60%; transform: rotate(180deg); animation-duration: 16s;"></div>
+        <div class="line" style="width: 350px; top: 10%; left: 80%; transform: rotate(270deg); animation-duration: 18s;"></div>
+        <!-- Można dodać więcej linii z losowymi rozmiarami, czasem trwania animacji itp. -->
+    </div>
 
     <h1>O mnie</h1>
     <div class="content">

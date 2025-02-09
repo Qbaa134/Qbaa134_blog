@@ -22,6 +22,13 @@
             font-weight: 600;
         }
 
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding: 0 15px;
+        }
+
         /* Link powrotu */
         .back-link {
             position: fixed;
@@ -122,24 +129,39 @@
             margin: 0 5px;
             cursor: pointer;
         }
+
+        .line {
+            width: 80%;
+            margin: 30px auto;
+            border-top: 1px solid #ffcc00;
+            opacity: 0.3;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+        }
     </style>
 </head>
 <body>
 
     <h1>Powitanie na moim blogu!</h1>
-    <p>Witaj na moim blogu, który poświęcony jest tematom związanym z elektroniką, programowaniem i innymi technologiami. Tutaj będę dzielił się swoimi doświadczeniami, projektami DIY oraz wszystkim, co mnie pasjonuje.</p>
-    <p>Chciałbym zaprosić Cię do regularnego odwiedzania bloga i interakcji poprzez komentarze i pomysły!</p>
+    <p>Cześć! Skoro tutaj trafiłeś, to znaczy, że interesują Cię technologie, elektronika, programowanie i wszystko, co związane z techniką. Świetnie się składa, bo właśnie o tym będzie ten blog! 😊</p>
+    <p>Kim jestem? 🤔</p>
+    <p>Nazywam się Kuba, ale na Githubie używam nicku Qbaa134. Moja pasja to mikrokomputery, elektroniką, a także programowanie i hackowanie. Na moim blogu będę dzielił się swoimi projektami DIY, doświadczeniami z pracy z Arduino, Raspberry Pi, ESP32 i innymi technologiami. Ponadto będę pisał o systemach operacyjnych, bezpieczeństwie IT i tworzeniu własnych urządzeń elektronicznych. 💻⚡️</p>
+    <div class="line"></div>
+    <p>Chciałbym zaprosić Cię do regularnego odwiedzania bloga, dzielenia się pomysłami oraz komentowania artykułów. Cieszę się, że tu trafiłeś! 😃</p>
+    <div class="line"></div>
 
     <div class="back-link">
-        <a href="index.html" style="color: black; text-decoration: none;">Powróć do strony głównej</a>
+        <a href="index.html" style="color: black; text-decoration: none;">Powróć do strony głównej 🏠</a>
     </div>
 
     <!-- Przycisk otwierający sekcję komentarzy -->
-    <button onclick="toggleComments()" class="comment-button">Dodaj komentarz</button>
+    <button onclick="toggleComments()" class="comment-button">Dodaj komentarz 💬</button>
 
     <!-- Sekcja komentarzy -->
     <div class="comment-section" id="commentSection">
-        <h2>Dodaj swój komentarz</h2>
+        <h2>Dodaj swój komentarz ✍️</h2>
         
         <!-- Nazwa użytkownika i komentarz -->
         <div class="input-container">
@@ -159,7 +181,7 @@
         </div>
 
         <!-- Przycisk do wysłania komentarza -->
-        <button onclick="submitComment()" class="comment-button">Wyślij komentarz</button>
+        <button onclick="submitComment()" class="comment-button">Wyślij komentarz 🚀</button>
     </div>
 
     <script>

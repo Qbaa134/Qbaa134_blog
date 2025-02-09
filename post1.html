@@ -14,14 +14,15 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            display: flex;
         }
 
-        .content {
-            width: 70%;
-            padding: 20px;
+        h1 {
+            margin-top: 50px;
+            font-size: 2.5em;
+            font-weight: 600;
         }
 
+        /* Link powrotu */
         .back-link {
             position: fixed;
             bottom: 20px;
@@ -36,34 +37,6 @@
 
         .back-link:hover {
             background: #e6b800;
-        }
-
-        .recommended-posts {
-            width: 25%;
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: #1e1e1e;
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-        }
-
-        .recommended-posts h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .recommended-posts a {
-            display: block;
-            color: #ffcc00;
-            text-decoration: none;
-            font-size: 16px;
-            margin: 5px 0;
-        }
-
-        .recommended-posts a:hover {
-            color: #e6b800;
         }
 
         /* Komentarze */
@@ -122,6 +95,7 @@
             background: #e6b800;
         }
 
+        /* Ustawienie dla pola nazwy, komentarza i gwiazdek */
         .input-container {
             margin-bottom: 20px;
         }
@@ -152,22 +126,12 @@
 </head>
 <body>
 
-    <div class="content">
-        <h1>Powitanie na moim blogu!</h1>
-        <p>Witaj na moim blogu, który poświęcony jest tematom związanym z elektroniką, programowaniem i innymi technologiami. Tutaj będę dzielił się swoimi doświadczeniami, projektami DIY oraz wszystkim, co mnie pasjonuje.</p>
-        <p>Chciałbym zaprosić Cię do regularnego odwiedzania bloga i interakcji poprzez komentarze i pomysły!</p>
-    </div>
+    <h1>Powitanie na moim blogu!</h1>
+    <p>Witaj na moim blogu, który poświęcony jest tematom związanym z elektroniką, programowaniem i innymi technologiami. Tutaj będę dzielił się swoimi doświadczeniami, projektami DIY oraz wszystkim, co mnie pasjonuje.</p>
+    <p>Chciałbym zaprosić Cię do regularnego odwiedzania bloga i interakcji poprzez komentarze i pomysły!</p>
 
     <div class="back-link">
         <a href="index.html" style="color: black; text-decoration: none;">Powróć do strony głównej</a>
-    </div>
-
-    <!-- Sekcja polecanych wpisów -->
-    <div class="recommended-posts" id="recommended-posts">
-        <h2>Polecane wpisy:</h2>
-        <div id="random-posts">
-            <!-- Losowe wpisy będą wyświetlane tutaj -->
-        </div>
     </div>
 
     <!-- Przycisk otwierający sekcję komentarzy -->
@@ -199,36 +163,6 @@
     </div>
 
     <script>
-        // Losowanie wpisów
-        const posts = [
-            { title: "Wpis 1: Temat elektroniki", link: "post2.html" },
-            { title: "Wpis 2: Programowanie w Pythonie", link: "post3.html" },
-            { title: "Wpis 3: Hackowanie i bezpieczeństwo", link: "post4.html" },
-            { title: "Wpis 4: 3D Printing", link: "post5.html" }
-        ];
-
-        function getRandomPosts() {
-            const randomPosts = [];
-            while (randomPosts.length < 3) {
-                const randomIndex = Math.floor(Math.random() * posts.length);
-                const post = posts[randomIndex];
-                if (!randomPosts.includes(post)) {
-                    randomPosts.push(post);
-                }
-            }
-            return randomPosts;
-        }
-
-        function displayRandomPosts() {
-            const randomPosts = getRandomPosts();
-            const postsContainer = document.getElementById('random-posts');
-            postsContainer.innerHTML = randomPosts.map(post => 
-                `<a href="${post.link}">${post.title}</a>`
-            ).join('');
-        }
-
-        displayRandomPosts(); // Wyświetlanie losowych wpisów
-
         // Funkcja otwierająca sekcję komentarzy
         function toggleComments() {
             const commentSection = document.getElementById('commentSection');

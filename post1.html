@@ -94,6 +94,34 @@
         .comment-button:hover {
             background: #e6b800;
         }
+
+        /* Ustawienie dla pola nazwy, komentarza i gwiazdek */
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .input-container input, .input-container textarea {
+            width: 80%;
+            max-width: 500px;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #fff;
+        }
+
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .stars-container .star {
+            font-size: 35px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -112,10 +140,17 @@
     <!-- Sekcja komentarzy -->
     <div class="comment-section" id="commentSection">
         <h2>Dodaj swój komentarz</h2>
-        <input type="text" id="userName" placeholder="Twoje imię..." required>
-        <textarea id="userComment" placeholder="Twój komentarz..." rows="4" required></textarea>
+        
+        <!-- Nazwa użytkownika i komentarz -->
+        <div class="input-container">
+            <input type="text" id="userName" placeholder="Twoje imię..." required>
+        </div>
+        <div class="input-container">
+            <textarea id="userComment" placeholder="Twój komentarz..." rows="4" required></textarea>
+        </div>
 
-        <div class="star-rating" id="starRating">
+        <!-- Gwiazdki -->
+        <div class="stars-container" id="starRating">
             <span class="star" onclick="ratePost(1)">★</span>
             <span class="star" onclick="ratePost(2)">★</span>
             <span class="star" onclick="ratePost(3)">★</span>
@@ -123,6 +158,7 @@
             <span class="star" onclick="ratePost(5)">★</span>
         </div>
 
+        <!-- Przycisk do wysłania komentarza -->
         <button onclick="submitComment()" class="comment-button">Wyślij komentarz</button>
     </div>
 

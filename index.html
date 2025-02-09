@@ -56,9 +56,10 @@
             align-items: center;
             margin-top: 20px;
         }
-        .post-link {
+
+        .post-link, .button {
             display: block;
-            width: 300px;
+            width: 400px; /* Zwiększona szerokość przycisku */
             padding: 15px;
             margin: 10px;
             text-align: center;
@@ -67,14 +68,16 @@
             font-size: 18px;
             font-weight: bold;
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 40px; /* Zaokrąglone boki dla efektu kapsuły */
             box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
             transition: transform 0.2s ease-in-out;
         }
-        .post-link:hover {
+
+        .post-link:hover, .button:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 15px rgba(255, 255, 255, 0.15);
         }
+
 
         /* Animacja gwiazdy */
         .star-container {

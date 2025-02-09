@@ -90,8 +90,8 @@
             }
         }
 
-        /* Tło z losowymi liniami i efektami */
-        .background-lines {
+        /* Canvas w tle */
+        #canvas {
             position: absolute;
             top: 0;
             left: 0;
@@ -101,37 +101,12 @@
             pointer-events: none;
         }
 
-        .line {
-            position: absolute;
-            background-color: rgba(255, 204, 0, 0.6);
-            height: 2px;
-            animation: lineAnimation 8s infinite;
-        }
-
-        @keyframes lineAnimation {
-            0% {
-                transform: translate(-100%, -100%) rotate(0deg);
-                opacity: 0.5;
-            }
-            100% {
-                transform: translate(100%, 100%) rotate(360deg);
-                opacity: 0.1;
-            }
-        }
-
     </style>
 </head>
 <body>
 
-    <!-- Tło z losowymi liniami -->
-    <div class="background-lines">
-        <div class="line" style="width: 300px; top: 20%; left: 10%; transform: rotate(45deg); animation-duration: 12s;"></div>
-        <div class="line" style="width: 500px; top: 50%; left: 50%; transform: rotate(135deg); animation-duration: 10s;"></div>
-        <div class="line" style="width: 400px; top: 80%; left: 30%; transform: rotate(90deg); animation-duration: 14s;"></div>
-        <div class="line" style="width: 600px; top: 40%; left: 60%; transform: rotate(180deg); animation-duration: 16s;"></div>
-        <div class="line" style="width: 350px; top: 10%; left: 80%; transform: rotate(270deg); animation-duration: 18s;"></div>
-        <!-- Można dodać więcej linii z losowymi rozmiarami, czasem trwania animacji itp. -->
-    </div>
+    <!-- Canvas do rysowania linii -->
+    <canvas id="canvas"></canvas>
 
     <h1>O mnie</h1>
     <div class="content">
@@ -178,6 +153,35 @@
             }
             typeText(); // Uruchamiamy funkcję
         };
+
+        // Rysowanie losowych linii na canvasie
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Ustawienia rozmiaru canvas
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function drawLine() {
+            // Ustawienie właściwości linii
+            const startX = Math.random() * canvas.width;
+            const startY = Math.random() * canvas.height;
+            const endX = Math.random() * canvas.width;
+            const endY = Math.random() * canvas.height;
+            const lineWidth = Math.random() * 2 + 1;
+            const alpha = Math.random() * 0.5 + 0.2; // Przezroczystość od 0.2 do 0.7
+
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+            ctx.lineWidth = lineWidth;
+            ctx.strokeStyle = `rgba(255, 204, 0, ${alpha})`;
+            ctx.stroke();
+        }
+
+        // Rysowanie linii co 100ms
+        setInterval(drawLine, 100);
+
     </script>
 
 </body>

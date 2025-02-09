@@ -302,14 +302,15 @@
     <div class="back-link">
         <a href="index.html" style="color: black; text-decoration: none;">Powróć do strony głównej 🏠</a>
     </div><!-- Przycisk otwierający sekcję komentarzy -->
+<!-- Przycisk otwierający sekcję komentarzy -->
 <button onclick="toggleComments()" class="comment-button">Dodaj komentarz 💬</button>
 
 <!-- Sekcja komentarzy -->
 <div class="comment-section" id="commentSection">
     <h2>Dodaj swój komentarz ✍️</h2>
     
-        <!-- Formularz do wysyłania komentarza -->
-        <form action="send_comment.php" method="POST">
+    <!-- Formularz do wysyłania komentarza -->
+    <form id="commentForm">
         <!-- Nazwa użytkownika i komentarz -->
         <div class="input-container">
             <input type="text" id="userName" name="userName" placeholder="Twoje imię..." required>
@@ -331,7 +332,7 @@
         <input type="hidden" id="rating" name="rating" value="0">
 
         <!-- Przycisk do wysłania komentarza -->
-        <button type="submit" class="comment-button">Wyślij komentarz 🚀</button>
+        <button type="button" onclick="submitComment()" class="comment-button">Wyślij komentarz 🚀</button>
     </form>
 </div>
 
@@ -355,7 +356,41 @@
             }
         });
     }
+
+    // Funkcja do wysyłania komentarza przez AJAX
+    function submitComment() {
+        const name = document.getElementById('userName').value;
+        const comment = document.getElementById('userComment').value;
+        const rating = document.getElementById('rating').value;
+
+        if (name && comment && rating > 0) {
+            // Przygotowanie danych do wysłania
+            const formData = new FormData();
+            formData.append('userName', name);
+            formData.append('userComment', comment);
+            formData.append('rating', rating);
+
+            // Wysłanie danych przez AJAX
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'send_comment.php', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert('Komentarz został wysłany!');
+                    // Zresetowanie formularza
+                    document.getElementById('userName').value = '';
+                    document.getElementById('userComment').value = '';
+                    document.getElementById('rating').value = 0;
+                    document.getElementById('starRating').querySelectorAll('.star').forEach(star => star.style.color = '#2e2e2e');
+                    toggleComments(); // Zamknięcie sekcji komentarzy
+                }
+            };
+            xhr.send(formData);
+        } else {
+            alert('Proszę wypełnić wszystkie pola!');
+        }
+    }
 </script>
+
 
 
       

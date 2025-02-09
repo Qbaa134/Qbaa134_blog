@@ -301,21 +301,21 @@
     <div class="line"></div>
     <div class="back-link">
         <a href="index.html" style="color: black; text-decoration: none;">Powróć do strony głównej 🏠</a>
-    </div>
+    </div><!-- Przycisk otwierający sekcję komentarzy -->
+<button onclick="toggleComments()" class="comment-button">Dodaj komentarz 💬</button>
 
-       <!-- Przycisk otwierający sekcję komentarzy -->
-    <button onclick="toggleComments()" class="comment-button">Dodaj komentarz 💬</button>
-
-    <!-- Sekcja komentarzy -->
-    <div class="comment-section" id="commentSection">
-        <h2>Dodaj swój komentarz ✍️</h2>
-        
+<!-- Sekcja komentarzy -->
+<div class="comment-section" id="commentSection">
+    <h2>Dodaj swój komentarz ✍️</h2>
+    
+    <!-- Formularz do wysyłania komentarza -->
+    <form id="commentForm" action="send_comment.php" method="POST">
         <!-- Nazwa użytkownika i komentarz -->
         <div class="input-container">
-            <input type="text" id="userName" placeholder="Twoje imię..." required>
+            <input type="text" id="userName" name="userName" placeholder="Twoje imię..." required>
         </div>
         <div class="input-container">
-            <textarea id="userComment" placeholder="Twój komentarz..." rows="4" required></textarea>
+            <textarea id="userComment" name="userComment" placeholder="Twój komentarz..." rows="4" required></textarea>
         </div>
 
         <!-- Gwiazdki -->
@@ -327,49 +327,35 @@
             <span class="star" onclick="ratePost(5)">★</span>
         </div>
 
+        <!-- Ukryte pole do przechowywania oceny -->
+        <input type="hidden" id="rating" name="rating" value="0">
+
         <!-- Przycisk do wysłania komentarza -->
-        <button onclick="submitComment()" class="comment-button">Wyślij komentarz 🚀</button>
-        </div>
+        <button type="submit" class="comment-button">Wyślij komentarz 🚀</button>
+    </form>
+</div>
 
-        <script>
-            // Funkcja otwierająca sekcję komentarzy
-            function toggleComments() {
-                const commentSection = document.getElementById('commentSection');
-                commentSection.classList.toggle('active');
+<script>
+    // Funkcja otwierająca sekcję komentarzy
+    function toggleComments() {
+        const commentSection = document.getElementById('commentSection');
+        commentSection.classList.toggle('active');
+    }
+
+    // Funkcja do oceny postu
+    function ratePost(starCount) {
+        rating = starCount;
+        document.getElementById('rating').value = rating; // Przypisz ocenę do ukrytego pola
+        const stars = document.querySelectorAll('.star');
+        stars.forEach((star, index) => {
+            if (index < starCount) {
+                star.style.color = '#ffcc00';
+            } else {
+                star.style.color = '#2e2e2e';
             }
+        });
+    }
+</script>
 
-            // Funkcja do oceny postu
-            let rating = 0;
-            function ratePost(starCount) {
-                rating = starCount;
-                const stars = document.querySelectorAll('.star');
-                stars.forEach((star, index) => {
-                    if (index < starCount) {
-                        star.style.color = '#ffcc00';
-                    } else {
-                        star.style.color = '#2e2e2e';
-                    }
-                });
-            }
 
-            // Funkcja do wysyłania komentarza
-            function submitComment() {
-                const name = document.getElementById('userName').value;
-                const comment = document.getElementById('userComment').value;
-
-                if (name && comment && rating > 0) {
-                    alert(`Komentarz został dodany!\nImię: ${name}\nKomentarz: ${comment}\nOcena: ${rating} gwiazdek`);
-                    // Można tu dodać kod do wysyłania danych na serwer
-                    document.getElementById('userName').value = '';
-                    document.getElementById('userComment').value = '';
-                    rating = 0;
-                    document.getElementById('starRating').querySelectorAll('.star').forEach(star => star.style.color = '#2e2e2e');
-                    toggleComments(); // Zamknięcie sekcji komentarzy
-                } else {
-                    alert('Proszę wypełnić wszystkie pola!');
-                }
-            }
-        </script>
-
-    </body>
-    </html>
+      

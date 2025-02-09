@@ -4,6 +4,7 @@
 **Cześć!** 😄 Witaj na moim blogu, który jest poświęcony wszystkim pasjonatom **technologii**, **elektroniki**, **programowania**, **inżynierii odwrotnej** oraz wielu innych dziedzin związanych z nowoczesnymi technologiami! 🚀 Jeśli interesujesz się **mikrokomputerami**, **Arduino**, **Raspberry Pi**, **drukiem 3D**, **hackowaniem** oraz **bezpieczeństwem IT**, to trafiłeś we właściwe miejsce! 🌍
 ---
 ### Posty na blogu będą pojawiać się około 2 razy w tygodniu!
+[**Kliknij tutaj, aby odwiedzić moją stronę! 🚀**](http://qbaa.duckdns.org)
 ---
 
 ## **O mnie** 👨‍💻

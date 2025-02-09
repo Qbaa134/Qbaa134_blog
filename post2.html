@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Top 10 Narzędzi Hakerskich</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-top: 50px;
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            padding: 0 15px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 20px 0;
+        }
+
+        .tool {
+            background-color: #1e1e1e;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool h3 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        .tool p {
+            margin-top: 10px;
+        }
+
+        .tool ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .back-link {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #ffcc00;
+            color: black;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            background: #e6b800;
+        }
+
+        .comment-section {
+            margin-top: 50px;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            margin-left: 10%;
+            display: none;
+            text-align: center;
+        }
+
+        .comment-section.active {
+            display: block;
+        }
+
+        .comment-section input, .comment-section textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 90%;
+            max-width: 400px;
+            background: #2e2e2e;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .star-rating {
+            display: inline-flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            font-size: 30px;
+            color: #ffcc00;
+            cursor: pointer;
+        }
+
+        .star:hover {
+            color: #e6b800;
+        }
+
+        .comment-button {
+            padding: 10px 20px;
+            background: #ffcc00;
+            color: black;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .comment-button:hover {
+            background: #e6b800;
+        }
+
+        .input-container input, .input-container textarea {
+            width: 80%;
+            max-width: 500px;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #fff;
+        }
+
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .stars-container .star {
+            font-size: 35px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .line {
+            width: 80%;
+            margin: 30px auto;
+            border-top: 1px solid #ffcc00;
+            opacity: 0.3;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Top 10 Narzędzi Hakerskich</h1>
+    
+    <div class="tool">
+        <h2>Kali Linux 🐧</h2>
+        <p>Kali Linux to specjalistyczna dystrybucja systemu operacyjnego Linux, stworzona z myślą o testach penetracyjnych i analizie bezpieczeństwa. Kali jest jednym z najbardziej popularnych narzędzi wśród hakerów i specjalistów od cyberbezpieczeństwa. Oferuje setki narzędzi, które pozwalają na skanowanie sieci, eksplorację podatności systemów, przeprowadzanie ataków na aplikacje webowe, przechwytywanie pakietów i wiele innych działań związanych z hackingiem.</p>
+        <ul>
+            <li>Składa się z setek narzędzi bezpieczeństwa.</li>
+            <li>Obsługuje wiele platform, w tym Raspberry Pi.</li>
+            <li>Regularnie aktualizowane i wspierane przez społeczność.</li>
+        </ul>
+    </div>
+
+    <div class="tool">
+        <h2>Metasploit 💣</h2>
+        <p>Metasploit to jedna z najważniejszych platform w świecie testów penetracyjnych. Jest to narzędzie, które pozwala na wykorzystanie gotowych exploitów w celu przeprowadzenia ataków na systemy operacyjne, aplikacje webowe oraz urządzenia sieciowe. Dzięki wbudowanej bazie danych podatności oraz zintegrowanym narzędziom do automatyzacji testów, Metasploit stanowi fundament procesu testowania penetracyjnego.</p>
+        <ul>
+            <li>Posiada zintegrowane exploity i bazy danych podatności.</li>
+            <li>Umożliwia tworzenie i testowanie własnych exploitów.</li>
+            <li>Wsparcie dla post-exploitation i automatyzacji testów.</li>
+        </ul>
+    </div>
+
+    <div class="tool">
+        <h2>Wireshark 🕵️‍♂️</h2>
+        <p>Wireshark to jedno z najlepszych narzędzi do analizy ruchu sieciowego. Pozwala na przechwytywanie pakietów i analizowanie zawartości transmisji w czasie rzeczywistym, co umożliwia wykrywanie nieautoryzowanego ruchu, ataków typu Man-in-the-Middle (MITM) i innych zagrożeń. Wireshark obsługuje wiele protokołów sieciowych i daje możliwość dokładnej analizy danych przechodzących przez sieć.</p>
+        <ul>
+            <li>Monitorowanie ruchu sieciowego w czasie rzeczywistym.</li>
+            <li>Analiza ruchu HTTP, HTTPS i wielu innych protokołów.</li>
+            <li>Identyfikacja zagrożeń, takich jak MITM.</li>
+        </ul>
+    </div>
+
+    <div class="tool">
+        <h2>Nmap 🌍</h2>
+        <p>Nmap, czyli Network Mapper, to jedno z najbardziej popularnych narzędzi do skanowania sieci. Pozwala na mapowanie urządzeń w sieci, wykrywanie dostępnych portów, usług działających na tych portach oraz określanie systemu operacyjnego, na którym działa urządzenie. Nmap jest szczególnie użyteczne w testach penetracyjnych, gdzie konieczne jest zidentyfikowanie słabych punktów w infrastrukturze sieciowej.</p>
+        <ul>
+            <li>Mapowanie urządzeń w sieci.</li>
+            <li>Wykrywanie portów, usług i systemów operacyjnych.</li>
+            <li>Wsparcie dla różnych rodzajów skanów, np. wykrywanie wersji oprogramowania.</li>
+        </ul>
+    </div>
+
+    <div class="tool">
+        <h2>Burp Suite 🧨</h2>
+        <p>Burp Suite to jedno z najbardziej wszechstronnych narzędzi do testowania bezpieczeństwa aplikacji webowych. Jest używane przez specjalistów do przeprowadzania testów penetracyjnych, wykrywania luk w zabezpieczeniach, takich jak SQL Injection, XSS czy CSRF. Burp Suite pozwala na przechwytywanie, modyfikowanie i analizowanie ruchu HTTP/HTTPS, co ułatwia wykrywanie problemów w komunikacji aplikacji z serwerem.</p>
+        <ul>
+            <li>Przechwytywanie i analiza ruchu HTTP/HTTPS.</li>
+            <li>Wbudowany skaner bezpieczeństwa do wykrywania luk.</li>
+            <li>Wsparcie dla zaawansowanych ataków, takich jak brute-force i fuzzing.</li>
+        </ul>
+    </div>
+
+    <div class="tool">
+        <h2>Aircrack-ng 📡</h2>
+        <p>Aircrack-ng to pakiet narzędzi, który pozwala na przeprowadzanie ataków na sieci Wi-Fi. Umożliwia przechwytywanie ruchu sieciowego, analizowanie pakietów, łamanie haseł i ataki typu brute-force na zabezpieczenia WPA/WPA2. Aircrack-ng jest niezastąpione przy audytach bezpieczeństwa sieci bezprzewodowych.</p>
+        <ul>
+            <li>Łamanie haseł do sieci Wi-Fi.</li>
+            <li>Wykrywanie urządzeń w sieci bezprzewodowej.</li>
+            <li>Przechwytywanie i analiza ruchu w sieciach Wi-Fi.</li>
+        </ul>
+    </div>
+
+    <div class="tool">
+        <h2>John the Ripper 🔐</h2>
+        <p>John the Ripper to jedno z najlepszych narzędzi do łamania haseł. Obsługuje wiele algorytmów hashujących, takich jak DES, MD5, SHA-1 i wiele innych. Jest wykorzystywane w testach penetracyjnych do łamania haseł i analizowania bezpieczeństwa systemów. Narzędzie może również pomóc w wykrywaniu słabych haseł w organizacjach.</p>
+        <ul>
+            <li>Łamanie haseł różnych algorytmów hashujących.</li>
+            <li>Wsparcie dla ataków słownikowych i brute-force.</li>
+            <li>Wszechstronne w użyciu na różnych platformach.</li>
+        </ul>
+    </div>
+
+    <div class="tool">
+        <h2>Hydra 🧬</h2>
+        <p>Hydra to narzędzie do przeprowadzania ataków brute-force na różne usługi sieciowe. Obsługuje wiele protokołów, takich jak FTP, SSH, HTTP, HTTPS, RDP i inne. Hydra jest często wykorzystywana do testowania haseł na serwerach i urządzeniach sieciowych.</p>
+        <ul>
+            <li>Ataki brute-force na różne protokoły sieciowe.</li>
+            <li>Wsparcie dla wielu metod ataków (słownik, brute-force).</li>
+            <li>Możliwość przeprowadzania ataków równocześnie na wielu usługach.</li>
+        </ul>
+    </div>
+
+    <div class="tool">
+        <h2>Netcat 🖧</h2>
+        <p>Netcat, znany również jako "swiss army knife" w świecie sieci komputerowych, to narzędzie do pracy z połączeniami sieciowymi. Pozwala na tworzenie połączeń TCP i UDP, transfer plików, a także działa jako serwer i klient w jednym. Netcat jest często wykorzystywany do testów penetracyjnych i diagnostyki sieci.</p>
+        <ul>
+            <li>Umożliwia tworzenie połączeń TCP/UDP.</li>
+            <li>Transfer plików między maszynami.</li>
+            <li>Przydatne w diagnostyce i eksploracji sieci.</li>
+        </ul>
+    </div>
+
+    <div class="tool">
+        <h2>Social-Engineer Toolkit (SET) 🕵️‍♀️</h2>
+        <p>Social-Engineer Toolkit to narzędzie do przeprowadzania ataków socjotechnicznych. Umożliwia tworzenie fałszywych stron internetowych, phishing, ataki typu spear phishing, a także zbieranie danych uwierzytelniających i innych wrażliwych informacji. SET jest jednym z najlepszych narzędzi do symulacji ataków socjotechnicznych i testowania obronności organizacji.</p>
+        <ul>
+            <li>Phishing i spear-phishing.</li>
+            <li>Tworzenie fałszywych stron internetowych.</li>
+            <li>Zbieranie informacji i ataki socjotechniczne.</li>
+        </ul>
+    </div>
+
+    <div class="back-link">
+        <a href="index.html" style="color: black; text-decoration: none;">Powróć do strony głównej 🏠</a>
+    </div>
+
+    <button onclick="toggleComments()" class="comment-button">Dodaj komentarz 💬</button>
+
+    <div class="comment-section" id="commentSection">
+        <h2>Dodaj swój komentarz ✍️</h2>
+        <input type="text" placeholder="Twoje imię" id="username">
+        <textarea placeholder="Twój komentarz" id="comment"></textarea>
+        <div class="star-rating">
+            <span class="star" onclick="rate(1)">⭐</span>
+            <span class="star" onclick="rate(2)">⭐</span>
+            <span class="star" onclick="rate(3)">⭐</span>
+            <span class="star" onclick="rate(4)">⭐</span>
+            <span class="star" onclick="rate(5)">⭐</span>
+        </div>
+        <button class="comment-button" onclick="submitComment()">Dodaj komentarz</button>
+    </div>
+
+    <script>
+        function toggleComments() {
+            var section = document.getElementById('commentSection');
+            section.classList.toggle('active');
+        }
+
+        function rate(stars) {
+            alert("Oceniłeś na " + stars + " gwiazdek!");
+        }
+
+        function submitComment() {
+            alert("Komentarz został dodany!");
+        }
+    </script>
+</body>
+</html>

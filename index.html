@@ -119,6 +119,49 @@
         .contact-link:hover {
             transform: scale(1.1);
         }
+
+        /* Styl powiadomienia */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffcc00;
+            color: black;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+        }
+
+        /* Animacja dla powiadomienia */
+        .show-notification {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out, fadeOut 3s ease-in-out 3s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -150,6 +193,11 @@
         <a href="post2.html" class="post-link" data-title="Post 2">Post 2</a>
     </div>
 
+    <!-- Powiadomienie powitalne -->
+    <div id="welcomeNotification" class="notification">
+        Witaj na stronie! 🎉 Cieszymy się, że tu jesteś! 😊
+    </div>
+
     <!-- Przycisk kontaktowy -->
     <div class="contact-link">
         <a href="kontakt.html" style="color: black; text-decoration: none;">!</a>
@@ -170,6 +218,12 @@
                 link.style.display = title.includes(input) ? "block" : "none";
             });
         }
+
+        // Funkcja do wyświetlania powiadomienia
+        window.onload = function() {
+            const notification = document.getElementById('welcomeNotification');
+            notification.classList.add('show-notification');
+        };
     </script>
 
 </body>

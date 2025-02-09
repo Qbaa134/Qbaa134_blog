@@ -273,35 +273,73 @@
         <a href="index.html" style="color: black; text-decoration: none;">Powróć do strony głównej 🏠</a>
     </div>
 
+       <!-- Przycisk otwierający sekcję komentarzy -->
     <button onclick="toggleComments()" class="comment-button">Dodaj komentarz 💬</button>
 
+    <!-- Sekcja komentarzy -->
     <div class="comment-section" id="commentSection">
         <h2>Dodaj swój komentarz ✍️</h2>
-        <input type="text" placeholder="Twoje imię" id="username">
-        <textarea placeholder="Twój komentarz" id="comment"></textarea>
-        <div class="star-rating">
-            <span class="star" onclick="rate(1)">⭐</span>
-            <span class="star" onclick="rate(2)">⭐</span>
-            <span class="star" onclick="rate(3)">⭐</span>
-            <span class="star" onclick="rate(4)">⭐</span>
-            <span class="star" onclick="rate(5)">⭐</span>
+        
+        <!-- Nazwa użytkownika i komentarz -->
+        <div class="input-container">
+            <input type="text" id="userName" placeholder="Twoje imię..." required>
         </div>
-        <button class="comment-button" onclick="submitComment()">Dodaj komentarz</button>
-    </div>
+        <div class="input-container">
+            <textarea id="userComment" placeholder="Twój komentarz..." rows="4" required></textarea>
+        </div>
 
-    <script>
-        function toggleComments() {
-            var section = document.getElementById('commentSection');
-            section.classList.toggle('active');
-        }
+        <!-- Gwiazdki -->
+        <div class="stars-container" id="starRating">
+            <span class="star" onclick="ratePost(1)">★</span>
+            <span class="star" onclick="ratePost(2)">★</span>
+            <span class="star" onclick="ratePost(3)">★</span>
+            <span class="star" onclick="ratePost(4)">★</span>
+            <span class="star" onclick="ratePost(5)">★</span>
+        </div>
 
-        function rate(stars) {
-            alert("Oceniłeś na " + stars + " gwiazdek!");
-        }
+        <!-- Przycisk do wysłania komentarza -->
+        <button onclick="submitComment()" class="comment-button">Wyślij komentarz 🚀</button>
+        </div>
 
-        function submitComment() {
-            alert("Komentarz został dodany!");
-        }
-    </script>
-</body>
-</html>
+        <script>
+            // Funkcja otwierająca sekcję komentarzy
+            function toggleComments() {
+                const commentSection = document.getElementById('commentSection');
+                commentSection.classList.toggle('active');
+            }
+
+            // Funkcja do oceny postu
+            let rating = 0;
+            function ratePost(starCount) {
+                rating = starCount;
+                const stars = document.querySelectorAll('.star');
+                stars.forEach((star, index) => {
+                    if (index < starCount) {
+                        star.style.color = '#ffcc00';
+                    } else {
+                        star.style.color = '#2e2e2e';
+                    }
+                });
+            }
+
+            // Funkcja do wysyłania komentarza
+            function submitComment() {
+                const name = document.getElementById('userName').value;
+                const comment = document.getElementById('userComment').value;
+
+                if (name && comment && rating > 0) {
+                    alert(`Komentarz został dodany!\nImię: ${name}\nKomentarz: ${comment}\nOcena: ${rating} gwiazdek`);
+                    // Można tu dodać kod do wysyłania danych na serwer
+                    document.getElementById('userName').value = '';
+                    document.getElementById('userComment').value = '';
+                    rating = 0;
+                    document.getElementById('starRating').querySelectorAll('.star').forEach(star => star.style.color = '#2e2e2e');
+                    toggleComments(); // Zamknięcie sekcji komentarzy
+                } else {
+                    alert('Proszę wypełnić wszystkie pola!');
+                }
+            }
+        </script>
+
+    </body>
+    </html>

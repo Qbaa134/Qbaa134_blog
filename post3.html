@@ -3,24 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strona w budowie</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Top 10 Narzędzi Hakerskich</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #111;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffcc00;
+            margin-top: 50px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin: 20px 0;
+            color: #ffcc00;
+        }
+
+        p {
+            color: #bbb;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 10px 0;
+            padding: 0 10px;
+        }
+
+        .tool {
+            background-color: #222;
+            border: 2px solid #444;
+            border-radius: 10px;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tool ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        .tool ul li {
+            color: #bbb;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .back-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ffcc00;
+            color: black;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            background: #e6b800;
+        }
+        /* Komentarze */
+        .comment-section {
+            margin-top: 50px;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            margin-left: 10%;
+            display: none;
+            text-align: center;
+        } 
+        
+        .comment-section.active {
+            display: block;
+        }
+
+        .comment-section input, .comment-section textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 90%;
+            max-width: 400px;
+            background: #2e2e2e;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .star-rating {
+            display: inline-flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            font-size: 30px;
+            color: #ffcc00;
+            cursor: pointer;
+        }
+
+        .star:hover {
+            color: #e6b800;
+        }
+
+        .comment-button {
+            padding: 10px 20px;
+            background: #ffcc00;
+            color: black;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .comment-button:hover {
+            background: #e6b800;
+        }
+
+        /* Ustawienie dla pola nazwy, komentarza i gwiazdek */
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .input-container input, .input-container textarea {
+            width: 80%;
+            max-width: 500px;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #fff;
+        }
+
+        .stars-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #333;
-            font-family: Arial, sans-serif;
-            text-align: center;
+            margin-top: 10px;
         }
-        h1 {
-            font-size: 48px;
-            color: #f4f4f4;
+
+        .stars-container .star {
+            font-size: 35px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .line {
+            width: 80%;
+            margin: 30px auto;
+            border-top: 1px solid #ffcc00;
+            opacity: 0.3;
+        }
+
+        .emoji {
+            font-size: 1.5em;
         }
     </style>
 </head>
 <body>
-    <h1>Strona zostanie stworzona w przyszłości</h1>
-</body>
-</html>
+
+    <h1>Porównanie ESP32 i ESP8266</h1>
+
+    <!-- Introduction -->
+    <div class="tool">
+        <h2>Wstęp</h2>
+        <p>ESP32 i ESP8266 to jedne z najpopularniejszych mikrokontrolerów na rynku, wykorzystywane w projektach związanych z Internetem rzeczy (IoT), automatyką domową oraz elektroniką DIY. Dzięki swojej niskiej cenie, dużej dostępności oraz bogatej dokumentacji, stały się ulubieńcami zarówno hobbystów, jak i profesjonalistów. Te moduły oferują bogaty zestaw funkcji, które umożliwiają tworzenie zaawansowanych rozwiązań, od prostych czujników po kompleksowe systemy sterowania. Ich wszechstronność sprawia, że są stosowane w szerokim zakresie aplikacji – od inteligentnych domów, przez monitoring, po systemy monitorowania środowiska, aż po robotykę czy urządzenia wearable.</p>
+    </div>
+
+    <!-- Tools sections -->
+    <!-- 1. Kali Linux -->
+    <div class="tool">
+        <h2>Porównanie w budowie</h2>
+        <p>Pod względem specyfikacji technicznej ESP8266 posiada jednordzeniowy procesor o taktowaniu 80 lub 160 MHz, podczas gdy ESP32 wyposażony jest w dwa rdzenie o częstotliwości do 240 MHz. Różnice te sprawiają, że ESP32 oferuje znacznie większą wydajność i możliwość równoczesnego wykonywania bardziej skomplikowanych operacji. ESP8266 ma około 50 kB pamięci RAM, co jest wystarczające dla prostych zastosowań, natomiast ESP32 oferuje około 520 kB RAM, co pozwala na bardziej zaawansowane projekty. Dodatkowo ESP32 posiada więcej pamięci flash, co ułatwia przechowywanie większej ilości kodu oraz danych.</p>
+    </div>
+
+    <!-- 2. Metasploit -->
+    <div class="tool"></p>
+    <h2>Połączenia</h2>
+    <p>ESP8266 obsługuje wyłącznie Wi-Fi w paśmie 2.4 GHz, natomiast ESP32, oprócz Wi-Fi, posiada także moduł Bluetooth 4.2 oraz BLE. Dzięki temu ESP32 jest bardziej wszechstronny i może komunikować się z większą liczbą urządzeń. Dodatkowo, ESP32 oferuje więcej dostępnych pinów GPIO oraz obsługuje szerszy zakres interfejsów, takich jak DAC czy CAN, których brakuje w ESP8266. Dla wielu projektów wymagających większej liczby peryferiów i zaawansowanej komunikacji ESP32 będzie lepszym wyborem.</p>
+    </div>
+
+    <!-- 3. Wireshark -->
+    <div class="tool">
+        <h2>Zużycie energii</h2>
+        <p>Jeśli chodzi o zużycie energii, ESP8266 zużywa mniej prądu w trybie aktywnym, jednak ESP32 ma więcej trybów oszczędzania energii, co pozwala na lepsze zarządzanie zużyciem baterii. W trybie głębokiego uśpienia ESP32 może zużywać poniżej 10 µA, podczas gdy ESP8266 pobiera około 20 µA. Możliwość wyłączania poszczególnych rdzeni oraz precyzyjne zarządzanie zasilaniem sprawiają, że ESP32 jest bardziej energooszczędny w długoterminowych projektach zasilanych bateryjnie.</p>
+    </div>
+     <!-- 5. Nmap -->
+    <div class="tool">
+        <h2>Cena</h2>
+        <p>Cena jest kolejnym istotnym czynnikiem. ESP8266 jest tańszy i bardziej dostępny, co czyni go dobrą opcją dla prostych projektów IoT. ESP32 jest droższy, ale oferuje większe możliwości i lepszą wydajność, co sprawia, że jest bardziej odpowiedni dla zaawansowanych zastosowań. Dla projektów, gdzie liczy się budżet, ESP8266 pozostaje atrakcyjną opcją.</p>
+    </div>
+    <!-- 7. Burp Suite -->
+    <div class="tool">
+        <h2>Zastosowanie ESP8266</h2>
+        <p>ESP8266 jest często wybieranym układem do projektów, które nie wymagają dużej mocy obliczeniowej, ale muszą być niedrogie i łatwe do implementacji. Jego typowe zastosowania obejmują:</p>
+        <ul>
+            <li>✅ Proste urządzenia IoT: ESP8266 jest idealnym rozwiązaniem do prostych aplikacji, takich jak zdalne sterowanie urządzeniami przez Wi-Fi, automatyka domowa czy proste systemy monitorujące. Dzięki wbudowanemu Wi-Fi jest łatwy w integracji z chmurą i urządzeniami mobilnymi.</li>
+            <li>✅ Proste czujniki i systemy monitorujące: Niewielka liczba pinów GPIO i ograniczona liczba interfejsów sprawiają, że ESP8266 nadaje się do projektów, w których nie jest wymagana obsługa wielu urządzeń peryferyjnych.</li>
+            <li>✅ Sterowanie urządzeniami przez sieć: Przykładem mogą być proste systemy alarmowe, sterowanie oświetleniem, klimatyzacją czy systemy monitorowania zużycia energii.</li>
+        </ul>
+    </div>
+
+    <!-- 8. Hydra -->
+    <div class="tool">
+        <h2>Zastosowanie ESP32</h2>
+        <p>Z kolei ESP32, ze względu na swoją większą moc obliczeniową i szerszą funkcjonalność, jest wykorzystywany w bardziej zaawansowanych projektach, takich jak:</p>
+        <ul>
+            <li>✅ Złożone systemy IoT: ESP32 świetnie radzi sobie z projektami, które wymagają obsługi wielu urządzeń peryferyjnych, takich jak czujniki temperatury, wilgotności, ciśnienia, czujniki ruchu, kamery, a także sterowanie silnikami, LED-ami czy innymi urządzeniami.</li>
+            <li>✅ Aplikacje audio i wideo: ESP32 jest wykorzystywany w projektach takich jak streamery audio, systemy rozpoznawania mowy, przetwarzanie dźwięku czy sterowanie urządzeniami multimedialnymi.</li>
+            <li>✅ Zaawansowane systemy sterowania robotami: Dzięki większej liczbie dostępnych pinów GPIO, wsparciu dla interfejsów takich jak CAN czy I2S oraz większej mocy obliczeniowej, ESP32 jest wykorzystywany do budowy robotów i automatycznych systemów przemysłowych.</li>
+            <li>✅ Komunikacja Bluetooth: Z obsługą Bluetooth 4.2 i BLE (Bluetooth Low Energy), ESP32 znajduje zastosowanie w systemach wymagających komunikacji bezprzewodowej, takich jak urządzenia zdrowotne, kontrola dostępu czy systemy lokalizacji.</li>
+        </ul>
+    </div>
+
+    <!-- 9. Nikto -->
+    <div class="tool">
+        <h2>Środowisko programistyczne</h2>
+        <p>ESP8266 i ESP32 obsługiwane są w popularnych środowiskach programistycznych, takich jak Arduino IDE, PlatformIO, ESP-IDF (w przypadku ESP32) oraz MicroPython. Każde z tych środowisk oferuje różne podejścia do programowania, zależnie od wymagań projektu.</p>
+        <ul>
+            <li>✅ Arduino IDE: Jest to najpopularniejsze środowisko do programowania ESP8266 i ESP32, szczególnie dla początkujących. Zapewnia intuicyjne i szybkie tworzenie aplikacji przy minimalnej konfiguracji. W przypadku ESP8266 dostępne są liczne biblioteki i przykłady, co sprawia, że jest to bardzo przystępne rozwiązanie.</li>
+            <li>✅ PlatformIO: To bardziej zaawansowane środowisko, które oferuje wsparcie dla wielu mikrokontrolerów, w tym ESP8266 i ESP32. PlatformIO integruje się z popularnymi edytorami kodu, takimi jak Visual Studio Code. Jest to opcja dla programistów, którzy preferują bardziej zaawansowane możliwości konfiguracji i debugowania.</li>
+            <li>✅ ESP-IDF: Jest to oficjalne środowisko programistyczne dla ESP32, oferujące najwięcej funkcji i możliwości konfiguracji sprzętu. Idealne dla zaawansowanych użytkowników, którzy chcą wykorzystać pełny potencjał ESP32, w tym Bluetooth, komunikację CAN, obsługę audio i video, a także zaawansowane techniki oszczędzania energii.</li>
+            <li>✅ MicroPython: Jest to środowisko, które pozwala programować ESP8266 i ESP32 w języku Python. Jest to świetne rozwiązanie dla osób, które są przyzwyczajone do programowania w Pythonie i preferują prostsze podejście do tworzenia prototypów.</li>
+        </ul>
+    </div>
+
+    <!-- 10. Sn1per -->
+    <div class="tool">
+        <h2>Kompatybilnośc z akcesoriami</h2>
+        <p>ESP8266 i ESP32 są kompatybilne z szeroką gamą akcesoriów, ale różnią się w zakresie dostępnych interfejsów i możliwości rozszerzeń.</p>
+        <ul>
+            <li>✅ ESP8266: Posiada ograniczoną liczbę pinów GPIO, co ogranicza liczbę podłączanych urządzeń peryferyjnych. Ma tylko jedno wejście analogowe, co może być ograniczeniem w bardziej wymagających projektach. Natomiast w przypadku rozszerzeń, takich jak czujniki, przekaźniki, LED-y i inne proste urządzenia, ESP8266 wciąż jest wystarczający.</li>
+            <li>✅ ESP32: Ma znacznie więcej pinów GPIO i obsługuje różne interfejsy, takie jak I2C, SPI, UART, CAN, I2S oraz ADC. Jest także kompatybilny z różnymi akcesoriami, takimi jak wyświetlacze OLED, czujniki temperatury, wilgotności, ciśnienia, silniki serwo, a także akcesoria wymagające Bluetooth, takie jak słuchawki czy urządzenia do rozpoznawania mowy.</li>
+        </ul>
+    </div>
+    <div class="tool">
+        <h2>Wsparcie społecznościowe</h2>
+        <p>Zarówno ESP8266, jak i ESP32 posiadają ogromną społeczność użytkowników i programistów, co ułatwia rozwiązywanie problemów i zdobywanie wiedzy na temat tych układów. ESP8266: Ma bardzo dużą społeczność, szczególnie wśród hobbystów i twórców projektów DIY. Istnieje wiele forów, grup dyskusyjnych, blogów, samouczków i przykładów projektów. Dzięki temu początkujący mogą łatwo znaleźć wsparcie. ESP32: Choć jest to nowszy układ niż ESP8266, zdobył już ogromną popularność, zwłaszcza wśród profesjonalistów i inżynierów. Oferuje bardziej rozbudowaną dokumentację, zaawansowane przykłady kodów oraz wsparcie dla bardziej skomplikowanych projektów.</p>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="tool">
+        <h2>Podsumowanie</h2>
+        <p>ESP8266 i ESP32 to dwa mikrokontrolery, które różnią się zarówno wydajnością, jak i możliwościami. ESP8266 to tańsze rozwiązanie, idealne do prostych projektów IoT, takich jak sterowanie urządzeniami przez Wi-Fi, integracja z chmurą czy systemy monitorowania. Ma jednordzeniowy procesor i 50 kB pamięci RAM, co wystarcza do podstawowych zadań, a jego programowanie w Arduino IDE jest łatwe, co sprawia, że jest świetnym wyborem dla początkujących. ESP32 jest znacznie bardziej zaawansowany. Posiada dwurdzeniowy procesor o wyższej częstotliwości (do 240 MHz), 520 kB pamięci RAM, a także Bluetooth, BLE oraz więcej pinów GPIO i interfejsów, co czyni go idealnym do bardziej skomplikowanych projektów, takich jak robotyka, systemy audio czy urządzenia z Bluetooth. Ma także lepszą obsługę energii, co pozwala na oszczędność baterii w długoterminowych projektach. Mimo wyższej ceny, ESP32 jest bardziej wszechstronny i oferuje więcej możliwości rozwoju. Wybór między nimi zależy głównie od specyfiki projektu i budżetu – ESP8266 jest świetny do prostych zastosowań, podczas gdy ESP32 sprawdzi się w bardziej zaawansowanych aplikacjach.</p>
+    </div>
+
+
+    <div class="line"></div>
+    <div class="back-link">
+        <a href="index.html" style="color: black; text-decoration: none;">Powróć do strony głównej 🏠</a>
+    </div>
+
+       <!-- Przycisk otwierający sekcję komentarzy -->
+    <button onclick="toggleComments()" class="comment-button">Dodaj komentarz 💬</button>
+
+    <!-- Sekcja komentarzy -->
+    <div class="comment-section" id="commentSection">
+        <h2>Dodaj swój komentarz ✍️</h2>
+        
+        <!-- Nazwa użytkownika i komentarz -->
+        <div class="input-container">
+            <input type="text" id="userName" placeholder="Twoje imię..." required>
+        </div>
+        <div class="input-container">
+            <textarea id="userComment" placeholder="Twój komentarz..." rows="4" required></textarea>
+        </div>
+
+        <!-- Gwiazdki -->
+        <div class="stars-container" id="starRating">
+            <span class="star" onclick="ratePost(1)">★</span>
+            <span class="star" onclick="ratePost(2)">★</span>
+            <span class="star" onclick="ratePost(3)">★</span>
+            <span class="star" onclick="ratePost(4)">★</span>
+            <span class="star" onclick="ratePost(5)">★</span>
+        </div>
+
+        <!-- Przycisk do wysłania komentarza -->
+        <button onclick="submitComment()" class="comment-button">Wyślij komentarz 🚀</button>
+        </div>
+
+        <script>
+            // Funkcja otwierająca sekcję komentarzy
+            function toggleComments() {
+                const commentSection = document.getElementById('commentSection');
+                commentSection.classList.toggle('active');
+            }
+
+            // Funkcja do oceny postu
+            let rating = 0;
+            function ratePost(starCount) {
+                rating = starCount;
+                const stars = document.querySelectorAll('.star');
+                stars.forEach((star, index) => {
+                    if (index < starCount) {
+                        star.style.color = '#ffcc00';
+                    } else {
+                        star.style.color = '#2e2e2e';
+                    }
+                });
+            }
+
+            // Funkcja do wysyłania komentarza
+            function submitComment() {
+                const name = document.getElementById('userName').value;
+                const comment = document.getElementById('userComment').value;
+
+                if (name && comment && rating > 0) {
+                    alert(`Komentarz został dodany!\nImię: ${name}\nKomentarz: ${comment}\nOcena: ${rating} gwiazdek`);
+                    // Można tu dodać kod do wysyłania danych na serwer
+                    document.getElementById('userName').value = '';
+                    document.getElementById('userComment').value = '';
+                    rating = 0;
+                    document.getElementById('starRating').querySelectorAll('.star').forEach(star => star.style.color = '#2e2e2e');
+                    toggleComments(); // Zamknięcie sekcji komentarzy
+                } else {
+                    alert('Proszę wypełnić wszystkie pola!');
+                }
+            }
+        </script>
+
+    </body>
+    </html>

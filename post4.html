@@ -168,11 +168,13 @@
         .emoji {
             font-size: 1.5em;
         }
-        .image {
-            flex: 1; /* Umożliwia równy podział */
-            height: 100%;
-            object-fit: cover; /* Dopasowanie obrazów do przestrzeni */
-        }
+        .center-image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 15px; /* Zaokrąglenie rogów */
+            width: 100%;/* Możesz dostosować szerokość obrazu */
+            height: auto
         }
     </style>
 </head>
@@ -180,6 +182,7 @@
 
     <h1>Narzędzia dla inżynierii odwrotnej – od czego zacząć?</h1>
     <!-- Introduction -->
+   <img src="https://raw.githubusercontent.com/Qbaa134/Qbaa134_blog/main/io.png" alt="Opis obrazka" class="center-image"> 
     <div class="tool">
         <h2>Wstęp</h2>
         <p>Inżynieria odwrotna to proces polegający na analizie istniejącego produktu, systemu lub technologii w celu zrozumienia jego budowy, funkcji oraz zastosowanych rozwiązań. Może obejmować różne dziedziny, takie jak mechanika, elektronika, oprogramowanie, a nawet materiały. Celem inżynierii odwrotnej jest uzyskanie informacji na temat konstrukcji obiektu, który może być następnie użyty do replikacji, modyfikacji lub poprawy danego systemu. W artykule tym przedstawimy, od czego zacząć przygodę z inżynierią odwrotną oraz jakie narzędzia są kluczowe w tym procesie.</p>

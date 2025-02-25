@@ -188,6 +188,11 @@
         <h2>Wstęp</h2>
         <p>Na wstępie chciałbym wspomnieć iż to nie ja jestem autorem skryptu tylko Spacehuhn. Możecie odwiedźic jego stronę: <a href="https://spacehuhn.com/" target="_blank">Kliknij tutaj</a></p>
         <p>Ten tutorial poprowadzi Cię krok po kroku, jak skonfigurować i uruchomić Deauthera ESP8266 stworzonego przez SpaceHuhna. Projekt ten pozwala na przeprowadzanie ataków deautoryzacji na sieci Wi-Fi. Pamiętaj, że takie działania są nielegalne, jeśli wykonujesz je bez zgody właścicieli sieci. Zawsze upewnij się, że masz odpowiednie pozwolenie do przeprowadzania takich testów.</p>
+        <p>Zacznijmy od tego czym jest Deauther. Deauther to narzędzie oparte na ESP8266, które pozwala na wykonywanie ataków związanych z zarządzaniem sieciami WiFi, takich jak deautoryzacja, probe request i atak beacon flood. Jest ono wykorzystywane głównie do testowania zabezpieczeń sieci bezprzewodowych i edukacji w zakresie cyberbezpieczeństwa.</p>
+    </div>
+    <div class="tool">
+        <h2>Jak działa Deauther?</h2>
+        <p>Deauther wykorzystuje protokół IEEE 802.11, który pozwala na wysyłanie pakietów zarządzających siecią. Kluczowym mechanizmem jest wysyłanie pakietów deautoryzacyjnych do klientów WiFi, co powoduje ich rozłączenie z siecią. Dobra, koniec tej teorii, czas na konkret! Jak stworzyć własnego Deauthera i poczuć się jak haker z filmów? </p>
     </div>
     <div class="tool">
         <h2>Co będziesz potrzebować:</h2>
@@ -255,7 +260,7 @@
             <li>✅ Wejdź w <a href="https://drive.google.com/file/d/1Yhnz2T6ohlLWS-KNPRmU9NBvhZbiXpq6/view?usp=drive_link" target="_blank">link</a> i pobierz plik.</li>
             <li>✅ Rozpakuj plik ZIP do swojego folderu.</li>
         </ul>
-        <p>Otwórz plik z rozszerzeniem .ino w Arduino IDE:</p>
+        <p>Otwórz plik z rozszerzeniem <strong>.ino</strong> w Arduino IDE:</p>
         <ul>
             <li>✅ Otwórz Arduino IDE.</li>
             <li>✅ Wybierz Plik > Otwórz i wybierz plik o rozszerzeniu .ino z folderu, w którym rozpakowałeś projekt.</li>
@@ -270,9 +275,9 @@
             <li>✅ Wybierz odpowiedni port szeregowy w Narzędzia > Port.</li>
             <li>✅ Opcjonalnie wybierz usuwanie wszystkich plików w Narzędziach > Erase Flash > Erase All Contents.</li>
         <p>Wybór ustawień wyświetlacza</p>
-            <li>✅ W pliku A_config.h odkoduj linijkę naszego wyswietlacza.</li>
+            <li>✅ W pliku <strong>A_config.h</strong> odkoduj linijkę naszego wyświetlacza.</li>
             <li>✅ Odkoduj sterownik naszego wyświetlacza.</li>
-            <li>✅ Odkoduj linijkę #define FLIP_DIPLAY true</li> 
+            <li>✅ Odkoduj linijkę<strong>#define FLIP_DIPLAY true</strong></li> 
         </ul>
     </div>
     <div class="tool">
@@ -292,25 +297,38 @@
         <ul>
             <li>✅ Rozpakuj plik ZIP do swojego folderu.</li>
             <li>✅ Wejdź na tę <a href="https://esp.huhn.me/" target="_blank">Stronę</a></li>
-            <li>✅ Kliknij Connect i połacz się z płytką na wybranym porcie</li>
+            <li>✅ Kliknij Connect i połącz się z płytką na wybranym porcie</li>
             <li>✅ Załaduj plik z folderu, gdzie rozpakowałeś plik ZIP dedykowany dla naszej płytki i wyświetlacza</li>
-            <li>✅ Kliknij Program poczekaj aż prrogram zostanie wgrany</li> 
-            <li>✅ Zresetuj płytke przyciskiem</li>
+            <li>✅ Kliknij Program poczekaj aż program zostanie wgrany</li> 
+            <li>✅ Zresetuj płytkę przyciskiem</li>
         </ul>
     </div>
 
 
     <div class="tool">
         <h2>Uruchomienie i Korzystanie z Deauthera</h2>
-        <p></p>
+        <p>Interfejs wyświetlacza Deauthera jest przeznaczony do pracy z 128x64 pikselowym monochromatycznym wyświetlaczem OLED. Umożliwia on wygodną obsługę narzędzia bez potrzeby podłączania go do komputera.</p>
+        <ul>
+            <li>✅ Nawigacja odbywa się za pomocą przycisków: góra, dół i select.</li>
+            <li>✅ Deauther oferuje trzy rodzaje skanów: AP (Access Points) – skanowanie punktów dostępowych Wi-Fi, trwa kilka sekund; ST (Stations) – skanowanie stacji klienckich Wi-Fi, trwa dłużej i wykrywa aktywne urządzenia w czasie skanowania; Można także skanować AP i ST jednocześnie.</li>
+            <li>✅ W menu select wybierasz urządzenia, które chcesz zaatakować. Możesz wybrać AP lub ST z listy, a także SSID do ataku beacon lub zapisane urządzenia pod nazwami. Aby edytować SSID lub nazwy, musisz użyć interfejsu webowego lub szeregowego.</li>
+            <li>✅ Deauther oferuje trzy rodzaje ataków: DEAUTH – atak deautoryzacji, który rozłącza wybrane urządzenia; BEACON – atak polegający na zalewaniu sieci sygnałami beacon; PROBE – atak polegający na wysyłaniu zapytań o dostępność sieci. Na ekranie widoczna jest liczba wysyłanych pakietów na sekundę.</li>
+            <li>✅ W menu jest opcja wizualizacji ruchu Wi-Fi w Twojej okolicy. Możesz zmieniać kanały za pomocą przycisków góra/dół.</li> 
+            <li>✅ W menu jest też zegar, na którym możesz ustawić godzinę, co sprawia, że urządzenie wygląda jak zwykły smartwatch.</li>
+        </ul> 
+        <p>Uwaga: Interfejs wyświetlacza oferuje tylko podstawowe funkcje Deauthera. W celu edycji SSID lub bardziej zaawansowanych ustawień, skorzystaj z interfejsu webowego lub szeregowego.</p>
+    </div>
+        
+    <div class="tool">
+        <h2>Komendy Monitora Szergowego dla Deauthera</h2>
+        <p>Wejdź w <a href="https://drive.google.com/file/d/1yBf3mEIGpD2ooT0K7dYIPceoC2TAnZ3P/view?usp=drive_link" target="_blank">link</a> i pobierz plik PDF, a następnie go otwórz.</p>
     </div>
 
-    
     <div class="tool">
-        <h2></h2>
-        <p></p>
+        <h2>Korzystanie z Interfejsu Webowego</h2>
+        <p>Aby uzyskać dostęp do interfejsu webowego, Twój Deauther musi być uruchomiony, a Ty musisz być połączony z jego siecią WiFi o nazwie <strong>pwned</strong> przy użyciu hasła <strong>deauther</strong>. Następnie otwórz przeglądarkę i przejdź do adresu <strong>192.168.4.1.</strong> Upewnij się, że nie jesteś połączony z VPN-em ani żadnym innym narzędziem, które mogłoby zakłócać połączenie. W przypadku niektórych telefonów konieczne może być tymczasowe wyłączenie transmisji danych komórkowych. Jeśli nie widzisz sieci <strong>pwned</strong>, upewnij się, że oprogramowanie ESP8266 Deauther zostało poprawnie zainstalowane. Przygotowałem do tego instrukcję, którą znajdziesz wyżej. Pierwszą rzeczą, którą prawdopodobnie zobaczysz po otwarciu interfejsu webowego, będzie ostrzeżenie, które musisz potwierdzić, aby kontynuować. Spacehuhndodał je, ponieważ wielu użytkowników nadużywało tego narzędzia i rozpowszechniało dezinformację na temat jego działania. Na stronie Scan możesz wyszukać punkty dostępowe (sieci WiFi) oraz stacje (urządzenia klienckie) w pobliżu. Jeśli lista punktów dostępowych jest pusta, kliknij SCAN APS. Skanowanie trwa zazwyczaj od 2 do 5 sekund. Po zakończeniu skanowania kliknij RELOAD, aby zobaczyć wyniki. Gdy już masz listę punktów dostępowych, możesz wybrać je do ataku. **Upewnij się, że wybierasz tylko swoje własne sieci! <strong>Celowe atakowanie cudzych sieci jest surowo zabronione!</strong> Możesz wybrać wiele celów, ale dla stabilności i wydajności zaleca się wybranie tylko jednego. Możesz również skanować stacje (klienty WiFi), aby zaatakować konkretne urządzenie zamiast całej sieci. Podczas skanowania stacji interfejs webowy nie będzie dostępny, więc musisz poczekać na zakończenie procesu i ponownie się połączyć. Na tej stronie możesz również dodawać, edytować i usuwać SSID-y. SSID (Service Set Identifier) to nazwa sieci WiFi i są one wykorzystywane w atakach Beacon i Probe. Na stronie Attack możesz uruchomić i zatrzymać ataki WiFi, takie jak Deauthentication (rozłączanie urządzeń), Beacon (fałszywe punkty dostępowe) oraz Probe (fałszowanie zapytań o sieci). Możesz stracić połączenie z interfejsem webowym po rozpoczęciu ataku. Jeśli jednak wybierzesz tylko jeden cel, możliwe, że uda Ci się ponownie połączyć bez problemów. Ataki domyślnie zatrzymują się po 5 minutach, aby zapobiec nadużyciom. Informacja pkts/s (liczba pakietów na sekundę) nie odświeża się automatycznie, aby oszczędzać zasoby. Musisz kliknąć RELOAD, aby zobaczyć aktualne wartości. W ustawieniach urządzenia możesz zmienić SSID i hasło sieci Deauthera. Po dokonaniu zmian kliknij SAVE, a następnie RELOAD, aby upewnić się, że zostały zastosowane.  Podczas korzystania z tego narzędzia warto pamiętać, że projekt ESP8266 Deauther był dowodem koncepcji, który zyskał popularność wśród osób uczących się o hackowaniu WiFi. To nie jest profesjonalne narzędzie – jest darmowe i open-source'owe. Dlatego: interfejs webowy bywa niestabilny i może generować błędy, po rozpoczęciu skanowania lub ataku możesz stracić połączenie z Deautherem, ataki są przeznaczone do testowania i nie zawsze będą skuteczne, liczba sieci i urządzeń, które możesz wykryć lub zaatakować, zależy od wielu czynników, np. takich jak moc nadawcza ESP8266.</p>
     </div>
-    <!-- Conclusion -->
+        <!-- Conclusion -->
     <div class="tool">
         <h2>Podsumowanie</h2>
         <p>Deauther ESP8266 stworzony przez SpaceHuhna to potężne narzędzie do testowania zabezpieczeń sieci Wi-Fi, ale używaj go odpowiedzialnie i zgodnie z prawem. Projekt jest łatwy do skonfigurowania i pozwala na szybkie rozpoczęcie eksperymentów z atakami deautoryzacji. Ciesz się zabawą, ale pamiętaj o bezpieczeństwie! Jeśli masz pytania lub potrzebujesz pomocy, zajrzyj na stronę projektu SpaceHuhna lub skontaktuj się ze mną.</p>

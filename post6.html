@@ -6,8 +6,8 @@
     <title>Praca w toku</title>
     <style>
         body {
-            background-color: #2e2e2e;
-            color: #f2e12c;
+            background-color: #2e2e2e; /* Ciemno-szare tło */
+            color: #f2e12c; /* Żółty tekst */
             font-family: Arial, sans-serif;
             margin: 0;
             height: 100vh;
@@ -18,41 +18,21 @@
         }
 
         h1 {
-            font-size: 2em;
-            margin-bottom: 20px;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
         }
 
         .gear {
             width: 150px;
             height: 150px;
-            border: 15px solid #f2e12c;
-            border-radius: 50%;
             position: relative;
             animation: rotate 4s linear infinite;
         }
 
-        .gear:before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            width: 30px;
-            height: 30px;
-            background-color: #f2e12c;
-            border-radius: 50%;
-            transform: translateX(-50%);
-        }
-
-        .gear:after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: -20px;
-            width: 30px;
-            height: 30px;
-            background-color: #f2e12c;
-            border-radius: 50%;
-            transform: translateY(-50%);
+        .gear svg {
+            width: 100%;
+            height: 100%;
         }
 
         @keyframes rotate {
@@ -67,6 +47,21 @@
 </head>
 <body>
     <h1>Praca w toku</h1>
-    <div class="gear"></div>
+    <div class="gear">
+        <!-- SVG zębatka -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#B0B0B0" stroke-width="10" />
+            <g fill="none" stroke="#B0B0B0" stroke-width="10">
+                <line x1="50" y1="10" x2="50" y2="0" />
+                <line x1="50" y1="90" x2="50" y2="100" />
+                <line x1="10" y1="50" x2="0" y2="50" />
+                <line x1="90" y1="50" x2="100" y2="50" />
+                <line x1="15.36" y1="15.36" x2="7.07" y2="7.07" />
+                <line x1="84.64" y1="15.36" x2="92.93" y2="7.07" />
+                <line x1="15.36" y1="84.64" x2="7.07" y2="92.93" />
+                <line x1="84.64" y1="84.64" x2="92.93" y2="92.93" />
+            </g>
+        </svg>
+    </div>
 </body>
 </html>

@@ -19,13 +19,13 @@
 
         h1 {
             font-size: 2.5em;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             text-align: center;
         }
 
         .gear {
-            width: 150px;
-            height: 150px;
+            width: 250px;
+            height: 250px;
             position: relative;
             animation: rotate 4s linear infinite;
         }
@@ -48,19 +48,21 @@
 <body>
     <h1>Praca w toku</h1>
     <div class="gear">
-        <!-- SVG zębatka -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#B0B0B0" stroke-width="10" />
-            <g fill="none" stroke="#B0B0B0" stroke-width="10">
-                <line x1="50" y1="10" x2="50" y2="0" />
-                <line x1="50" y1="90" x2="50" y2="100" />
-                <line x1="10" y1="50" x2="0" y2="50" />
-                <line x1="90" y1="50" x2="100" y2="50" />
-                <line x1="15.36" y1="15.36" x2="7.07" y2="7.07" />
-                <line x1="84.64" y1="15.36" x2="92.93" y2="7.07" />
-                <line x1="15.36" y1="84.64" x2="7.07" y2="92.93" />
-                <line x1="84.64" y1="84.64" x2="92.93" y2="92.93" />
+        <!-- SVG realistycznej zębatki -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="60" fill="none" stroke="#B0B0B0" stroke-width="15" />
+            <g fill="none" stroke="#B0B0B0" stroke-width="15">
+                <!-- Zęby zębatki -->
+                <line x1="100" y1="40" x2="100" y2="10" />
+                <line x1="100" y1="160" x2="100" y2="190" />
+                <line x1="40" y1="100" x2="10" y2="100" />
+                <line x1="160" y1="100" x2="190" y2="100" />
+                <line x1="35.36" y1="35.36" x2="15.36" y2="15.36" />
+                <line x1="164.64" y1="35.36" x2="184.64" y2="15.36" />
+                <line x1="35.36" y1="164.64" x2="15.36" y2="184.64" />
+                <line x1="164.64" y1="164.64" x2="184.64" y2="184.64" />
             </g>
+            <circle cx="100" cy="100" r="20" fill="#B0B0B0" />
         </svg>
     </div>
 </body>

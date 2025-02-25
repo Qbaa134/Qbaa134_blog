@@ -199,7 +199,39 @@
             <li>✅ Pliki deauthera.ino lub plik .bin</li>
         </ul>
      </div>
-<!-- 2. Metasploit -->
+    <div class="tool"></p>
+        <h2>Podłączenie</h2>
+        <p>SPI (Serial Peripheral Interface) to protokół komunikacyjny, który pozwala na szybkie przesyłanie danych między urządzeniami. W przypadku wyświetlaczy SPI, będziemy używać kilku pinów na ESP8266 do połączenia z wyświetlaczem.</p>
+        <p>Wyświetlacz:</p>
+        <ul>
+            <li>✅ GND (Ground) — Podłącz do GND na ESP8266.</li>
+            <li>✅ VCC/VDD (Zasilanie) — Podłącz do 3.3V na ESP8266.</li>
+            <li>✅ SCL/CLK/SCK (Zegar) — Podłącz do GPIO 14 (D5) na ESP8266.</li>
+            <li>✅ SDA/MOSI (Dane) — Podłącz do GPIO 13 (D7) na ESP8266.</li>
+            <li>✅ RST/RES/RESET (Reset) — Podłącz do GPIO 5 (D1) na ESP8266.</li>
+            <li>✅ DC (Dane/Kontrola) — Podłącz do GPIO 4 (D2) na ESP8266.</li>
+            <li>✅ CS (Chip Select) — Podłącz do GPIO 15 (D8) na ESP8266 lub do GND</li>          
+        </ul>
+        <p>Przyciski</p>
+        <ul>
+            <li>✅ UP — Podłącz do GPIO 0 (D3) na ESP8266.</li>
+            <li>✅ DOWN — Podłącz do GPIO 12 (D6) na ESP8266.</li>
+            <li>✅ A — Podłącz do GPIO 2 (D4) na ESP8266.</li>         
+        </ul>
+        <p>I2C (Inter-Integrated Circuit) to inny protokół komunikacyjny, który używa dwóch głównych linii do przesyłania danych: SDA i SCL. Jest to prostsza konfiguracja w porównaniu do SPI, ponieważ wymaga mniej pinów.</p>
+        <p>Wyświetlacz:</p>
+        <ul>
+            <li>✅ GND (Ground) — Podłącz do GND na ESP8266.</li>
+            <li>✅ VCC/VDD (Zasilanie) — Podłącz do 3.3V na ESP8266.</li>
+            <li>✅ SCL/CLK/SCK (Zegar) — Podłącz do GPIO 5 (D1) na ESP8266.</li>
+            <li>✅ SDA (Dane) — Podłącz do GPIO 4 (D2) na ESP8266.</li>        
+        </ul>
+        <p>Przyciski</p>
+        <ul>
+            <li>✅ UP — Podłącz do GPIO 14 (D5) na ESP8266. Może być używane do przewijania menu lub uruchamiania jakiejś funkcji.</li>
+            <li>✅ DOWN — Podłącz do GPIO 12 (D6) na ESP8266. Może służyć do przewijania w dół w menu.</li>
+            <li>✅ A — Podłącz do GPIO 13 (D7) na ESP8266. Może to być przycisk wyzwalający jakąś akcję.</li>         
+        </ul>
     <div class="tool"></p>
         <h2>Przygotowanie Arduino IDE</h2>
         <p>Jeśli jeszcze nie masz Arduino IDE, pobierz je i zainstaluj ze strony: <a href="https://www.arduino.cc/en/software" target="_blank">Pobierz tutaj</a></p>
@@ -215,75 +247,73 @@
             <li>✅ Przejdź do Narzędzia > Płyta > Menedżer płytek.</li>
             <li>✅ Wyszukaj ESP8266 Deauther i zainstaluj najnowszą wersję.</li>
         </ul>
-     </div>
-
-    <!-- 3. Wireshark -->
+    </div>
     <div class="tool">
         <h2>Pobranie i Instalacja oprogramowania Deauther</h2>
-        <p>Po przeanalizowaniu i zrozumieniu struktury obiektu, kolejnym krokiem jest jego odtworzenie. W tym celu warto używać narzędzi takich jak drukarki 3D czy frezarki CNC. Te urządzenia umożliwiają tworzenie prototypów na podstawie wcześniej zebranych danych.</p>
+        <p>Pobierz kod źródłowy:</p>
         <ul>
-            <li>✅ Drukarka 3D: Dzięki niej można wytwarzać modele fizyczne obiektów na podstawie modeli 3D stworzonych za pomocą skanera. Drukarki 3D pozwalają na testowanie różnych wersji komponentów przed podjęciem produkcji.</li>
-            <li>✅ Frezarka CNC: Umożliwia precyzyjne cięcie materiałów na podstawie zapisanego projektu. To świetne narzędzie, gdy chcemy odtworzyć mechaniczne komponenty.</li>
+            <li>✅ Wejdź w <a href="https://drive.google.com/file/d/1Yhnz2T6ohlLWS-KNPRmU9NBvhZbiXpq6/view?usp=drive_link" target="_blank">link</a> i pobierz plik.</li>
+            <li>✅ Rozpakuj plik ZIP do swojego folderu.</li>
+        </ul>
+        <p>Otwórz plik z rozszerzeniem .ino w Arduino IDE:</p>
+        <ul>
+            <li>✅ Otwórz Arduino IDE.</li>
+            <li>✅ Wybierz Plik > Otwórz i wybierz plik o rozszerzeniu .ino z folderu, w którym rozpakowałeś projekt.</li>
+        </ul>        
+    </div>
+
+    <div class="tool">
+        <h2>Konfiguracja i Wybór Płytki</h2>
+        <p>Wybór odpowiedniej płytki:</p>
+        <ul>
+            <li>✅ Przejdź do Narzędzia > Płytka i wybierz odpowiednią wersję ESP8266 Deauthera(u nas głównie będzie to NODEMCU).</li>
+            <li>✅ Wybierz odpowiedni port szeregowy w Narzędzia > Port.</li>
+            <li>✅ Opcjonalnie wybierz usuwanie wszystkich plików w Narzędziach > Erase Flash > Erase All Contents.</li>
+        <p>Wybór ustawień wyświetlacza</p>
+            <li>✅ W pliku A_config.h odkoduj linijkę naszego wyswietlacza.</li>
+            <li>✅ Odkoduj sterownik naszego wyświetlacza.</li>
+            <li>✅ Odkoduj linijkę #define FLIP_DIPLAY true</li> 
         </ul>
     </div>
-     <!-- 5. Nmap -->
     <div class="tool">
-        <h2>Zbieranie i analiza danych</h2>
-        <p>Inżynieria odwrotna nie kończy się na zrozumieniu technologii i stworzeniu prototypu. Ważnym etapem jest także zbieranie danych dotyczących wydajności, trwałości oraz funkcjonalności odtworzonych obiektów. Możemy tu zastosować takie narzędzia jak testery obciążeniowe, kamery termowizyjne do monitorowania temperatury pracy, czy analityki danych do mierzenia efektywności.</p>
-    </div>
-    <!-- 7. Burp Suite -->
-    <div class="tool">
-        <h2>Inżynieria odwrotna w kontekście hackowania</h2>
-        <p>Inżynieria odwrotna jest również jednym z kluczowych narzędzi w świecie hackowania, ponieważ pozwala na zrozumienie, jak systemy działają, jak są zabezpieczone i jak można je obejść. W kontekście bezpieczeństwa IT, inżynieria odwrotna odgrywa kluczową rolę w analizie oprogramowania, wykrywaniu podatności oraz opracowywaniu exploitów.</p>
+        <h2>Kompilacja i Wgranie na ESP8266</h2>
         <ul>
-            <li>✅ IDA Pro: Jeden z najpopularniejszych dekompilatorów, który pozwala na analizowanie i rozkładanie kodu wykonywalnego. Dzięki niemu hakerzy mogą zrozumieć, jak działa oprogramowanie, jak jest zaimplementowane i gdzie mogą występować potencjalne luki w zabezpieczeniach.</li>
-            <li>✅ Ghidra: Narzędzie stworzone przez NSA, które stało się popularne wśród hakerów i badaczy bezpieczeństwa. Pozwala na analizowanie kodu w różnych językach maszynowych, w tym na dekompilację plików wykonywalnych.Ghidra: Narzędzie stworzone przez NSA, które stało się popularne wśród hakerów i badaczy bezpieczeństwa. Pozwala na analizowanie kodu w różnych językach maszynowych, w tym na dekompilację plików wykonywalnych.</li>
-            <li>✅ Ataki na firmware: W inżynierii odwrotnej sprzętu często badany jest firmware urządzenia. Dzięki temu można odkryć nieaktualizowane wersje oprogramowania, które zawierają znane luki bezpieczeństwa. Hakerzy mogą następnie opracować exploit, który pozwoli im na przejęcie kontroli nad urządzeniem.</li>
-            <li>✅ Ataki na firmware: W inżynierii odwrotnej sprzętu często badany jest firmware urządzenia. Dzięki temu można odkryć nieaktualizowane wersje oprogramowania, które zawierają znane luki bezpieczeństwa. Hakerzy mogą następnie opracować exploit, który pozwoli im na przejęcie kontroli nad urządzeniem.</li>
-            <li>✅ Zabezpieczenia urządzeń IoT: W przypadku urządzeń IoT, które mogą nie mieć silnych mechanizmów ochrony, inżynieria odwrotna jest wykorzystywana do sprawdzenia, czy urządzenia są odpowiednio chronione przed atakami. Często jest to droga do wykrycia błędów w konfiguracji, które mogą zostać wykorzystane do nieautoryzowanego dostępu.</li>
+            <li>✅ Kliknij przycisk Sprawdź (znajdujący się obok przycisku "Wgraj"), aby sprawdzić kod pod kątem błędów.</li>
+            <li>✅ Podłącz ESP8266 do komputera za pomocą kabla USB.</li>
+            <li>✅ Kliknij Wgraj, aby przesłać kod na płytkę.</li>
+            <li>✅ Poczekaj na zakończenie procesu.</li>
+            <li>✅ Zresetuj płytkę przyciskiem</li>
         </ul>
     </div>
 
-    <!-- 8. Hydra -->
     <div class="tool">
-        <h2>Narzędzia do hakowania i inżynierii odwrotnej</h2>
-        <p>Istnieje wiele narzędzi, które są wykorzystywane przez hakerów w procesie inżynierii odwrotnej w celu odkrywania podatności systemów i urządzeń:</p>
+        <h2>Instalacja przez przeglądarkę</h2>
+        <p>Wejdź w <a href="https://drive.google.com/file/d/1OM_kyKHLadIgdTnUU5XEBreQuIF_bwrQ/view?usp=drive_link" target="_blank">link</a> i pobierz go.</p>
         <ul>
-            <li>✅ Wireshark: Narzędzie do analizy ruchu sieciowego. Używane do przechwytywania i analizowania pakietów, co może pomóc w odkrywaniu niezaszyfrowanych danych przesyłanych w sieci. Jest to jedno z podstawowych narzędzi wykorzystywanych przez hakerów do monitorowania komunikacji i testowania bezpieczeństwa sieci.</li>
-            <li>✅ Burp Suite: Zestaw narzędzi służących do testowania bezpieczeństwa aplikacji webowych. Pomaga w przechwytywaniu i modyfikowaniu żądań HTTP/HTTPS, co umożliwia odkrywanie luk w zabezpieczeniach aplikacji internetowych.</li>
-            <li>✅ Metasploit: Framework do tworzenia i testowania exploitów. Hakerzy wykorzystują Metasploit do przeprowadzania ataków na urządzenia i systemy w celu odkrycia ich słabych punktów. Pozwala on na automatyzację ataków i wykorzystywanie znanych podatności.</li>
+            <li>✅ Rozpakuj plik ZIP do swojego folderu.</li>
+            <li>✅ Wejdź na tę <a href="https://esp.huhn.me/" target="_blank">Stronę</a></li>
+            <li>✅ Kliknij Connect i połacz się z płytką na wybranym porcie</li>
+            <li>✅ Załaduj plik z folderu, gdzie rozpakowałeś plik ZIP dedykowany dla naszej płytki i wyświetlacza</li>
+            <li>✅ Kliknij Program poczekaj aż prrogram zostanie wgrany</li> 
+            <li>✅ Zresetuj płytke przyciskiem</li>
         </ul>
     </div>
 
-    <!-- 9. Nikto -->
-    <div class="tool">
-        <h2>Testy Penetracyjne</h2>
-        <p>Testy penetracyjne (pentesty) są kluczowym elementem w zapewnianiu bezpieczeństwa systemów komputerowych. Inżynieria odwrotna odgrywa w nich bardzo ważną rolę, ponieważ pozwala na szczegółowe zrozumienie, jak działają różne systemy, aplikacje i urządzenia. Dzięki tej wiedzy, hakerzy mogą zidentyfikować słabości w zabezpieczeniach, wykrywać podatności, a także opracowywać techniki wykorzystywania tych słabości. Testy penetracyjne mają na celu symulowanie rzeczywistego ataku na system lub sieć w sposób kontrolowany, by ocenić, czy są one odporne na próby intruzji. W procesie tym wykorzystuje się inżynierię odwrotną do przeprowadzania analizy systemów w celu uzyskania wglądu w ich działanie, struktury oraz potencjalne luki bezpieczeństwa. Dzięki inżynierii odwrotnej, testy penetracyjne mogą obejmować:</p>
-        <ul>
-            <li>✅ Zbieranie informacji o systemie: Wstępna faza, w której wykorzystuje się inżynierię odwrotną do analizy systemu lub aplikacji w celu zidentyfikowania jego słabych punktów.</li>
-            <li>✅ Eksploatację podatności: Po wykryciu słabości, hakerzy wykorzystują inżynierię odwrotną, aby opracować odpowiednie exploity i przeprowadzić atak.</li>
-            <li>✅ Analizę protokołów komunikacyjnych: Sieci komputerowe opierają się na różnych protokołach, takich jak TCP/IP, HTTP, FTP i inne. Inżynierowie odwrotni mogą analizować te protokoły w celu wykrycia błędów w ich implementacji, które mogą prowadzić do podatności na ataki, takich jak man-in-the-middle (MITM) czy ataki DoS. Użycie narzędzi takich jak Wireshark czy Tcpdump pozwala na przechwytywanie pakietów sieciowych i analizowanie ich struktury w celu zidentyfikowania problemów.</li>
-            <li>✅ Często systemy zabezpieczeń nie są poprawnie skonfigurowane lub wykorzystują słabe algorytmy kryptograficzne. Inżynierowie odwrotni wykorzystują narzędzia do analizy konfiguracji sieciowych i protokołów, aby wykryć takie błędy i przygotować odpowiednie exploity.</li>
-            <li>✅ Wielu producentów urządzeń IoT nie zapewnia aktualizacji bezpieczeństwa lub posiada luki w zabezpieczeniach, które mogą zostać wykorzystane do przejęcia kontroli nad urządzeniem. Hakerzy mogą analizować firmware urządzeń, aby znaleźć nieaktualizowane komponenty oprogramowania zawierające znane luki. Z tego powodu inżynierowie odwrotni często przeprowadzają analizę firmware’u, dekompilując i analizując kod w celu identyfikacji błędów.</li> 
-            <li>✅ Aplikacje mobilne często przechowują wrażliwe dane, takie jak hasła, tokeny sesji czy dane karty kredytowej, w niezabezpieczonych miejscach (np. w pamięci telefonu lub w plikach konfiguracyjnych). Inżynierowie odwrotni mogą przeprowadzać ataki, aby uzyskać dostęp do tych danych, wykorzystując techniki takie jak analiza pamięci, analiza pamięci podręcznej aplikacji, lub badanie plików logów.</li>
-        </ul>
-    </div>
 
-    <!-- 10. Sn1per -->
     <div class="tool">
-        <h2>Etyka i odpowiedzialność w inżynierii odwrotnej</h2>
-        <p>Inżynieria odwrotna to obszar, w którym z jednej strony istnieje duże pole do eksperymentów i odkrywania nowych rozwiązań, a z drugiej wymaga to ścisłej wiedzy technicznej, cierpliwości i precyzyjnego podejścia. To także przestrzeń, w której etyka i odpowiedzialność mają kluczowe znaczenie. Wiele osób, które wchodzą w świat inżynierii odwrotnej, początkowo koncentruje się na łamaniu zabezpieczeń, jednak z biegiem czasu zaczynają dostrzegać, że może to również prowadzić do wnoszenia pozytywnego wkładu w rozwój technologii. Właśnie dlatego niektóre z najbardziej znanych prac inżynierii odwrotnej, w tym w kontekście hackowania, polegają na poprawianiu bezpieczeństwa, optymalizowaniu oprogramowania, czy tworzeniu otwartych rozwiązań. Dla każdego, kto interesuje się tą dziedziną, szczególnie na początku warto skupić się na etycznym aspekcie działań. Zrozumienie, kiedy i jak stosować inżynierię odwrotną, jest nie mniej istotne niż zdobywanie technicznych umiejętności. Dlatego warto zainwestować czas w naukę o legalnych i odpowiedzialnych zastosowaniach inżynierii odwrotnej, takich jak poprawa zabezpieczeń, testy penetracyjne, czy tworzenie alternatywnych rozwiązań bazujących na otwartych standardach. Tego rodzaju praca nie tylko daje satysfakcję, ale również przyczynia się do rozwoju technologii i zwiększenia bezpieczeństwa w świecie cyfrowym.</p>
+        <h2>Uruchomienie i Korzystanie z Deauthera</h2>
+        <p></p>
     </div>
 
     
     <div class="tool">
-        <h2>Inżynieria odwrotna: Przyszłość technologii i hackowania</h2>
-        <p>Inżynieria odwrotna to dziedzina, która w ostatnich latach zyskuje na znaczeniu, zarówno wśród inżynierów, jak i hakerów. Zrozumienie działania urządzeń, oprogramowania i systemów jest kluczem do opracowywania nowych, bardziej wydajnych rozwiązań technologicznych. Co więcej, inżynieria odwrotna jest nieocenionym narzędziem w walce z cyberzagrożeniami. Hakerzy etyczni, czyli tzw. "white hat hackers", wykorzystują te same techniki, które mogą być używane do nielegalnych celów, do testowania zabezpieczeń systemów, pomagając w wykrywaniu i naprawianiu luk bezpieczeństwa. Warto również podkreślić, że inżynieria odwrotna to proces ciągłego uczenia się. Technologie, które były innowacyjne w jednym momencie, szybko stają się przestarzałe lub podatne na ataki. Dlatego też nie tylko narzędzia, ale i wiedza o nich musi być na bieżąco aktualizowana. Używanie technik inżynierii odwrotnej w praktyce to także wspaniała okazja do rozwijania umiejętności analitycznych, takich jak dekompozycja złożonych systemów, testowanie hipotez, oraz eksperymentowanie z nowymi technologiami. Z czasem inżynieria odwrotna przekształca się w sztukę, w której każdy element systemu – od najdrobniejszego mikroukładu po najbardziej złożony algorytm – jest analizowany w celu zrozumienia, jak wpływa na działanie całego urządzenia lub aplikacji. To wyzwanie, które wciąga, zmusza do myślenia poza utartymi schematami i pozwala spojrzeć na technologie z zupełnie nowej perspektywy. Bez wątpienia inżynieria odwrotna pozostanie kluczowym obszarem w przyszłości technologii, umożliwiając innowacje, poprawę bezpieczeństwa i rozwój cyfrowego świata.</p>
+        <h2></h2>
+        <p></p>
     </div>
     <!-- Conclusion -->
     <div class="tool">
         <h2>Podsumowanie</h2>
-        <p>Aby rozpocząć przygodę z inżynierią odwrotną, warto zacząć od zrozumienia podstawowych narzędzi i technologii, które są wykorzystywane w tym procesie. Skanery 3D, mikroskopy, analizatory materiałów, oraz narzędzia do analizy oprogramowania to tylko wierzchołek góry lodowej. Dobrze jest także zacząć od prostszych projektów, takich jak analiza mniejszych urządzeń, aby stopniowo rozwijać swoje umiejętności. Praca w tej dziedzinie jest wymagająca, ale daje ogromną satysfakcję z odkrywania, jak działają rzeczy, które nas otaczają. Inżynieria odwrotna to również dziedzina, w której kreatywność i zmysł analityczny są nieocenione. Praca z narzędziami do analizy i prototypowania pozwala na rozwój nie tylko w zakresie technicznym, ale również w myśleniu o nowatorskich rozwiązaniach. Wiele projektów inżynierii odwrotnej wymaga bowiem wyjścia poza schematy, testowania nowych podejść i znajdowania rozwiązań, które nie zostały przewidziane przez twórców oryginalnych urządzeń. To jest moment, w którym hakerstwo wkracza w tę dziedzinę. Hakerstwo, w kontekście inżynierii odwrotnej, to nie tylko umiejętność łamania zabezpieczeń, ale także podejście do rozwiązywania problemów poprzez głębsze zrozumienie funkcjonowania systemów i urządzeń. Hakerzy używają narzędzi do analizy kodu, dekodowania firmware'u, czy rozmontowywania sprzętu, aby znaleźć luki w systemie i wykorzystać je w sposób konstruktywny. Wielu hackerów zaczyna swoją przygodę od analizy oprogramowania, próbując zrozumieć, jak działa aplikacja, aplikacja mobilna, czy system operacyjny, aby znaleźć jego słabe punkty. Współczesne narzędzia, takie jak IDA Pro, OllyDbg, Wireshark czy Burp Suite, stają się podstawą codziennej pracy w tej dziedzinie. Ważnym elementem hakerstwa jest także tzw. "hacking hardware", czyli analiza urządzeń fizycznych – od prostych elektroniki po złożone systemy wbudowane. Dzięki umiejętnościom inżynierii odwrotnej, hakerzy mogą rozmontować urządzenie, zrozumieć jego działanie i przeprogramować jego mikroprocesory, zmieniając jego funkcjonalność lub poprawiając jego bezpieczeństwo. Niektóre techniki, jak exploitacja nieaktualizowanego firmware'u lub manipulacja pamięcią, pozwalają na przejęcie kontroli nad urządzeniem, co stanowi istotny element testów penetracyjnych. Z perspektywy hakerstwa, inżynieria odwrotna jest narzędziem do eksploracji i rozwiązywania problemów. Celem jest nie tylko odkrycie podatności, ale także nauka o tym, jak te systemy działają i jak można je poprawić lub zmodyfikować. Dlatego każdy projekt, który wymaga inżynierii odwrotnej, staje się także okazją do nauki, rozwijania umiejętności oraz wyciągania nowych wniosków, które mogą zostać zaadaptowane w innych dziedzinach inżynierii.</p>
+        <p>Deauther ESP8266 stworzony przez SpaceHuhna to potężne narzędzie do testowania zabezpieczeń sieci Wi-Fi, ale używaj go odpowiedzialnie i zgodnie z prawem. Projekt jest łatwy do skonfigurowania i pozwala na szybkie rozpoczęcie eksperymentów z atakami deautoryzacji. Ciesz się zabawą, ale pamiętaj o bezpieczeństwie! Jeśli masz pytania lub potrzebujesz pomocy, zajrzyj na stronę projektu SpaceHuhna lub skontaktuj się ze mną.</p>
     </div>
 
 

@@ -1,1 +1,356 @@
-Nic tu nie ma!
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ESP8266 Deauther by Spacehuhn tutorial</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #111;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffcc00;
+            margin-top: 50px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin: 20px 0;
+            color: #ffcc00;
+        }
+
+        p {
+            color: #bbb;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 10px 0;
+            padding: 0 10px;
+        }
+
+        .tool {
+            background-color: #222;
+            border: 2px solid #444;
+            border-radius: 10px;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tool ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        .tool ul li {
+            color: #bbb;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .back-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ffcc00;
+            color: black;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            background: #e6b800;
+        }
+        /* Komentarze */
+        .comment-section {
+            margin-top: 50px;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            margin-left: 10%;
+            display: none;
+            text-align: center;
+        } 
+        
+        .comment-section.active {
+            display: block;
+        }
+
+        .comment-section input, .comment-section textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 90%;
+            max-width: 400px;
+            background: #2e2e2e;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .star-rating {
+            display: inline-flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            font-size: 30px;
+            color: #ffcc00;
+            cursor: pointer;
+        }
+
+        .star:hover {
+            color: #e6b800;
+        }
+
+        .comment-button {
+            padding: 10px 20px;
+            background: #ffcc00;
+            color: black;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .comment-button:hover {
+            background: #e6b800;
+        }
+
+        /* Ustawienie dla pola nazwy, komentarza i gwiazdek */
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .input-container input, .input-container textarea {
+            width: 80%;
+            max-width: 500px;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #fff;
+        }
+
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .stars-container .star {
+            font-size: 35px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .line {
+            width: 80%;
+            margin: 30px auto;
+            border-top: 1px solid #ffcc00;
+            opacity: 0.3;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+        }
+        .center-image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 15px; /* Zaokrąglenie rogów */
+            width: 100%;/* Możesz dostosować szerokość obrazu */
+            height: auto
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Narzędzia dla inżynierii odwrotnej – od czego zacząć?</h1>
+    <!-- Introduction -->
+   <img src="https://raw.githubusercontent.com/Qbaa134/Qbaa134_blog/main/io.png" alt="Opis obrazka" class="center-image"> 
+    <div class="tool">
+        <h2>Wstęp</h2>
+        <p>Na wstępie chciałbym wspomnieć iż to nie ja jestem autorem skryptu tylko Spacehuhn. Możecie odwiedzic jego stronę: <a href="https://spacehuhn.com/" target="_blank">Kliknij tutaj</a></p>
+        <p>Ten tutorial poprowadzi Cię krok po kroku, jak skonfigurować i uruchomić Deauthera ESP8266 stworzonego przez SpaceHuhna. Projekt ten pozwala na przeprowadzanie ataków deautoryzacji na sieci Wi-Fi. Pamiętaj, że takie działania są nielegalne, jeśli wykonujesz je bez zgody właścicieli sieci. Zawsze upewnij się, że masz odpowiednie pozwolenie do przeprowadzania takich testów.</p>
+    </div>
+    <!-- Tools sections -->
+    <!-- 1. Kali Linux -->
+    <div class="tool">
+        <h2>Zrozumienie podstaw inżynierii odwrotnej</h2>
+        <p>Inżynieria odwrotna zaczyna się od szczegółowej analizy obiektu, który ma zostać zrozumiany i odtworzony. Może to być np. elektronika, której schematy nie są dostępne, a chcemy poznać sposób jej działania. W przypadku produktów mechanicznych proces obejmuje rozkładanie elementów na czynniki pierwsze i analizowanie materiałów, kształtów oraz technologii produkcji. Warto zacząć od przemyślenia, co konkretnie chcemy osiągnąć. Jeśli celem jest stworzenie kopii produktu, inżynieria odwrotna będzie głównie polegała na analizie struktury i materiałów. Z kolei, jeśli celem jest modyfikacja, może być konieczne poszukiwanie punktów, w których system jest słaby lub w których można wprowadzić innowacje.</p>
+    </div>
+
+    <!-- 2. Metasploit -->
+    <div class="tool"></p>
+        <h2>Podstawowe narzędzia inżynierii odwrotnej</h2>
+        <ul>
+            <li>✅ Mikroskopy elektronowe pozwalają na dokładną analizę drobnych elementów sprzętu. Przydatne w przypadku analizowania układów elektronicznych czy mikrostruktury materiałów.</li>
+            <li>✅ Skanery 3D to jedno z najpopularniejszych narzędzi w inżynierii odwrotnej. Dzięki nim można stworzyć precyzyjny model 3D dowolnego obiektu. Skaner 3D działa poprzez pomiar powierzchni obiektu i tworzenie chmurowych punktów, które są następnie przekształcane w trójwymiarowy model CAD.</li>
+            <li>✅ Analizatory materiałów i spektrometry Narzędzia takie jak spektrometry mogą pomóc w zidentyfikowaniu materiałów, z których wykonany jest dany obiekt. Dzięki analizie spektralnej możemy poznać skład chemiczny materiałów, co jest kluczowe przy replikacji lub modyfikacjach.</li>
+            <li>✅ W przypadku inżynierii odwrotnej oprogramowania podstawowym narzędziem będą debugery. Służą one do analizy kodu źródłowego, jego struktur i działania w czasie rzeczywistym. Dzięki debuggerom możemy śledzić przepływ danych oraz identyfikować kluczowe fragmenty programu.</li>
+            <li>✅ Narzędzia takie jak IDA Pro, OllyDbg czy Ghidra są szeroko wykorzystywane do analizy kodu, który nie ma dostępnych źródeł.</li>
+            <li>✅ Narzędzia te służą do przekształcania kodu binarnego (np. plików wykonywalnych) z powrotem w bardziej zrozumiałą formę, która może zostać poddana dalszej analizie.</li>
+        </ul>
+     </div>
+
+    <!-- 3. Wireshark -->
+    <div class="tool">
+        <h2>Sprzęt i oprogramowanie do prototypowania</h2>
+        <p>Po przeanalizowaniu i zrozumieniu struktury obiektu, kolejnym krokiem jest jego odtworzenie. W tym celu warto używać narzędzi takich jak drukarki 3D czy frezarki CNC. Te urządzenia umożliwiają tworzenie prototypów na podstawie wcześniej zebranych danych.</p>
+        <ul>
+            <li>✅ Drukarka 3D: Dzięki niej można wytwarzać modele fizyczne obiektów na podstawie modeli 3D stworzonych za pomocą skanera. Drukarki 3D pozwalają na testowanie różnych wersji komponentów przed podjęciem produkcji.</li>
+            <li>✅ Frezarka CNC: Umożliwia precyzyjne cięcie materiałów na podstawie zapisanego projektu. To świetne narzędzie, gdy chcemy odtworzyć mechaniczne komponenty.</li>
+        </ul>
+    </div>
+     <!-- 5. Nmap -->
+    <div class="tool">
+        <h2>Zbieranie i analiza danych</h2>
+        <p>Inżynieria odwrotna nie kończy się na zrozumieniu technologii i stworzeniu prototypu. Ważnym etapem jest także zbieranie danych dotyczących wydajności, trwałości oraz funkcjonalności odtworzonych obiektów. Możemy tu zastosować takie narzędzia jak testery obciążeniowe, kamery termowizyjne do monitorowania temperatury pracy, czy analityki danych do mierzenia efektywności.</p>
+    </div>
+    <!-- 7. Burp Suite -->
+    <div class="tool">
+        <h2>Inżynieria odwrotna w kontekście hackowania</h2>
+        <p>Inżynieria odwrotna jest również jednym z kluczowych narzędzi w świecie hackowania, ponieważ pozwala na zrozumienie, jak systemy działają, jak są zabezpieczone i jak można je obejść. W kontekście bezpieczeństwa IT, inżynieria odwrotna odgrywa kluczową rolę w analizie oprogramowania, wykrywaniu podatności oraz opracowywaniu exploitów.</p>
+        <ul>
+            <li>✅ IDA Pro: Jeden z najpopularniejszych dekompilatorów, który pozwala na analizowanie i rozkładanie kodu wykonywalnego. Dzięki niemu hakerzy mogą zrozumieć, jak działa oprogramowanie, jak jest zaimplementowane i gdzie mogą występować potencjalne luki w zabezpieczeniach.</li>
+            <li>✅ Ghidra: Narzędzie stworzone przez NSA, które stało się popularne wśród hakerów i badaczy bezpieczeństwa. Pozwala na analizowanie kodu w różnych językach maszynowych, w tym na dekompilację plików wykonywalnych.Ghidra: Narzędzie stworzone przez NSA, które stało się popularne wśród hakerów i badaczy bezpieczeństwa. Pozwala na analizowanie kodu w różnych językach maszynowych, w tym na dekompilację plików wykonywalnych.</li>
+            <li>✅ Ataki na firmware: W inżynierii odwrotnej sprzętu często badany jest firmware urządzenia. Dzięki temu można odkryć nieaktualizowane wersje oprogramowania, które zawierają znane luki bezpieczeństwa. Hakerzy mogą następnie opracować exploit, który pozwoli im na przejęcie kontroli nad urządzeniem.</li>
+            <li>✅ Ataki na firmware: W inżynierii odwrotnej sprzętu często badany jest firmware urządzenia. Dzięki temu można odkryć nieaktualizowane wersje oprogramowania, które zawierają znane luki bezpieczeństwa. Hakerzy mogą następnie opracować exploit, który pozwoli im na przejęcie kontroli nad urządzeniem.</li>
+            <li>✅ Zabezpieczenia urządzeń IoT: W przypadku urządzeń IoT, które mogą nie mieć silnych mechanizmów ochrony, inżynieria odwrotna jest wykorzystywana do sprawdzenia, czy urządzenia są odpowiednio chronione przed atakami. Często jest to droga do wykrycia błędów w konfiguracji, które mogą zostać wykorzystane do nieautoryzowanego dostępu.</li>
+        </ul>
+    </div>
+
+    <!-- 8. Hydra -->
+    <div class="tool">
+        <h2>Narzędzia do hakowania i inżynierii odwrotnej</h2>
+        <p>Istnieje wiele narzędzi, które są wykorzystywane przez hakerów w procesie inżynierii odwrotnej w celu odkrywania podatności systemów i urządzeń:</p>
+        <ul>
+            <li>✅ Wireshark: Narzędzie do analizy ruchu sieciowego. Używane do przechwytywania i analizowania pakietów, co może pomóc w odkrywaniu niezaszyfrowanych danych przesyłanych w sieci. Jest to jedno z podstawowych narzędzi wykorzystywanych przez hakerów do monitorowania komunikacji i testowania bezpieczeństwa sieci.</li>
+            <li>✅ Burp Suite: Zestaw narzędzi służących do testowania bezpieczeństwa aplikacji webowych. Pomaga w przechwytywaniu i modyfikowaniu żądań HTTP/HTTPS, co umożliwia odkrywanie luk w zabezpieczeniach aplikacji internetowych.</li>
+            <li>✅ Metasploit: Framework do tworzenia i testowania exploitów. Hakerzy wykorzystują Metasploit do przeprowadzania ataków na urządzenia i systemy w celu odkrycia ich słabych punktów. Pozwala on na automatyzację ataków i wykorzystywanie znanych podatności.</li>
+        </ul>
+    </div>
+
+    <!-- 9. Nikto -->
+    <div class="tool">
+        <h2>Testy Penetracyjne</h2>
+        <p>Testy penetracyjne (pentesty) są kluczowym elementem w zapewnianiu bezpieczeństwa systemów komputerowych. Inżynieria odwrotna odgrywa w nich bardzo ważną rolę, ponieważ pozwala na szczegółowe zrozumienie, jak działają różne systemy, aplikacje i urządzenia. Dzięki tej wiedzy, hakerzy mogą zidentyfikować słabości w zabezpieczeniach, wykrywać podatności, a także opracowywać techniki wykorzystywania tych słabości. Testy penetracyjne mają na celu symulowanie rzeczywistego ataku na system lub sieć w sposób kontrolowany, by ocenić, czy są one odporne na próby intruzji. W procesie tym wykorzystuje się inżynierię odwrotną do przeprowadzania analizy systemów w celu uzyskania wglądu w ich działanie, struktury oraz potencjalne luki bezpieczeństwa. Dzięki inżynierii odwrotnej, testy penetracyjne mogą obejmować:</p>
+        <ul>
+            <li>✅ Zbieranie informacji o systemie: Wstępna faza, w której wykorzystuje się inżynierię odwrotną do analizy systemu lub aplikacji w celu zidentyfikowania jego słabych punktów.</li>
+            <li>✅ Eksploatację podatności: Po wykryciu słabości, hakerzy wykorzystują inżynierię odwrotną, aby opracować odpowiednie exploity i przeprowadzić atak.</li>
+            <li>✅ Analizę protokołów komunikacyjnych: Sieci komputerowe opierają się na różnych protokołach, takich jak TCP/IP, HTTP, FTP i inne. Inżynierowie odwrotni mogą analizować te protokoły w celu wykrycia błędów w ich implementacji, które mogą prowadzić do podatności na ataki, takich jak man-in-the-middle (MITM) czy ataki DoS. Użycie narzędzi takich jak Wireshark czy Tcpdump pozwala na przechwytywanie pakietów sieciowych i analizowanie ich struktury w celu zidentyfikowania problemów.</li>
+            <li>✅ Często systemy zabezpieczeń nie są poprawnie skonfigurowane lub wykorzystują słabe algorytmy kryptograficzne. Inżynierowie odwrotni wykorzystują narzędzia do analizy konfiguracji sieciowych i protokołów, aby wykryć takie błędy i przygotować odpowiednie exploity.</li>
+            <li>✅ Wielu producentów urządzeń IoT nie zapewnia aktualizacji bezpieczeństwa lub posiada luki w zabezpieczeniach, które mogą zostać wykorzystane do przejęcia kontroli nad urządzeniem. Hakerzy mogą analizować firmware urządzeń, aby znaleźć nieaktualizowane komponenty oprogramowania zawierające znane luki. Z tego powodu inżynierowie odwrotni często przeprowadzają analizę firmware’u, dekompilując i analizując kod w celu identyfikacji błędów.</li> 
+            <li>✅ Aplikacje mobilne często przechowują wrażliwe dane, takie jak hasła, tokeny sesji czy dane karty kredytowej, w niezabezpieczonych miejscach (np. w pamięci telefonu lub w plikach konfiguracyjnych). Inżynierowie odwrotni mogą przeprowadzać ataki, aby uzyskać dostęp do tych danych, wykorzystując techniki takie jak analiza pamięci, analiza pamięci podręcznej aplikacji, lub badanie plików logów.</li>
+        </ul>
+    </div>
+
+    <!-- 10. Sn1per -->
+    <div class="tool">
+        <h2>Etyka i odpowiedzialność w inżynierii odwrotnej</h2>
+        <p>Inżynieria odwrotna to obszar, w którym z jednej strony istnieje duże pole do eksperymentów i odkrywania nowych rozwiązań, a z drugiej wymaga to ścisłej wiedzy technicznej, cierpliwości i precyzyjnego podejścia. To także przestrzeń, w której etyka i odpowiedzialność mają kluczowe znaczenie. Wiele osób, które wchodzą w świat inżynierii odwrotnej, początkowo koncentruje się na łamaniu zabezpieczeń, jednak z biegiem czasu zaczynają dostrzegać, że może to również prowadzić do wnoszenia pozytywnego wkładu w rozwój technologii. Właśnie dlatego niektóre z najbardziej znanych prac inżynierii odwrotnej, w tym w kontekście hackowania, polegają na poprawianiu bezpieczeństwa, optymalizowaniu oprogramowania, czy tworzeniu otwartych rozwiązań. Dla każdego, kto interesuje się tą dziedziną, szczególnie na początku warto skupić się na etycznym aspekcie działań. Zrozumienie, kiedy i jak stosować inżynierię odwrotną, jest nie mniej istotne niż zdobywanie technicznych umiejętności. Dlatego warto zainwestować czas w naukę o legalnych i odpowiedzialnych zastosowaniach inżynierii odwrotnej, takich jak poprawa zabezpieczeń, testy penetracyjne, czy tworzenie alternatywnych rozwiązań bazujących na otwartych standardach. Tego rodzaju praca nie tylko daje satysfakcję, ale również przyczynia się do rozwoju technologii i zwiększenia bezpieczeństwa w świecie cyfrowym.</p>
+    </div>
+
+    
+    <div class="tool">
+        <h2>Inżynieria odwrotna: Przyszłość technologii i hackowania</h2>
+        <p>Inżynieria odwrotna to dziedzina, która w ostatnich latach zyskuje na znaczeniu, zarówno wśród inżynierów, jak i hakerów. Zrozumienie działania urządzeń, oprogramowania i systemów jest kluczem do opracowywania nowych, bardziej wydajnych rozwiązań technologicznych. Co więcej, inżynieria odwrotna jest nieocenionym narzędziem w walce z cyberzagrożeniami. Hakerzy etyczni, czyli tzw. "white hat hackers", wykorzystują te same techniki, które mogą być używane do nielegalnych celów, do testowania zabezpieczeń systemów, pomagając w wykrywaniu i naprawianiu luk bezpieczeństwa. Warto również podkreślić, że inżynieria odwrotna to proces ciągłego uczenia się. Technologie, które były innowacyjne w jednym momencie, szybko stają się przestarzałe lub podatne na ataki. Dlatego też nie tylko narzędzia, ale i wiedza o nich musi być na bieżąco aktualizowana. Używanie technik inżynierii odwrotnej w praktyce to także wspaniała okazja do rozwijania umiejętności analitycznych, takich jak dekompozycja złożonych systemów, testowanie hipotez, oraz eksperymentowanie z nowymi technologiami. Z czasem inżynieria odwrotna przekształca się w sztukę, w której każdy element systemu – od najdrobniejszego mikroukładu po najbardziej złożony algorytm – jest analizowany w celu zrozumienia, jak wpływa na działanie całego urządzenia lub aplikacji. To wyzwanie, które wciąga, zmusza do myślenia poza utartymi schematami i pozwala spojrzeć na technologie z zupełnie nowej perspektywy. Bez wątpienia inżynieria odwrotna pozostanie kluczowym obszarem w przyszłości technologii, umożliwiając innowacje, poprawę bezpieczeństwa i rozwój cyfrowego świata.</p>
+    </div>
+    <!-- Conclusion -->
+    <div class="tool">
+        <h2>Podsumowanie</h2>
+        <p>Aby rozpocząć przygodę z inżynierią odwrotną, warto zacząć od zrozumienia podstawowych narzędzi i technologii, które są wykorzystywane w tym procesie. Skanery 3D, mikroskopy, analizatory materiałów, oraz narzędzia do analizy oprogramowania to tylko wierzchołek góry lodowej. Dobrze jest także zacząć od prostszych projektów, takich jak analiza mniejszych urządzeń, aby stopniowo rozwijać swoje umiejętności. Praca w tej dziedzinie jest wymagająca, ale daje ogromną satysfakcję z odkrywania, jak działają rzeczy, które nas otaczają. Inżynieria odwrotna to również dziedzina, w której kreatywność i zmysł analityczny są nieocenione. Praca z narzędziami do analizy i prototypowania pozwala na rozwój nie tylko w zakresie technicznym, ale również w myśleniu o nowatorskich rozwiązaniach. Wiele projektów inżynierii odwrotnej wymaga bowiem wyjścia poza schematy, testowania nowych podejść i znajdowania rozwiązań, które nie zostały przewidziane przez twórców oryginalnych urządzeń. To jest moment, w którym hakerstwo wkracza w tę dziedzinę. Hakerstwo, w kontekście inżynierii odwrotnej, to nie tylko umiejętność łamania zabezpieczeń, ale także podejście do rozwiązywania problemów poprzez głębsze zrozumienie funkcjonowania systemów i urządzeń. Hakerzy używają narzędzi do analizy kodu, dekodowania firmware'u, czy rozmontowywania sprzętu, aby znaleźć luki w systemie i wykorzystać je w sposób konstruktywny. Wielu hackerów zaczyna swoją przygodę od analizy oprogramowania, próbując zrozumieć, jak działa aplikacja, aplikacja mobilna, czy system operacyjny, aby znaleźć jego słabe punkty. Współczesne narzędzia, takie jak IDA Pro, OllyDbg, Wireshark czy Burp Suite, stają się podstawą codziennej pracy w tej dziedzinie. Ważnym elementem hakerstwa jest także tzw. "hacking hardware", czyli analiza urządzeń fizycznych – od prostych elektroniki po złożone systemy wbudowane. Dzięki umiejętnościom inżynierii odwrotnej, hakerzy mogą rozmontować urządzenie, zrozumieć jego działanie i przeprogramować jego mikroprocesory, zmieniając jego funkcjonalność lub poprawiając jego bezpieczeństwo. Niektóre techniki, jak exploitacja nieaktualizowanego firmware'u lub manipulacja pamięcią, pozwalają na przejęcie kontroli nad urządzeniem, co stanowi istotny element testów penetracyjnych. Z perspektywy hakerstwa, inżynieria odwrotna jest narzędziem do eksploracji i rozwiązywania problemów. Celem jest nie tylko odkrycie podatności, ale także nauka o tym, jak te systemy działają i jak można je poprawić lub zmodyfikować. Dlatego każdy projekt, który wymaga inżynierii odwrotnej, staje się także okazją do nauki, rozwijania umiejętności oraz wyciągania nowych wniosków, które mogą zostać zaadaptowane w innych dziedzinach inżynierii.</p>
+    </div>
+
+
+    <div class="line"></div>
+    <div class="back-link">
+        <a href="index.html" style="color: black; text-decoration: none;">Powróć do strony głównej 🏠</a>
+    </div>
+
+       <!-- Przycisk otwierający sekcję komentarzy -->
+    <button onclick="toggleComments()" class="comment-button">Dodaj komentarz 💬</button>
+
+    <!-- Sekcja komentarzy -->
+    <div class="comment-section" id="commentSection">
+        <h2>Dodaj swój komentarz ✍️</h2>
+        
+        <!-- Nazwa użytkownika i komentarz -->
+        <div class="input-container">
+            <input type="text" id="userName" placeholder="Twoje imię..." required>
+        </div>
+        <div class="input-container">
+            <textarea id="userComment" placeholder="Twój komentarz..." rows="4" required></textarea>
+        </div>
+
+        <!-- Gwiazdki -->
+        <div class="stars-container" id="starRating">
+            <span class="star" onclick="ratePost(1)">★</span>
+            <span class="star" onclick="ratePost(2)">★</span>
+            <span class="star" onclick="ratePost(3)">★</span>
+            <span class="star" onclick="ratePost(4)">★</span>
+            <span class="star" onclick="ratePost(5)">★</span>
+        </div>
+
+        <!-- Przycisk do wysłania komentarza -->
+        <button onclick="submitComment()" class="comment-button">Wyślij komentarz 🚀</button>
+        </div>
+
+        <script>
+            // Funkcja otwierająca sekcję komentarzy
+            function toggleComments() {
+                const commentSection = document.getElementById('commentSection');
+                commentSection.classList.toggle('active');
+            }
+
+            // Funkcja do oceny postu
+            let rating = 0;
+            function ratePost(starCount) {
+                rating = starCount;
+                const stars = document.querySelectorAll('.star');
+                stars.forEach((star, index) => {
+                    if (index < starCount) {
+                        star.style.color = '#ffcc00';
+                    } else {
+                        star.style.color = '#2e2e2e';
+                    }
+                });
+            }
+
+            // Funkcja do wysyłania komentarza
+            function submitComment() {
+                const name = document.getElementById('userName').value;
+                const comment = document.getElementById('userComment').value;
+
+                if (name && comment && rating > 0) {
+                    alert(`Komentarz został dodany!\nImię: ${name}\nKomentarz: ${comment}\nOcena: ${rating} gwiazdek`);
+                    // Można tu dodać kod do wysyłania danych na serwer
+                    document.getElementById('userName').value = '';
+                    document.getElementById('userComment').value = '';
+                    rating = 0;
+                    document.getElementById('starRating').querySelectorAll('.star').forEach(star => star.style.color = '#2e2e2e');
+                    toggleComments(); // Zamknięcie sekcji komentarzy
+                } else {
+                    alert('Proszę wypełnić wszystkie pola!');
+                }
+            }
+        </script>
+
+    </body>
+    </html>

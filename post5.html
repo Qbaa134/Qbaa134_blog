@@ -181,37 +181,45 @@
 </head>
 <body>
 
-    <h1>Narzędzia dla inżynierii odwrotnej – od czego zacząć?</h1>
+    <h1>ESP8266 Deauther</h1>
     <!-- Introduction -->
-   <img src="https://raw.githubusercontent.com/Qbaa134/Qbaa134_blog/main/io.png" alt="Opis obrazka" class="center-image"> 
+   <img src="" alt="Opis obrazka" class="center-image"> 
     <div class="tool">
         <h2>Wstęp</h2>
-        <p>Na wstępie chciałbym wspomnieć iż to nie ja jestem autorem skryptu tylko Spacehuhn. Możecie odwiedzic jego stronę: <a href="https://spacehuhn.com/" target="_blank">Kliknij tutaj</a></p>
+        <p>Na wstępie chciałbym wspomnieć iż to nie ja jestem autorem skryptu tylko Spacehuhn. Możecie odwiedźic jego stronę: <a href="https://spacehuhn.com/" target="_blank">Kliknij tutaj</a></p>
         <p>Ten tutorial poprowadzi Cię krok po kroku, jak skonfigurować i uruchomić Deauthera ESP8266 stworzonego przez SpaceHuhna. Projekt ten pozwala na przeprowadzanie ataków deautoryzacji na sieci Wi-Fi. Pamiętaj, że takie działania są nielegalne, jeśli wykonujesz je bez zgody właścicieli sieci. Zawsze upewnij się, że masz odpowiednie pozwolenie do przeprowadzania takich testów.</p>
     </div>
-    <!-- Tools sections -->
-    <!-- 1. Kali Linux -->
     <div class="tool">
-        <h2>Zrozumienie podstaw inżynierii odwrotnej</h2>
-        <p>Inżynieria odwrotna zaczyna się od szczegółowej analizy obiektu, który ma zostać zrozumiany i odtworzony. Może to być np. elektronika, której schematy nie są dostępne, a chcemy poznać sposób jej działania. W przypadku produktów mechanicznych proces obejmuje rozkładanie elementów na czynniki pierwsze i analizowanie materiałów, kształtów oraz technologii produkcji. Warto zacząć od przemyślenia, co konkretnie chcemy osiągnąć. Jeśli celem jest stworzenie kopii produktu, inżynieria odwrotna będzie głównie polegała na analizie struktury i materiałów. Z kolei, jeśli celem jest modyfikacja, może być konieczne poszukiwanie punktów, w których system jest słaby lub w których można wprowadzić innowacje.</p>
-    </div>
-
-    <!-- 2. Metasploit -->
-    <div class="tool"></p>
-        <h2>Podstawowe narzędzia inżynierii odwrotnej</h2>
+        <h2>Co będziesz potrzebować:</h2>
         <ul>
-            <li>✅ Mikroskopy elektronowe pozwalają na dokładną analizę drobnych elementów sprzętu. Przydatne w przypadku analizowania układów elektronicznych czy mikrostruktury materiałów.</li>
-            <li>✅ Skanery 3D to jedno z najpopularniejszych narzędzi w inżynierii odwrotnej. Dzięki nim można stworzyć precyzyjny model 3D dowolnego obiektu. Skaner 3D działa poprzez pomiar powierzchni obiektu i tworzenie chmurowych punktów, które są następnie przekształcane w trójwymiarowy model CAD.</li>
-            <li>✅ Analizatory materiałów i spektrometry Narzędzia takie jak spektrometry mogą pomóc w zidentyfikowaniu materiałów, z których wykonany jest dany obiekt. Dzięki analizie spektralnej możemy poznać skład chemiczny materiałów, co jest kluczowe przy replikacji lub modyfikacjach.</li>
-            <li>✅ W przypadku inżynierii odwrotnej oprogramowania podstawowym narzędziem będą debugery. Służą one do analizy kodu źródłowego, jego struktur i działania w czasie rzeczywistym. Dzięki debuggerom możemy śledzić przepływ danych oraz identyfikować kluczowe fragmenty programu.</li>
-            <li>✅ Narzędzia takie jak IDA Pro, OllyDbg czy Ghidra są szeroko wykorzystywane do analizy kodu, który nie ma dostępnych źródeł.</li>
-            <li>✅ Narzędzia te służą do przekształcania kodu binarnego (np. plików wykonywalnych) z powrotem w bardziej zrozumiałą formę, która może zostać poddana dalszej analizie.</li>
+            <li>✅ ESP8266 (np. NodeMCU, Wemos D1 Mini)</li>
+            <li>✅ Kabel micro USB do podłączenia ESP8266</li>
+            <li>✅ Komputer z systemem Windows/macOS/Linux</li>
+            <li>✅ Arduino IDE lub narzędzie do wgrania programu przez przeglądarkę:<a href="https://esp.huhn.me/" target="_blank">Kliknij tutaj</a></li>
+            <li>✅ Pliki deauthera.ino lub plik .bin</li>
+        </ul>
+     </div>
+<!-- 2. Metasploit -->
+    <div class="tool"></p>
+        <h2>Przygotowanie Arduino IDE</h2>
+        <p>Jeśli jeszcze nie masz Arduino IDE, pobierz je i zainstaluj ze strony: <a href="https://www.arduino.cc/en/software" target="_blank">Pobierz tutaj</a></p>
+        <p>Dodaj ESP8266 do Arduino IDE:</p>
+        <ul>
+            <li>✅ Otwórz Arduino IDE.</li>
+            <li>✅ Przejdź do Plik > Preferencje.</li>
+            <li>✅ W polu "Dodatkowe adresy URL menedżera płytek" dodaj następujący link: https://raw.githubusercontent.com/SpacehuhnTech/arduino/main/package_spacehuhn_index.json</li>
+            <li>✅ Kliknij OK.</li>
+        </ul>
+        <p>Zainstaluj bibliotekę ESP8266:</p>
+        <ul> 
+            <li>✅ Przejdź do Narzędzia > Płyta > Menedżer płytek.</li>
+            <li>✅ Wyszukaj ESP8266 Deauther i zainstaluj najnowszą wersję.</li>
         </ul>
      </div>
 
     <!-- 3. Wireshark -->
     <div class="tool">
-        <h2>Sprzęt i oprogramowanie do prototypowania</h2>
+        <h2>Pobranie i Instalacja oprogramowania Deauther</h2>
         <p>Po przeanalizowaniu i zrozumieniu struktury obiektu, kolejnym krokiem jest jego odtworzenie. W tym celu warto używać narzędzi takich jak drukarki 3D czy frezarki CNC. Te urządzenia umożliwiają tworzenie prototypów na podstawie wcześniej zebranych danych.</p>
         <ul>
             <li>✅ Drukarka 3D: Dzięki niej można wytwarzać modele fizyczne obiektów na podstawie modeli 3D stworzonych za pomocą skanera. Drukarki 3D pozwalają na testowanie różnych wersji komponentów przed podjęciem produkcji.</li>

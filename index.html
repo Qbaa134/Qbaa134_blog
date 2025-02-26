@@ -6,6 +6,7 @@
     <title>Qbaa134_Blog</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
         .sponsor-container {
             position: fixed;
             bottom: 10px;
@@ -24,7 +25,7 @@
             color: white;
             font-size: 16px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 5px; /* Odstęp między tekstem a obrazkiem */
             text-transform: uppercase;
         }
         
@@ -49,7 +50,6 @@
             font-weight: 600;
         }
 
-        /* Wyszukiwarka */
         .search-container {
             display: flex;
             justify-content: center;
@@ -62,11 +62,13 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
         }
+        
         .search-icon {
             color: #ffcc00;
             font-size: 20px;
             margin-right: 10px;
         }
+        
         #searchInput {
             width: 100%;
             padding: 10px;
@@ -77,7 +79,6 @@
             font-size: 16px;
         }
 
-        /* Linki do postów */
         .post-links {
             display: flex;
             flex-direction: column;
@@ -87,7 +88,7 @@
 
         .post-link, .button {
             display: block;
-            width: 400px; /* Zwiększona szerokość przycisku */
+            width: 400px;
             padding: 15px;
             margin: 10px;
             text-align: center;
@@ -96,7 +97,7 @@
             font-size: 18px;
             font-weight: bold;
             text-decoration: none;
-            border-radius: 40px; /* Zaokrąglone boki dla efektu kapsuły */
+            border-radius: 40px;
             box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
             transition: transform 0.2s ease-in-out;
         }
@@ -106,51 +107,30 @@
             box-shadow: 0 6px 15px rgba(255, 255, 255, 0.15);
         }
 
-        /* Animacja gwiazdy */
         .star-container {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
+        
         svg {
             width: 200px;
             height: 200px;
         }
+        
         path {
             stroke-dasharray: 400;
             stroke-dashoffset: 400;
             animation: draw 2s ease-in-out forwards;
         }
+
         @keyframes draw {
             to {
                 stroke-dashoffset: 0;
             }
         }
 
-        /* Kontakt */
-        .contact-link {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ffcc00;
-            color: black;
-            font-size: 20px;
-            width: 120px;
-            height: 60px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0 12px rgba(255, 204, 0, 0.9);
-            transition: transform 0.2s ease-in-out;
-        }
-        .contact-link:hover {
-            transform: scale(1.1);
-        }
-
-        /* Styl powiadomienia w lewym górnym rogu */
         .notification {
             position: fixed;
             top: 20px;
@@ -166,7 +146,6 @@
             z-index: 9999;
         }
 
-        /* Animacja dla powiadomienia */
         .show-notification {
             display: block;
             animation: fadeIn 0.5s ease-in-out, fadeOut 3s ease-in-out 3s forwards;
@@ -192,36 +171,26 @@
             }
         }
 
-        /* Pusta przestrzeń po ostatnim poście */
         .empty-space {
-            height: 50vh; /* 50% wysokości ekranu */
+            height: 50vh; 
         }
 
     </style>
 </head>
 <body>
 
-    <!-- Animacja gwiazdy -->
-    <div class="star-container">
-        <svg viewBox="0 0 100 100">
-            <path d="M50 10 L61 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L39 40 Z"
-                  stroke="yellow" stroke-width="4" fill="none"/>
-        </svg>
-    </div>
-
     <div class="sponsor-container">
+        <div class="sponsor-text">Główny sponsor</div>
         <img src="https://raw.githubusercontent.com/Qbaa134/Qbaa134_blog/main/PCBWay.png" alt="Sponsor" class="sponsor-image">
     </div>
 
     <h1>Blog</h1>
 
-    <!-- Wyszukiwarka -->
     <div class="search-container">
         <span class="search-icon">🔍</span>
         <input type="text" id="searchInput" onkeyup="searchPosts()" placeholder="Szukaj postów...">
     </div>
 
-    <!-- Linki do postów -->
     <div class="post-links" id="postLinks">
         <a href="post1.html" class="post-link" data-title="Powitanie">Powitanie</a>
         <a href="post2.html" class="post-link" data-title="Top 10 Hakerskich Narzędzi">Top 10 Hakerskich Narzędzi</a>
@@ -229,35 +198,24 @@
         <a href="post4.html" class="post-link" data-title="Co to inżynieria odwrotna?">Co to inżynieria odwrotna?</a> 
         <a href="post5.html" class="post-link" data-title="Deauther by Spacehuhn-DIY">Deauther by Spacehuhn-DIY</a>
         <a href="post6.html" class="post-link" data-title="Internetowa Stacja Pogodowa">Internetowa Stacja Pogodowa</a>
-        <a href="post1.html" class="post-link" data-title="Powitanie">Powitanie</a>
-        <a href="post2.html" class="post-link" data-title="Top 10 Hakerskich Narzędzi">Top 10 Hakerskich Narzędzi</a>
-        <a href="post3.html" class="post-link" data-title="Porównanie ESP8266 i ESP32">Porównanie ESP8266 i ESP32</a>
-        <a href="post4.html" class="post-link" data-title="Co to inżynieria odwrotna?">Co to inżynieria odwrotna?</a> 
-        <a href="post5.html" class="post-link" data-title="Deauther by Spacehuhn-DIY">Deauther by Spacehuhn-DIY</a>
-        <a href="post6.html" class="post-link" data-title="Internetowa Stacja Pogodowa">Internetowa Stacja Pogodowa</a>
     </div>
 
-    <!-- Pusta przestrzeń po ostatnim poście -->
     <div class="empty-space"></div>
 
-    <!-- Powiadomienie powitalne -->
     <div id="welcomeNotification" class="notification">
         Witaj na stronie! 🎉 Cieszę się, że tu jesteś! 😊
     </div>
 
-    <!-- Przycisk O mnie -->
     <div class="contact-link">
         <a href="kontakt.html" style="color: black; text-decoration: none; font-size: 20px;">O mnie</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-        // Ukrywanie animacji gwiazdy po 2 sekundach
         setTimeout(() => {
             document.querySelector('.star-container').style.display = 'none';
         }, 2000);
 
-        // Wyszukiwanie postów
         function searchPosts() {
             const input = document.getElementById('searchInput').value.toLowerCase();
             document.querySelectorAll('.post-link').forEach(link => {
@@ -266,7 +224,6 @@
             });
         }
 
-        // Funkcja do wyświetlania powiadomienia
         window.onload = function() {
             const notification = document.getElementById('welcomeNotification');
             notification.classList.add('show-notification');

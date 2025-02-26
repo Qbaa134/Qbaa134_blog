@@ -6,26 +6,31 @@
     <title>Qbaa134_Blog</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-       
-        .container {
+       .sponsor-container {
             position: fixed;
-            bottom: 50px; /* Odległość od dolnej krawędzi */
-            left: 10px; /* Odległość od lewej krawędzi */
-            font-size: 12px;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px 20px;
+            border-radius: 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .image-container {
-                position: fixed;
-                bottom: 10px;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: rgba(0, 0, 0, 0.6);
-                padding: 10px;
-                border-radius: 10px;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
+        
+        .sponsor-text {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .sponsor-image {
+            max-width: 100%;
+            height: auto;
         }
         body {
             font-family: 'Poppins', sans-serif;
@@ -196,9 +201,11 @@
         </svg>
     </div>
 
-    <div class="image-container">
-        <img src="https://raw.githubusercontent.com/Qbaa134/Qbaa134_blog/main/PCBWay.png" alt="Opis obrazka" width="180">
-    </div>
+   <div class="sponsor-container">
+      <p class="sponsor-text">Sponsor Główny</p>
+      <img src="https://raw.githubusercontent.com/Qbaa134/Qbaa134_blog/main/PCBWay.png" alt="Sponsor" class="sponsor-image">
+  </div>
+
     
     <h1>Blog</h1>
 

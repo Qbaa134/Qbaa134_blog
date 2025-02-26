@@ -29,9 +29,9 @@
         }
         
         .sponsor-image {
-            max-width: 55%; /* Zmniejsza szerokość obrazu o połowę */
+            max-width: 55%;
             height: auto;
-            margin-left: 5mm; /* Przesuwa obrazek o 5mm w prawo */
+            margin-left: 5mm;
         }
 
         body {
@@ -83,7 +83,6 @@
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
-            min-height: 50vh; /* Ustalamy minimalną wysokość na połowę strony */
         }
 
         .post-link, .button {
@@ -193,6 +192,11 @@
             }
         }
 
+        /* Pusta przestrzeń po ostatnim poście */
+        .empty-space {
+            height: 50vh; /* 50% wysokości ekranu */
+        }
+
     </style>
 </head>
 <body>
@@ -219,24 +223,22 @@
 
     <!-- Linki do postów -->
     <div class="post-links" id="postLinks">
-        <!-- Posty będą ładowane dynamicznie tutaj -->
+        <a href="post1.html" class="post-link" data-title="Powitanie">Powitanie</a>
+        <a href="post2.html" class="post-link" data-title="Top 10 Hakerskich Narzędzi">Top 10 Hakerskich Narzędzi</a>
+        <a href="post3.html" class="post-link" data-title="Porównanie ESP8266 i ESP32">Porównanie ESP8266 i ESP32</a>
+        <a href="post4.html" class="post-link" data-title="Co to inżynieria odwrotna?">Co to inżynieria odwrotna?</a> 
+        <a href="post5.html" class="post-link" data-title="Deauther by Spacehuhn-DIY">Deauther by Spacehuhn-DIY</a>
+        <a href="post6.html" class="post-link" data-title="Internetowa Stacja Pogodowa">Internetowa Stacja Pogodowa</a>
+        <a href="post1.html" class="post-link" data-title="Powitanie">Powitanie</a>
+        <a href="post2.html" class="post-link" data-title="Top 10 Hakerskich Narzędzi">Top 10 Hakerskich Narzędzi</a>
+        <a href="post3.html" class="post-link" data-title="Porównanie ESP8266 i ESP32">Porównanie ESP8266 i ESP32</a>
+        <a href="post4.html" class="post-link" data-title="Co to inżynieria odwrotna?">Co to inżynieria odwrotna?</a> 
+        <a href="post5.html" class="post-link" data-title="Deauther by Spacehuhn-DIY">Deauther by Spacehuhn-DIY</a>
+        <a href="post6.html" class="post-link" data-title="Internetowa Stacja Pogodowa">Internetowa Stacja Pogodowa</a>
     </div>
 
-    <!-- Przykładowe posty -->
-    <div class="post-links" id="postLinks">
-        <a href="post1.html" class="post-link" data-title="Powitanie">Powitanie</a>
-        <a href="post2.html" class="post-link" data-title="Top 10 Hakerskich Narzędzi">Top 10 Hakerskich Narzędzi</a>
-        <a href="post3.html" class="post-link" data-title="Porównanie ESP8266 i ESP32">Porównanie ESP8266 i ESP32</a>
-        <a href="post4.html" class="post-link" data-title="Co to inżynieria odwrotna?">Co to inżynieria odwrotna?</a> 
-        <a href="post5.html" class="post-link" data-title="Deauther by Spacehuhn-DIY">Deauther by Spacehuhn-DIY</a>
-        <a href="post6.html" class="post-link" data-title="Internetowa Stacja Pogodowa">Internetowa Stacja Pogodowa</a>
-        <a href="post1.html" class="post-link" data-title="Powitanie">Powitanie</a>
-        <a href="post2.html" class="post-link" data-title="Top 10 Hakerskich Narzędzi">Top 10 Hakerskich Narzędzi</a>
-        <a href="post3.html" class="post-link" data-title="Porównanie ESP8266 i ESP32">Porównanie ESP8266 i ESP32</a>
-        <a href="post4.html" class="post-link" data-title="Co to inżynieria odwrotna?">Co to inżynieria odwrotna?</a> 
-        <a href="post5.html" class="post-link" data-title="Deauther by Spacehuhn-DIY">Deauther by Spacehuhn-DIY</a>
-        <a href="post6.html" class="post-link" data-title="Internetowa Stacja Pogodowa">Internetowa Stacja Pogodowa</a>
-    </div>
+    <!-- Pusta przestrzeń po ostatnim poście -->
+    <div class="empty-space"></div>
 
     <!-- Powiadomienie powitalne -->
     <div id="welcomeNotification" class="notification">

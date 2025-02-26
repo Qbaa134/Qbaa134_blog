@@ -6,7 +6,20 @@
     <title>Qbaa134_Blog</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
+       
+        .container {
+            text-align: center;
+            margin-bottom: 100px; /* Odstęp od dołu */
+        }
+        .image-container {
+            position: fixed;
+            bottom: 10px; /* Odległość od dolnej krawędzi */
+            left: 10px; /* Odległość od lewej krawędzi */
+        }
+        .image-container img {
+            width: 150px; /* Dopasuj szerokość */
+            height: auto;
+        }           
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #121212;
@@ -175,7 +188,15 @@
                   stroke="yellow" stroke-width="4" fill="none"/>
         </svg>
     </div>
- 
+
+    <div class="container">
+        <h2>Projekt sponsorowany przez:</h2>
+    </div>
+
+    <div class="image-container">
+        <img src="https://github.com/Qbaa134/Qbaa134_blog/blob/main/PCBWay_preview_rev_1.png" alt="Opis obrazka">
+    </div>
+    
     <h1>Blog</h1>
 
     <!-- Wyszukiwarka -->
